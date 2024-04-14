@@ -1,5 +1,8 @@
 import React from "react";
-import CardCotegories from "./CardCotegories/CardCotegories";
+import CardCotegories from '../../../components/CardCotegories/CardCotegories'
+
+// images
+
 import Artback from '../../../../src/assets/IMAGE/SECTION/Art-back.png'
 import PaintBrush from '../../../../src/assets/IMAGE/PLAY.SVG/nav/PaintBrush.svg'
 import Collectiblse from '../../../../src/assets/IMAGE/SECTION/Collectiblse.png'
@@ -21,12 +24,12 @@ import Planet from '../../../../src/assets/IMAGE/PLAY.SVG/nav/Planet.svg'
 export default function Categories() {
   return (
     <>
-      <div className="pt-40">
+      <div className="pt-40 ">
         <div className="max-w-6xl mx-auto font-mono">
           <div className="text-white pb-[60px]">
             <h2 className="font-semibold text-4xl">Browse Categories</h2>
           </div>
-          <div className="flex justify-between">
+          <div className="sm:flex justify-between">
             <CardCotegories
               imgUrl={Artback}
               secondImgUrl={PaintBrush}
@@ -48,7 +51,7 @@ export default function Categories() {
               desc="Photography"
             />
           </div>
-          <div className="flex justify-between pt-[30px]">
+          <div className="sm:flex justify-between pt-[30px]">
             <CardCotegories
               imgUrl={Videoback}
               secondImgUrl={VideoCamera}

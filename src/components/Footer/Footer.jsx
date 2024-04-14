@@ -1,6 +1,9 @@
 import React from "react";
+// import './Footer.scss'
+import { NavLink } from "react-router-dom";
+
+// images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-import Logo from "../../../src/assets/IMAGE/HEADER/nav/NFT Marketplace.svg";
 import Discord from "../../../src/assets/IMAGE/SECTION/Discord.svg";
 import Youtube from "../../../src/assets/IMAGE/SECTION/Youtube.svg";
 import Twitter from "../../../src/assets/IMAGE/SECTION/Twitter.svg";
@@ -17,7 +20,9 @@ export default function Footer() {
             <div>
               <div className="flex items-center gap-4">
                 <img src={market} alt="market" />
-                <img src={Logo} alt="logo" />
+                <NavLink to="/" className="nav_link text-2xl">
+                  NFT Marketplace
+                </NavLink>
               </div>
 
               <div className="text-stone-400 pt-[30px]">
@@ -35,9 +40,38 @@ export default function Footer() {
             </div>
             <div className="flex flex-col gap-[20px] text-white">
               <h3 className="font-bold">Explore</h3>
-              <a href="">Marketplace</a>
-              <a href="">Rankings</a>
-              <a href="">Connect a wallet</a>
+              <ul>
+                <li>
+                  <NavLink
+                    to="/shop"
+                    exact
+                    activeClassName
+                    className="nav_link pt-[20px]"
+                  >
+                    Marketplace
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/rankings"
+                    exact
+                    activeClassName
+                    className="nav_link pt-[20px]"
+                  >
+                    Rankings
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/wallet"
+                    exact
+                    activeClassName
+                    className="nav_link pt-[20px]"
+                  >
+                    Connect a wallet
+                  </NavLink>
+                </li>
+              </ul>
             </div>
             <div>
               <div className="text-white pt-[14px]">
@@ -48,21 +82,21 @@ export default function Footer() {
               </div>
 
               <div className="relative mt-8 w-[400px]">
-              <div className="relative w-full h-[56px]">
-                <input
-                  className="bg-white p-4 pr-[140px] rounded-3xl w-full h-full z-0 focus:outline-none"
-                  placeholder="Enter your email here"
-                  type="email"
-                />
+                <div className="relative w-full h-[56px]">
+                  <input
+                    className="bg-white p-4 pr-[140px] rounded-3xl w-full h-full z-0 focus:outline-none"
+                    placeholder="Enter your email here"
+                    type="email"
+                  />
 
-                <div className="absolute flex items-center justify-center gap-[12px] rounded-2xl text-white border-2 bg-purple-500 border-purple-500 p-3 right-0 top-0 bottom-0">
-                  <img src={Message} alt="message" className="h-6 w-6" />
-                  <a href="#" className="text-sm">
-                    Subscribe
-                  </a>
+                  <div className="absolute flex items-center justify-center gap-[12px] rounded-2xl text-white border-2 bg-purple-500 border-purple-500 p-3 right-0 top-0 bottom-0">
+                    <img src={Message} alt="message" className="h-6 w-6" />
+                    <a href="#" className="text-sm">
+                      Subscribe
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
           </div>
           <div className="pt-[30px]">

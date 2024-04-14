@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-import SingIn from "../../../src/assets/IMAGE/PLAY.SVG/nav/User.svg";
+import SingIn from "../../../src/assets/IMAGE/PLAY.SVG/nav/WhiteUser.svg";
 
-export default function Header() {
+export default function Header() { 
   return (
     <>
       <header className="font-mono">
@@ -53,10 +53,10 @@ export default function Header() {
               </ul>
             </div>
             <div className="flex items-center gap-4 bg-purple-500 p-4 rounded-xl">
-              <img src={SingIn} alt="user" />
-              <a className="text-white" href="#">
+              <img className="w-[18%]" src={SingIn} alt="user" />
+              <NavLink   to="/register" className="text-white" >
                 Sign Up
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

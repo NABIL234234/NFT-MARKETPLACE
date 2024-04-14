@@ -1,5 +1,5 @@
 import React from "react";
-import CardCreators from "./CardCreators/CardCreators";
+import CardCreators from "../../../components/CardCreators/CardCreators";
 
 // images
 import Rocket from '../../../../src/assets/IMAGE/SECTION/RocketRank.png'

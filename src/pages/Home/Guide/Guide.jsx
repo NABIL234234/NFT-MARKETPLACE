@@ -1,5 +1,7 @@
 import React from "react";
-import CardGuide from "./CardGuide/CardGuide";
+import CardGuide from "../../../components/CardGuide/CardGuide";
+
+// images
 import Wallet from "../../../../src/assets/IMAGE/SECTION/wallet.png";
 import CollectionCreate from "../../../../src/assets/IMAGE/SECTION/collectionCreate.png";
 import Earning from "../../../../src/assets/IMAGE/SECTION/earning.png";

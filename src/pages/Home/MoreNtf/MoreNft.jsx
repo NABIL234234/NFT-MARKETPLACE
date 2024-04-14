@@ -1,22 +1,21 @@
 import React from "react";
-import CardMoreNft from "./CardMoreNft/CardMoreNft";
+import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
 import See from "../../../components/buttons/See";
 
 // images
 
-import Galaxy from '../../../../src/assets/IMAGE/SECTION/Galaxy.png'
-import MoonDancer from '../../../../src/assets/IMAGE/PLAY.SVG/nav/MoonDancer.png'
-import Odena from '../../../../src/assets/IMAGE/SECTION/Odena.png'
-import Nebula from '../../../../src/assets/IMAGE/PLAY.SVG/nav/Nebula.png'
-import Astro from '../../../../src/assets/IMAGE/SECTION/Astro.png'
-import Spaceone from '../../../../src/assets/IMAGE/PLAY.SVG/nav/spaceone.png'
-
+import Galaxy from "../../../../src/assets/IMAGE/SECTION/Galaxy.png";
+import MoonDancer from "../../../../src/assets/IMAGE/PLAY.SVG/nav/MoonDancer.png";
+import Odena from "../../../../src/assets/IMAGE/SECTION/Odena.png";
+import Nebula from "../../../../src/assets/IMAGE/PLAY.SVG/nav/Nebula.png";
+import Astro from "../../../../src/assets/IMAGE/SECTION/Astro.png";
+import Spaceone from "../../../../src/assets/IMAGE/PLAY.SVG/nav/spaceone.png";
 
 export default function MoreNft() {
   return (
     <>
       <div className="pt-40">
-        <div className="max-w-6xl mx-auto font-mono">
+        <div className="max-w-6xl mx-auto px-5 font-mono">
           <div>
             <div className="flex items-center pb-16">
               <div className="font-semibold text-white">
@@ -26,7 +25,7 @@ export default function MoreNft() {
               <See />
             </div>
 
-            <div className="flex justify-between">
+            <div className="sm:flex justify-between">
               <CardMoreNft
                 imgUrl={Galaxy}
                 title="Distant Galaxy"

@@ -1,6 +1,6 @@
 import "./App.css";
 import RouterView from "./router";
-import Layout from "./components/Layout/Layout";
+import Layout from "./Layout/Layout";
 
 function App() {
   return (

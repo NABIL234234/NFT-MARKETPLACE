@@ -1,5 +1,5 @@
 import React from "react";
-import CardCollection from "./Card-Collection/CardCollection";
+import CardCollection from "../../../components/Card-Collection/CardCollection";
 
 // images
 import Dog from "../../../../src/assets/IMAGE/SECTION/DOG.png";
