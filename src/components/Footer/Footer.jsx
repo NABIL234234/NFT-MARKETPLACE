@@ -38,40 +38,50 @@ export default function Footer() {
                 <img src={Instagram} alt="" />
               </div>
             </div>
-            <div className="flex flex-col gap-[20px] text-white">
-              <h3 className="font-bold">Explore</h3>
-              <ul>
-                <li>
-                  <NavLink
-                    to="/shop"
-                    exact
-                    activeClassName
-                    className="nav_link pt-[20px]"
-                  >
-                    Marketplace
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/rankings"
-                    exact
-                    activeClassName
-                    className="nav_link pt-[20px]"
-                  >
-                    Rankings
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/wallet"
-                    exact
-                    activeClassName
-                    className="nav_link pt-[20px]"
-                  >
-                    Connect a wallet
-                  </NavLink>
-                </li>
-              </ul>
+            <div className="flex flex-col gap-[12px]  text-white">
+              <div>
+                <h3 className="font-bold">Explore</h3>
+                <ul className="mt-[22px]">
+                  <li>
+                    <NavLink
+                      to="/shop"
+                      exact
+                      activeClassName
+                      className="nav_link"
+                    >
+                      Marketplace
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    <NavLink
+                      to="/rankings"
+                      exact
+                      activeClassName
+                      className="nav_link"
+                    >
+                      Rankings
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    <NavLink
+                      to="/connectWallet"
+                      exact
+                      activeClassName
+                      className="nav_link"
+                    >
+                      Connect Wallet
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div>
               <div className="text-white pt-[14px]">
