@@ -1,7 +1,15 @@
-import React from 'react'
+import React from "react";
+
+import UpperTitle from "./UpperTitle/UpperTitle";
+import TableHeader from "./TableHeader/TableHeader";
+import Artists from "./Artists/Artists";
 
 export default function index() {
   return (
-    <div className='text-fuchsia-600'>Rankings</div>
-  )
+    <>
+      <UpperTitle />
+      <TableHeader />
+      <Artists />
+    </>
+  );
 }

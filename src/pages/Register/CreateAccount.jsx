@@ -19,7 +19,9 @@ export default function index() {
         <div className="flex justify-center items-center p-[15px]">
           <div className="flex flex-col ">
             <div className="text-white pt-[20px] ">
-              <h3 className="text-3xl  md:text-4xl lg:text-5xl font-semibold">Create account</h3>
+              <h3 className="text-3xl  md:text-4xl lg:text-5xl font-semibold">
+                Create account
+              </h3>
               <p className=" max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
                 Welcome! enter your details and start creating, collecting and
                 selling NFTs.
@@ -34,7 +36,9 @@ export default function index() {
                 icons={Password}
                 placeholder="Confirm Password"
               />
-              <GetStarted imgUrl={CreateAcc} desc="Create Account" />
+              <div>
+                <GetStarted imgUrl={CreateAcc} desc="Create Account" />
+              </div>
             </div>
           </div>
         </div>

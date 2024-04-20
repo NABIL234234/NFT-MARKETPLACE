@@ -1,7 +1,13 @@
-import React from 'react'
+import React from "react";
+import BrowseMarketplace from "./BrowseMarketplace/BrowseMarketplace";
+import Nfts from "./Nfts/Nfts"
 
 export default function index() {
   return (
-    <div className='text-fuchsia-600'>Marketplace</div>
-  )
+    <>
+      <BrowseMarketplace />
+      <Nfts />
+    </>
+  );
 }
+  

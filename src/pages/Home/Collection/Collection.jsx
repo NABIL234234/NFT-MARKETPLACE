@@ -17,40 +17,49 @@ import RobotAvatar from "../../../../src/assets/IMAGE/SECTION/robotava.png";
 
 export default function Collection() {
   return (
-    <section className="pt-36 ">
+    <section className="pt-20 sm:pt-36 px-5">
       <div className="max-w-6xl mx-auto font-mono">
         <div>
           <div className="text-white">
-            <h2 className="font-semibold text-5xl">Trending Collection</h2>
-            <p className="text-xl pt-3">
+            <h2 className="font-semibold text-3xl mdd:text-5xl">
+              Trending Collection
+            </h2>
+            <p className="text-lg sm:text-xl pt-3">
               Checkout our weekly updated trending collection.
             </p>
           </div>
-          <div className="flex gap-20 ">
-            <CardCollection
-              imgUrl={Dog}
-              imgUrl2={Cat}
-              imgUrl3={Bear}
-              CollectionName="DSGN Animals"
-              avatarUrl={mrFox}
-              nickName="Mr Fox"
-            />
-            <CardCollection
-              imgUrl={Grib1}
-              imgUrl2={Grib2}
-              imgUrl3={Grib3}
-              CollectionName="Magic Mushrooms"
-              avatarUrl={ShroomieAvatar}
-              nickName="Shroomie Aang"
-            />
-            <CardCollection
-              imgUrl={Robot1}
-              imgUrl2={Robot2}
-              imgUrl3={Robot3}
-              CollectionName="Disco Machines"
-              avatarUrl={RobotAvatar}
-              nickName="BeKind2Robots"
-            />
+          <div className=" sm:flex gap-20 ">
+            <div className="flex justify-center items-center">
+              <CardCollection
+                imgUrl={Dog}
+                imgUrl2={Cat}
+                imgUrl3={Bear}
+                CollectionName="DSGN Animals"
+                avatarUrl={mrFox}
+                nickName="Mr Fox"
+              />
+            </div>
+
+            <div className="hidden sm:flex gap-20 ">
+              <CardCollection
+                imgUrl={Grib1}
+                imgUrl2={Grib2}
+                imgUrl3={Grib3}
+                CollectionName="Magic Mushrooms"
+                avatarUrl={ShroomieAvatar}
+                nickName="Shroomie Aang"
+              />
+            </div>
+            <div className="hidden lg:flex gap-20">
+              <CardCollection
+                imgUrl={Robot1}
+                imgUrl2={Robot2}
+                imgUrl3={Robot3}
+                CollectionName="Disco Machines"
+                avatarUrl={RobotAvatar}
+                nickName="BeKind2Robots"
+              />
+            </div>
           </div>
         </div>
       </div>

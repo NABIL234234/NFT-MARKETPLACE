@@ -3,7 +3,7 @@ import React from "react";
 export default function CardCollection({imgUrl, imgUrl2, imgUrl3,CollectionName, avatarUrl,nickName}) {
   return (
     <>
-      <div className="pt-16">
+      <div className="pt-8 sm:pt-16">
         <div>
           <div>
             <img src={imgUrl} alt="DOG" />
