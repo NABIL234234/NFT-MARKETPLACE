@@ -14,10 +14,10 @@ import Spaceone from "../../../../src/assets/IMAGE/PLAY.SVG/nav/spaceone.png";
 export default function MoreNft() {
   return (
     <>
-      <div className="pt-40">
+      <div className="pt-12 mdd:pt-40">
         <div className="max-w-6xl mx-auto px-5 font-mono">
           <div>
-            <div className="mb:flex items-center pb-16">
+            <div className="mb:flex items-center mdd:pb-16">
               <div className="font-semibold text-white">
                 <h2 className="text-4xl">Discover More NFTs</h2>
                 <p className="text-xl pt-3">Explore new trending NFTs</p>

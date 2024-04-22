@@ -6,7 +6,7 @@ export default function Digest() {
   return (
     <div className="pt-[40px]">
       <div className="max-w-6xl mx-auto font-mono ">
-        <div className="flex flex-col gap-[80px] bg-zinc-700 rounded-3xl p-[60px] mdd:flex-row">
+        <div className="flex flex-col mdd:flex-row gap-[30px] mdd:gap-[80px] bg-zinc-700 rounded-3xl p-[60px]  mb-[80px]">
           <div>
             <img src={SpaceMan} alt="spaceman" />
           </div>
@@ -20,7 +20,7 @@ export default function Digest() {
               </p>
             </div>
 
-            <div className="relative mt-8 ">
+            <div className="relative mt-8 mb-[40px]">
               <div className=" flex flex-col gap-2 mdd:relative w-full h-[56px]">
                 <input
                   className="bg-white p-4 rounded-3xl w-full h-full z-0 focus:outline-none mdd:pr-[140px]"

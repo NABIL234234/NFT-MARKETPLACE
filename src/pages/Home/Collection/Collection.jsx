@@ -17,7 +17,7 @@ import RobotAvatar from "../../../../src/assets/IMAGE/SECTION/robotava.png";
 
 export default function Collection() {
   return (
-    <section className="pt-20 sm:pt-36 px-5">
+    <section className="pt-10 sm:pt-36 px-5">
       <div className="max-w-6xl mx-auto font-mono">
         <div>
           <div className="text-white">

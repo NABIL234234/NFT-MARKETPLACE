@@ -19,10 +19,10 @@ import Chiblier from "../../../../src/assets/IMAGE/SECTION/Chiblier.png";
 export default function TopCreators() {
   return (
     <>
-      <section className="pt-40 px-5">
+      <section className="pt-12 mdd:pt-40 px-5">
         <div className="max-w-6xl mx-auto font-mono">
           <div>
-            <div className=" sm:flex items-center pb-16">
+            <div className=" sm:flex items-center pb-[20px] mdd:pb-[60px]">
               <div className="font-semibold text-white ">
                 <h2 className=" text-3xl mdd:text-5xl">Top creators</h2>
                 <p className="text-lg sm:text-xl pt-3">

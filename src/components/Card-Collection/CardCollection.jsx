@@ -4,9 +4,9 @@ import './CardCollection.css'
 export default function CardCollection({imgUrl, imgUrl2, imgUrl3, CollectionName, avatarUrl, nickName}) {
   return (
     <>
-      <div className="CardCollection pt-8 sm:pt-16">
+      <div className="CardCollection pt-4 sm:pt-16">
         <div>
-          <div>
+          <div> 
             <img src={imgUrl} alt="DOG" />
           </div>
           <div className="flex pt-4 gap-4">
