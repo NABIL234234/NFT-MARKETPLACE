@@ -1,9 +1,10 @@
 import React from "react";
+import './CardCollection.css'
 
-export default function CardCollection({imgUrl, imgUrl2, imgUrl3,CollectionName, avatarUrl,nickName}) {
+export default function CardCollection({imgUrl, imgUrl2, imgUrl3, CollectionName, avatarUrl, nickName}) {
   return (
     <>
-      <div className="pt-16">
+      <div className="CardCollection pt-8 sm:pt-16">
         <div>
           <div>
             <img src={imgUrl} alt="DOG" />
@@ -22,10 +23,7 @@ export default function CardCollection({imgUrl, imgUrl2, imgUrl3,CollectionName,
           <div className="text-white pt-3">
             <h4 className="text-lg">{CollectionName}</h4>
             <div className="flex pt-2 gap-2">
-              <img
-                src={avatarUrl}
-                alt="fox"
-              />
+              <img src={avatarUrl} alt="fox" />
               <h5>{nickName}</h5>
             </div>
           </div>

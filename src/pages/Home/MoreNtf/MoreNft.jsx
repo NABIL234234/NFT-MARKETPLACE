@@ -17,15 +17,41 @@ export default function MoreNft() {
       <div className="pt-40">
         <div className="max-w-6xl mx-auto px-5 font-mono">
           <div>
-            <div className="flex items-center pb-16">
+            <div className="mb:flex items-center pb-16">
               <div className="font-semibold text-white">
                 <h2 className="text-4xl">Discover More NFTs</h2>
                 <p className="text-xl pt-3">Explore new trending NFTs</p>
               </div>
+              <div className="flex mb:hidden justify-start flex-wrap">
+                <CardMoreNft
+                  imgUrl={Galaxy}
+                  title="Distant Galaxy"
+                  avatar={MoonDancer}
+                  user="MoonDancer"
+                  price="1.63 ETH"
+                  Bid="0.33 wETH"
+                />
+                <CardMoreNft
+                  imgUrl={Odena}
+                  title="Life On Edena"
+                  avatar={Nebula}
+                  user="NebulaKid"
+                  price="1.63 ETH"
+                  Bid="0.33 wETH"
+                />
+                <CardMoreNft
+                  imgUrl={Astro}
+                  title="AstroFiction"
+                  avatar={Spaceone}
+                  user="Spaceone"
+                  price="1.63 ETH"
+                  Bid="0.33 wETH"
+                />
+              </div>
               <See />
             </div>
 
-            <div className="sm:flex justify-between">
+            <div className="hidden mb:flex justify-start flex-wrap">
               <CardMoreNft
                 imgUrl={Galaxy}
                 title="Distant Galaxy"

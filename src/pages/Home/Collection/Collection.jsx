@@ -17,16 +17,18 @@ import RobotAvatar from "../../../../src/assets/IMAGE/SECTION/robotava.png";
 
 export default function Collection() {
   return (
-    <section className="pt-36 ">
+    <section className="pt-20 sm:pt-36 px-5">
       <div className="max-w-6xl mx-auto font-mono">
         <div>
           <div className="text-white">
-            <h2 className="font-semibold text-5xl">Trending Collection</h2>
-            <p className="text-xl pt-3">
+            <h2 className="font-semibold text-3xl mdd:text-5xl">
+              Trending Collection
+            </h2>
+            <p className="text-lg sm:text-xl pt-3">
               Checkout our weekly updated trending collection.
             </p>
           </div>
-          <div className="flex gap-20 ">
+          <div className="flex justify-start flex-wrap  ">
             <CardCollection
               imgUrl={Dog}
               imgUrl2={Cat}
@@ -35,6 +37,7 @@ export default function Collection() {
               avatarUrl={mrFox}
               nickName="Mr Fox"
             />
+
             <CardCollection
               imgUrl={Grib1}
               imgUrl2={Grib2}
@@ -43,6 +46,7 @@ export default function Collection() {
               avatarUrl={ShroomieAvatar}
               nickName="Shroomie Aang"
             />
+
             <CardCollection
               imgUrl={Robot1}
               imgUrl2={Robot2}
