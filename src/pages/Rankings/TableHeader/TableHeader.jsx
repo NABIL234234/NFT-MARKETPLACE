@@ -4,7 +4,7 @@ import React from "react";
 
 import lattice from "../../../assets/IMAGE/PLAY.SVG/nav/lattice.svg";
 
-export default function Artists() {
+export default function TableHeader() {
   return (
     <>
       <div className="pt-[40px]">
@@ -24,15 +24,15 @@ export default function Artists() {
                 <h3 className="text-stone-400 font-semibold">All Time</h3>
               </div>
             </div>
-            <div className="flex justify-between items-center w-[1050px] text-stone-500 border-2 border-zinc-600 py-[12px] px-[30px] rounded-3xl">
-              <div className="flex gap-[12px] pr-[100px]">
+            <div className="flex justify-between items-center w-full text-stone-500 border-2 border-zinc-600 py-[12px] px-[30px] rounded-3xl">
+              <div className="flex gap-[12px] ">
                 <img src={lattice} alt="lattice" />
                 <h5>Artist</h5>
               </div>
               <div className="flex gap-[170px]">
-                <h5>Change</h5>
+                <h5 className="hidden lg:flex">Change</h5>
                 <h5>NFTs Sold</h5>
-                <h5 className="pr-[10px]">Volume</h5>
+                <h5 className="]">Volume</h5>
               </div>
             </div>
           </div>

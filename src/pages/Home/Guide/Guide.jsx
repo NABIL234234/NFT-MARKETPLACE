@@ -10,12 +10,12 @@ export default function Guide() {
   return (
     <>
       <div className="pt-20">
-        <div className="max-w-6xl mx-auto font-mono">
+        <div className="max-w-6xl mx-auto px-5 font-mono">
           <div className="text-white">
             <h2 className="font-semibold text-5xl"> How it works</h2>
             <p className="text-xl pt-3">Find out how to get started</p>
           </div>
-          <div className="flex justify-between mt-[48px] mb-[80px]">
+          <div className="flex justify-start flex-wrap mt-[48px] mb-[80px]">
             <CardGuide
               imgUrl={Wallet}
               title="Setup Your wallet"

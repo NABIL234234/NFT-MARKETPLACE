@@ -28,38 +28,33 @@ export default function Collection() {
               Checkout our weekly updated trending collection.
             </p>
           </div>
-          <div className=" sm:flex gap-20 ">
-            <div className="flex justify-center items-center">
-              <CardCollection
-                imgUrl={Dog}
-                imgUrl2={Cat}
-                imgUrl3={Bear}
-                CollectionName="DSGN Animals"
-                avatarUrl={mrFox}
-                nickName="Mr Fox"
-              />
-            </div>
+          <div className="flex justify-start flex-wrap  ">
+            <CardCollection
+              imgUrl={Dog}
+              imgUrl2={Cat}
+              imgUrl3={Bear}
+              CollectionName="DSGN Animals"
+              avatarUrl={mrFox}
+              nickName="Mr Fox"
+            />
 
-            <div className="hidden sm:flex gap-20 ">
-              <CardCollection
-                imgUrl={Grib1}
-                imgUrl2={Grib2}
-                imgUrl3={Grib3}
-                CollectionName="Magic Mushrooms"
-                avatarUrl={ShroomieAvatar}
-                nickName="Shroomie Aang"
-              />
-            </div>
-            <div className="hidden lg:flex gap-20">
-              <CardCollection
-                imgUrl={Robot1}
-                imgUrl2={Robot2}
-                imgUrl3={Robot3}
-                CollectionName="Disco Machines"
-                avatarUrl={RobotAvatar}
-                nickName="BeKind2Robots"
-              />
-            </div>
+            <CardCollection
+              imgUrl={Grib1}
+              imgUrl2={Grib2}
+              imgUrl3={Grib3}
+              CollectionName="Magic Mushrooms"
+              avatarUrl={ShroomieAvatar}
+              nickName="Shroomie Aang"
+            />
+
+            <CardCollection
+              imgUrl={Robot1}
+              imgUrl2={Robot2}
+              imgUrl3={Robot3}
+              CollectionName="Disco Machines"
+              avatarUrl={RobotAvatar}
+              nickName="BeKind2Robots"
+            />
           </div>
         </div>
       </div>

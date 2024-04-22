@@ -1,4 +1,6 @@
 import React from "react";
+import "./CardMoreNft.css";
+
 import { Link } from "react-router-dom";
 
 export default function CardMoreNft({
@@ -11,11 +13,11 @@ export default function CardMoreNft({
 }) {
   return (
     <>
-      <div>
+      <div className="Card">
         <Link to="/info">
-          <div className="w-[330px] h-[469px] bg-zinc-800 rounded-3xl">
-            <div>
-              <img src={imgUrl} alt="Galaxy" />
+          <div className="bg-zinc-800 rounded-3xl">
+            <div className="w-full">
+              <img className="w-full object-cover" src={imgUrl} alt="Galaxy" />
             </div>
             <div className="text-white p-6">
               <div className="">

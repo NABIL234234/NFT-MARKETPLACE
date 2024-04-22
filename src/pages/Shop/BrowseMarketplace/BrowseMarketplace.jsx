@@ -1,4 +1,5 @@
 import React from "react";
+import Title from "../../../components/Title/Title";
 
 // images
 import Search from "../../../assets/IMAGE/PLAY.SVG/nav/search.svg";
@@ -8,22 +9,18 @@ export default function BrowseMarketplace() {
     <>
       <div className="max-w-6xl mx-auto px-5 font-mono">
         <div>
-          <div className="text-white">
-            <h1 className="font-semibold text-4xl lg:text-5xl">
-              Browse Marketplace
-            </h1>
-            <p className="font-normal text-lg pt-[10px]">
-              Browse through more than 50k NFTs on the NFT Marketplace.
-            </p>
-          </div>
+          <Title
+            mainText="Browse Marketplace"
+            miniText=" Browse through more than 50k NFTs on the NFT Marketplace."
+          />
           <div className="relative">
             <img
-              className="absolute top-[55%] left-[91%] w-[2%]"
+              className="absolute  top-[56%] left-[88%] rdd:left-[90%] rd:left-[92%] smm:left-[93%] sm:left-[94%] mdd:left-[95%] lgg:left-[96%] w-[22px]"
               src={Search}
               alt="search"
             />
             <input
-              className="w-[1050px] p-[13px] rounded-2xl bg-zinc-700 text-white outline-none pr-[60px] mt-[30px]"
+              className="w-full p-[13px] rounded-2xl bg-zinc-700 text-white outline-none pr-[60px] mt-[30px]"
               type="text"
               placeholder="Search your favourite NFTs"
             />

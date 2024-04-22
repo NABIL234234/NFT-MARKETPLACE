@@ -36,7 +36,7 @@ export default function TopCreators() {
             </div>
 
             <div>
-              <div className="flex gap-16">
+              <div className="flex justify-start flex-wrap">
                 <CardCreators
                   number="1"
                   imgUrl={KeepTrial}
@@ -61,9 +61,7 @@ export default function TopCreators() {
                   nickName="Juanie"
                   ETH="30.01 ETH"
                 />
-              </div>
 
-              <div className="flex gap-16 pt-8">
                 <CardCreators
                   number="5"
                   imgUrl={BlueWhale}
@@ -88,8 +86,7 @@ export default function TopCreators() {
                   nickName="Robotica"
                   ETH="27.33 ETH"
                 />
-              </div>
-              <div className="flex gap-16 pt-8">
+
                 <CardCreators
                   number="9"
                   imgUrl={RustyRobot}

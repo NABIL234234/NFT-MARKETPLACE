@@ -3,7 +3,7 @@ import Shop from "../pages/Shop";
 import Rankings from "../pages/Rankings";
 import Wallet from "../pages/Wallet";
 import Register from "../pages/Register/CreateAccount";
-import Info from "../pages/Info/Info"
+import Info from "../pages/Info"
 import { useRoutes } from "react-router";
 
 export default function RouterView() {
