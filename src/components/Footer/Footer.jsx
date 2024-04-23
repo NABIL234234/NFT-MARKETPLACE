@@ -91,22 +91,23 @@ export default function Footer() {
                 </p>
               </div>
 
-              <div className="relative mt-8 w-[320px] md:w-[400px]">
-                <div className="relative w-full h-[56px]">
-                  <input
-                    className="bg-white p-4 pr-[140px] rounded-3xl w-[270px]  md:w-full h-full z-0 focus:outline-none"
-                    placeholder="Enter your email here"
-                    type="email"
-                  />
+            
+              <div className="relative mt-8 mb-[40px]">
+              <div className=" flex flex-col gap-2 mdd:relative w-full h-[56px]">
+                <input
+                  className="bg-white p-4 rounded-3xl w-full h-full z-0 focus:outline-none mdd:pr-[140px]"
+                  placeholder="Enter your email here"
+                  type="email"
+                />
 
-                  <div className="absolute flex items-center justify-center gap-[12px] rounded-2xl text-white border-2 bg-purple-500 border-purple-500 p-3 right-[15%] md:right-0 top-0 bottom-0">
-                    <img src={Message} alt="message" className="h-6 w-6" />
-                    <a href="#" className="text-sm">
-                      Subscribe
-                    </a>
-                  </div>
+                <div className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white border-2 bg-purple-500 border-purple-500 p-3 right-0 top-0 bottom-0">
+                  <img src={Message} alt="message" className="h-6 w-6" />
+                  <a href="#" className="text-sm">
+                    Subscribe
+                  </a>
                 </div>
               </div>
+            </div>
             </div>
           </div>
           <div className="pt-[30px]">
