@@ -1,0 +1,15 @@
+.Indicators {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); /* Динамическое распределение на всех экранах */
+  grid-auto-flow: column; /* Расположение в столбец */
+}
+
+.Indicators > * {
+  grid-auto-flow: row; /* Переключение на расположение в ряд */
+}
+
+/* Дополнительные стили */
+.Indicators > div {
+  display: flex;
+  align-items: center;
+}

@@ -28,7 +28,7 @@ export default function Collection() {
               Checkout our weekly updated trending collection.
             </p>
           </div>
-          <div className="flex justify-start flex-wrap  ">
+          <div className="flex justify-start flex-wrap items-center  ">
             <CardCollection
               imgUrl={Dog}
               imgUrl2={Cat}
