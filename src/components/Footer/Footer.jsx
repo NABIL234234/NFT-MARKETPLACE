@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-import Discord from "../../../src/assets/IMAGE/SECTION/Discord.svg";
-import Youtube from "../../../src/assets/IMAGE/SECTION/Youtube.svg";
-import Twitter from "../../../src/assets/IMAGE/SECTION/Twitter.svg";
-import Instagram from "../../../src/assets/IMAGE/SECTION/instagram.svg";
-import Message from "../../../src/assets/IMAGE/SECTION/message.svg";
+  import Discord from "../../../src/assets/IMAGE/SECTION/Discord.svg";
+  import Youtube from "../../../src/assets/IMAGE/SECTION/Youtube.svg";
+  import Twitter from "../../../src/assets/IMAGE/SECTION/Twitter.svg";
+  import Instagram from "../../../src/assets/IMAGE/SECTION/instagram.svg";
+  import Message from "../../../src/assets/IMAGE/SECTION/message.svg";
 import Border from "../../../src/assets/IMAGE/SECTION/Border.svg";
 
 export default function Footer() {
