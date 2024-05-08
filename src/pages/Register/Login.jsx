@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Inputs from "../../components/inputs/Inputs";
 import { useDispatch } from "react-redux";
 import { postUsers } from "../../store/actions/asyncAction";
@@ -6,18 +6,15 @@ import { postUsers } from "../../store/actions/asyncAction";
 // images
 import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
 import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
-import Email from "../../assets/IMAGE/PLAY.SVG/nav/email.svg";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
 
 export default function index() {
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
     password: "",
-    confirmPassword: "",
   });
 
-  const { username, email, password, confirmPassword } = formData;
+  const { username, password } = formData;
 
   const inputFormData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,31 +54,23 @@ export default function index() {
           <div className="flex flex-col ">
             <div className="text-white pt-[20px] ">
               <h3 className="text-3xl  md:text-4xl lg:text-5xl font-semibold">
-                Create account
+                Login to your account
               </h3>
               <p className=" max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
                 Welcome! enter your details and start creating, collecting and
                 selling NFTs.
               </p>
             </div>
-            <div className="flex flex-col  gap-[10px] md:gap-[15px] pt-[15px] mdd:pt-[20px]">
+            <div className="flex flex-col gap-[10px] md:gap-[15px] pt-[15px] mdd:pt-[20px]">
               <Inputs
                 type="text"
                 icons={User}
-                placeholder="Username"
+                placeholder="UserName"
                 name="username"
                 value={username}
                 onChange={inputFormData}
               />
 
-              <Inputs
-                type="email"
-                icons={Email}
-                placeholder="Email Address"
-                name="email"
-                value={email}
-                onChange={inputFormData}
-              />
               <Inputs
                 type="password"
                 icons={Password}
@@ -90,14 +79,7 @@ export default function index() {
                 value={password}
                 onChange={inputFormData}
               />
-              <Inputs
-                type="password"
-                icons={Password}
-                placeholder="Confirm Password"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={inputFormData}
-              />
+
               <div>
                 <button
                   type="submit"
