@@ -43,12 +43,7 @@ export default function Footer() {
                 <h3 className="font-bold">Explore</h3>
                 <ul className="mt-[22px]">
                   <li>
-                    <NavLink
-                      to="/shop"
-                      exact
-                      activeClassName
-                      className="nav_link"
-                    >
+                    <NavLink to="/shop" exact="true" className="nav_link">
                       Marketplace
                     </NavLink>
                   </li>
@@ -57,12 +52,7 @@ export default function Footer() {
               <div>
                 <ul>
                   <li>
-                    <NavLink
-                      to="/rankings"
-                      exact
-                      activeClassName
-                      className="nav_link"
-                    >
+                    <NavLink to="/rankings" exact="true" className="nav_link">
                       Rankings
                     </NavLink>
                   </li>
@@ -71,12 +61,7 @@ export default function Footer() {
               <div>
                 <ul>
                   <li>
-                    <NavLink
-                      to="/wallet"
-                      exact
-                      activeClassName
-                      className="nav_link"
-                    >
+                    <NavLink to="/wallet" exact="true" className="nav_link">
                       Connect Wallet
                     </NavLink>
                   </li>
@@ -91,15 +76,15 @@ export default function Footer() {
                 </p>
               </div>
 
-              <div className="relative mt-8 w-[320px] md:w-[400px]">
-                <div className="relative w-full h-[56px]">
+              <div className="relative mt-8 mb-[40px]">
+                <div className=" flex flex-col gap-2 mdd:relative w-full h-[56px]">
                   <input
-                    className="bg-white p-4 pr-[140px] rounded-3xl w-[270px]  md:w-full h-full z-0 focus:outline-none"
+                    className="bg-white p-4 rounded-3xl w-full h-full z-0 focus:outline-none mdd:pr-[140px]"
                     placeholder="Enter your email here"
                     type="email"
                   />
 
-                  <div className="absolute flex items-center justify-center gap-[12px] rounded-2xl text-white border-2 bg-purple-500 border-purple-500 p-3 right-[15%] md:right-0 top-0 bottom-0">
+                  <div className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white border-2 bg-purple-500 border-purple-500 p-3 right-0 top-0 bottom-0">
                     <img src={Message} alt="message" className="h-6 w-6" />
                     <a href="#" className="text-sm">
                       Subscribe

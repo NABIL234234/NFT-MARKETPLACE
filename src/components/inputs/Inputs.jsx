@@ -1,8 +1,6 @@
 import React from "react";
 
-// images
-
-export default function Inputs({ icons, placeholder, type }) {
+export default function Inputs({ icons, placeholder, type, onChange, value, name }) {
   return (
     <>
       <div className="relative">
@@ -15,6 +13,9 @@ export default function Inputs({ icons, placeholder, type }) {
           className="w-[300px] rd:w-[350px] mdd:w-[300px] p-[14px] pl-[55px] rounded-3xl outline-none"
           type={type}
           placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e)}
+          name={name}
         />
       </div>
     </>

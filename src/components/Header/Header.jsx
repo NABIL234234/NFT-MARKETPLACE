@@ -19,14 +19,14 @@ export default function Header() {
                 NFT Marketplace
               </NavLink>
             </div>
-            <div></div> 
+            <div></div>
             <div className="lg:flex items-center ml-20">
               <ul className="hidden lgg:flex justify-between gap-x-12 text-white font-semibold text-xl">
                 <li>
                   <NavLink
                     to="/shop"
-                    exact
-                    activeClassName
+                    exact="true"
+                
                     className="nav_link"
                   >
                     Marketplace
@@ -35,8 +35,8 @@ export default function Header() {
                 <li>
                   <NavLink
                     to="/rankings"
-                    exact
-                    activeClassName
+                    exact="true"
+             
                     className="nav_link"
                   >
                     Rankings
@@ -45,8 +45,8 @@ export default function Header() {
                 <li>
                   <NavLink
                     to="/wallet"
-                    exact
-                    activeClassName
+                    exact="true"
+            
                     className="nav_link"
                   >
                     Connect a wallet
