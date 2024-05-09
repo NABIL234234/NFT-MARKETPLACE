@@ -24,9 +24,9 @@ import Planet from "../../../../src/assets/IMAGE/PLAY.SVG/nav/Planet.svg";
 export default function Categories() {
   return (
     <>
-      <div className="pt-40">
+      <div className="pt-12 mdd:pt-40">
         <div className="max-w-6xl px-5 mx-auto font-mono">
-          <div className="text-white pb-[60px]">
+          <div className="text-white pb-[20px] mdd:pb-[60px]">
             <h2 className="font-semibold text-4xl">Browse Categories</h2>
           </div>
           <div className="flex justify-start flex-wrap">

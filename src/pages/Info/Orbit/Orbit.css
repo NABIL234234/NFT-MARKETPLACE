@@ -1,0 +1,9 @@
+.Orbitians {
+  background-image: url(../../../assets/IMAGE/SECTION/Orbitians.png);
+  background-repeat:no-repeat;
+  background-position:center;
+  object-fit: cover;
+  background-size: 100%;
+  height: 650px;
+  width: 100%;
+}

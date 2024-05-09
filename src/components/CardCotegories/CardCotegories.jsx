@@ -4,7 +4,7 @@ import './CardCategories.css'
 
 export default function CardCotegories({imgUrl, secondImgUrl, desc}) {
   return (
-    <div className="CardCategories">
+    <div className="CardCategories self-stretch">
       <div className="w-full">
         <div className="flex justify-center items-center ">
           <img className="relative  z-0 w-[100%]" src={imgUrl} alt="art" />
