@@ -12,7 +12,7 @@ export default function Discover() {
       <div className="max-w-6xl mx-auto px-5 font-mono">
         <div className="mdd:flex pt-2  lgg:pt-16 justify-between items-center gap-[34px]">
           <div className=" text-white">
-            <div className=" max-w- mdd:max-w-md font-semibold text-4xl lg:text-6xl">
+            <div className=" mdd:max-w-md font-semibold text-4xl lg:text-6xl">
               <h2>Discover Digital Art & Collect NFTs</h2>
             </div>
             <div className="max-w-lg font-normal text-lg pt-7 mb-[20px]">

@@ -4,8 +4,8 @@ import './CardGuide.css'
 export default function CardGuide({imgUrl, title, desc}) {
   return (
     <>
-      <div className="CardGuide justify-center  text-center bg-zinc-700 rounded-2xl	text-white p-[30px] pb-[30px]" >
-        <div>
+      <div className="CardGuide justify-center text-center bg-zinc-700 rounded-2xl	text-white p-[30px] pb-[30px]" >
+        <div className="flex justify-center items-center">
           <img src={imgUrl} alt="wallet" />
         </div>
         <div>

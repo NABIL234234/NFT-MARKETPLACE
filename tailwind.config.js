@@ -11,6 +11,7 @@ export default {
       mb: "499px",
       smm: '530px',
       sm: '640px',
+      pl: '700px',
       mdd: '770px',
       md: '880px',
       lgg: '995px',

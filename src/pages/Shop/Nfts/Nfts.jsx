@@ -1,9 +1,10 @@
 import React from "react";
 
 import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
-import MoonDancer from "../../../../src/assets/IMAGE/PLAY.SVG/nav/MoonDancer.png";
+
 
 // images
+import MoonDancer from "../../../../src/assets/IMAGE/PLAY.SVG/nav/MoonDancer.png";
 import NftsGrib from "../../../assets/IMAGE/SECTION/NftsGrib.png";
 import Nfts032 from "../../../assets/IMAGE/SECTION/Nfts032.png";
 import Nfts024 from "../../../assets/IMAGE/SECTION/Nfts024.png";

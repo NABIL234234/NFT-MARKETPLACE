@@ -1,0 +1,8 @@
+.HeaderChannel {
+  background-image: url(../../../assets/IMAGE/SECTION/bg-profile.png);
+  background-repeat:no-repeat;
+  background-position:center;
+  object-fit: cover;
+  background-size: 100%;
+  height: 350px;
+}
