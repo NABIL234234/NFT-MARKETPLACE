@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Inputs from "../../components/inputs/Inputs";
 import { useDispatch } from "react-redux";
 import { postUserLogin } from "../../store/actions/asyncAction";
@@ -26,6 +26,8 @@ export default function index() {
       console.error("Ошибка при выполнении запроса:", error);
     }
   };
+
+  
 
   return (
     <>
@@ -84,10 +86,10 @@ export default function index() {
               <div>
                 <button
                   type="submit"
-                  className="w-[150px] h-[40px] rounded-xl bg-purple-500"
+                  className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
      
                 >
-                  Send
+                  Login
                 </button>
               </div>
             </div>

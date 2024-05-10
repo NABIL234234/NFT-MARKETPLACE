@@ -120,9 +120,9 @@ export default function Index() {
             <div>
               <button
                 type="submit"
-                className="w-[150px] h-[40px] rounded-xl bg-purple-500"
+                className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
               >
-                Send
+                Create account
               </button>
             </div>
           </div>
