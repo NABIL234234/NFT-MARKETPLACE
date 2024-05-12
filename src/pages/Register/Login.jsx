@@ -45,7 +45,7 @@ export default function Login() {
               <h3 className="text-3xl  md:text-4xl lg:text-5xl font-semibold">
                 Login to your account
               </h3>
-              <p className=" max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
+              <p className="max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
                 Welcome! enter your details and start creating, collecting and
                 selling NFTs.
               </p>
@@ -93,7 +93,7 @@ export default function Login() {
               </button>
               <div className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-white">
                 <FaKey />
-                <NavLink>Не помните свой пароль?</NavLink>
+                <NavLink to="/confirmAccount">Не помните свой пароль?</NavLink>
               </div>
             </div>
           </div>
