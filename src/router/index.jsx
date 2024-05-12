@@ -10,6 +10,7 @@ import Profile from "../pages/Profile";
 import Register from "../pages/Register/CreateAccount";
 import Login from "../pages/Register/Login";
 import ConfirmAccount from "../pages/Register/ConfirmAccount"
+import Identification from "../pages/Register/Identification";
 
 export default function RouterView() {
   const element = useRoutes([
@@ -23,6 +24,7 @@ export default function RouterView() {
     { path: "/register", element: <Register /> },
     { path: "/login", element: <Login /> },
     { path: "/confirmAccount", element: <ConfirmAccount /> },
+    { path: "/identification", element: <Identification /> },
   ]);
 
   return element;
