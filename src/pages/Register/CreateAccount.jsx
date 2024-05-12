@@ -73,7 +73,7 @@ export default function Register() {
               <Inputs
                 type="email"
                 icons={Email}
-                placeholder="Email Address"
+                placeholder="Email address"
                 name="email"
                 {...register("email", { required: "Введи свой @email " })}
               />
