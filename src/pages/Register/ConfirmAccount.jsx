@@ -7,6 +7,11 @@ import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 
 export default function ConfirmAccount() {
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   
   return (
     <>
