@@ -2,13 +2,15 @@
 import Inputs from "../../components/inputs/Inputs";
 import { useDispatch } from "react-redux";
 import { postUserLogin } from "../../store/actions/asyncAction";
+import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 
 // images
 import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
 import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
-import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { FaKey } from "react-icons/fa";
+import { IoLogIn } from "react-icons/io5";
 
 export default function Login() {
   const {
@@ -30,7 +32,7 @@ export default function Login() {
 
   return (
     <>
-      <section className="mdd:flex gap-[15px] md:gap-[40px] lg:gap-[60px] xl:gap-[180px]  font-mono">
+      <section className="mdd:flex gap-[15px] md:gap-[40px] lg:gap-[60px] xl:gap-[150px]  font-mono">
         <div>
           <img src={SingUpImg} alt="SingUpImg" />
         </div>
@@ -84,10 +86,15 @@ export default function Login() {
 
               <button
                 type="submit"
-                className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
+                className="flex justify-center items-center gap-[10px] w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
               >
+                <IoLogIn />
                 Login
               </button>
+              <div className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-white">
+                <FaKey />
+                <NavLink>Не помните свой пароль?</NavLink>
+              </div>
             </div>
           </div>
         </form>
