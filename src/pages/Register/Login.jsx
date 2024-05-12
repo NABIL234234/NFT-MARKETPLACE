@@ -8,6 +8,7 @@ import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
 import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
 import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
   const {
@@ -81,14 +82,12 @@ export default function Login() {
                 )}
               </div>
 
-              <div>
-                <button
-                  type="submit"
-                  className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
-                >
-                  Login
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
+              >
+                Login
+              </button>
             </div>
           </div>
         </form>

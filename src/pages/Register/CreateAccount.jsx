@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { postUsers } from "../../store/actions/asyncAction";
+import { NavLink } from "react-router-dom";
 import Inputs from "../../components/inputs/Inputs";
 
 // images
@@ -117,13 +118,18 @@ export default function Register() {
               )}
             </div>
 
-            <div>
+            <div className="flex flex-col gap-6">
+
               <button
                 type="submit"
                 className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
               >
                 Create account
               </button>
+
+
+              <NavLink className="flex justify-center w-[80px] p-[5px] bg-white" to="/login">login</NavLink>
+
             </div>
           </div>
         </div>
