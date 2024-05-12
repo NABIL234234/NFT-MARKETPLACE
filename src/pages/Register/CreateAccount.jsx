@@ -11,7 +11,7 @@ import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Email from "../../assets/IMAGE/PLAY.SVG/nav/email.svg";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
 
-export default function Index() {
+export default function Register() {
   const {
     register,
     handleSubmit,

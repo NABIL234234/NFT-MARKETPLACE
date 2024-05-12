@@ -9,7 +9,7 @@ import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
 import { useForm } from "react-hook-form";
 
-export default function index() {
+export default function Login() {
   const {
     register,
     handleSubmit,
@@ -18,7 +18,7 @@ export default function index() {
 
   const dispatch = useDispatch();
 
-  const onSubmit = async (data) => { 
+  const onSubmit = async (data) => {
     try {
       const resultAction = await dispatch(postUserLogin(data));
       console.log("Данные с сервера:", resultAction.payload);
@@ -26,8 +26,6 @@ export default function index() {
       console.error("Ошибка при выполнении запроса:", error);
     }
   };
-
-  
 
   return (
     <>
@@ -87,7 +85,6 @@ export default function index() {
                 <button
                   type="submit"
                   className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
-     
                 >
                   Login
                 </button>
