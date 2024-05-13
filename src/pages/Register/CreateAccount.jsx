@@ -91,17 +91,20 @@ export default function Register() {
                 icons={Password}
                 placeholder="Password"
                 name="password"
-                {...register("password", { required: "Придумай новый пароль", minLength: {
-                  value: 6,
-                  message: "Пароль должен содержать как минимум 6 символа!" 
-                } })}
+                {...register("password", {
+                  required: "Придумай новый пароль",
+                  minLength: {
+                    value: 6,
+                    message: "Пароль должен содержать как минимум 6 символа!",
+                  },
+                })}
               />
               {errors.password && (
                 <span className="error absolute text-red-500 font-sans">
                   {errors.password.message}
                 </span>
               )}
-              
+
             </div>
 
             <div>
@@ -113,7 +116,7 @@ export default function Register() {
                 {...register("confirmPassword", {
                   required: "Подтверди пароль",
                   validate: (value) =>
-                    value === password || "Пароли не совпадают",
+                    value === password || "Пароли не совпадают!",
                 })}
               />
               {errors.confirmPassword && (
@@ -124,7 +127,6 @@ export default function Register() {
             </div>
 
             <div className="flex flex-col gap-6">
-
               <button
                 type="submit"
                 className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
@@ -132,9 +134,12 @@ export default function Register() {
                 Create account
               </button>
 
-
-              <NavLink className="flex justify-center w-[80px] p-[5px] bg-white" to="/login">login</NavLink>
-
+              <NavLink
+                className="flex justify-center w-[80px] p-[5px] bg-white"
+                to="/login"
+              >
+                login
+              </NavLink>
             </div>
           </div>
         </div>
