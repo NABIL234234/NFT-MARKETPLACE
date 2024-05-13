@@ -12,6 +12,8 @@ export default function ConfirmAccount() {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
+
   const onSubmit = async (data) => {
     try {
       const resultAction = await dispatch(postUsers(data));
@@ -41,19 +43,45 @@ export default function ConfirmAccount() {
               Security Check
               </h2>
               <p >
-             
+              Enter the verification code sent to your account:
               </p>
             </div>
 
-            <div className="mt-[10px]">
+            <div className="flex justify-center gap-2 mt-[10px]">
               <input
-                type="text"
-                placeholder="Email address"
-                name="email"
-                {...register("email", {
-                  required: "Введи свой @email",
+                name="code"
+                {...register("code", {
+                  required: "Введи код подтверждения",
                 })}
-                className="flex items-center w-[280px] rdd:w-[300px] mb:w-[400px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
+                className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
+              />
+              <input
+                name="code"
+                {...register("code", {
+                  required: "Введи код подтверждения",
+                })}
+                className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
+              />
+              <input
+                name="code"
+                {...register("code", {
+                  required: "Введи код подтверждения",
+                })}
+                className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
+              />
+              <input
+                name="code"
+                {...register("code", {
+                  required: "Введи код подтверждения",
+                })}
+                className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
+              />
+              <input
+                name="code"
+                {...register("code", {
+                  required: "Введи код подтверждения",
+                })}
+                className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
               />
               {errors.email && (
                 <span className="error absolute text-red-500 font-sans">
