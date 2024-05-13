@@ -18,6 +18,7 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
     watch,
+    minLength,
   } = useForm();
   const dispatch = useDispatch();
 
@@ -90,13 +91,17 @@ export default function Register() {
                 icons={Password}
                 placeholder="Password"
                 name="password"
-                {...register("password", { required: "Придумай новый пароль" })}
+                {...register("password", { required: "Придумай новый пароль", minLength: {
+                  value: 6,
+                  message: "Пароль должен содержать как минимум 6 символа!" 
+                } })}
               />
               {errors.password && (
                 <span className="error absolute text-red-500 font-sans">
                   {errors.password.message}
                 </span>
               )}
+              
             </div>
 
             <div>

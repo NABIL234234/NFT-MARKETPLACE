@@ -17,6 +17,7 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
+    minLength,
   } = useForm();
 
   const dispatch = useDispatch();
@@ -75,6 +76,10 @@ export default function Login() {
                   name="password"
                   {...register("password", {
                     required: "Придумай новый пароль",
+                    minLength: {
+                      value: 6,
+                      message: "Пароль должен содержать как минимум 6 символа!"
+                    }
                   })}
                 />
                 {errors.password && (
