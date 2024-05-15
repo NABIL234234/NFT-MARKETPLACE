@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { useDispatch } from "react-redux";
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 
@@ -98,7 +98,7 @@ export default function ConfirmAccount() {
                 Next
               </button>
               <NavLink
-                to="/login"
+                to="/confirmAccount"
                 className="flex justify-center items-center text-purple-500 rounded-sm hover:text-violet-600"
               >
                 back
