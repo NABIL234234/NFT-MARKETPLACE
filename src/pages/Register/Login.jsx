@@ -98,7 +98,7 @@ export default function Login() {
               </button>
               <div className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-white">
                 <FaKey />
-                <NavLink to="/confirmAccount">Не помните свой пароль?</NavLink>
+                <NavLink to="/confirmAccount">Don't remember your password?</NavLink>
               </div>
             </div>
           </div>
