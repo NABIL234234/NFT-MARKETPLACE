@@ -12,13 +12,17 @@ export default function ConfirmAccount() {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       const resultAction = await dispatch(postCode(data));
       console.log("Данные с сервера:", resultAction.payload);
-      navigate("/identification"); 
+      if (resultAction.payload.statusCode === 200) {
+        navigate("/identification");
+      } else {
+        console.log("error:", resultAction.payload.message);
+      }
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
@@ -43,9 +47,8 @@ export default function ConfirmAccount() {
                 Account Verification
               </h2>
               <p className="max-w-[300px]">
-                Which{" "}
-                <span className="text-purple-500">Nft Marketplace</span> account
-                are you having trouble logging into?
+                Which <span className="text-purple-500">Nft Marketplace</span>{" "}
+                account are you having trouble logging into?
               </p>
             </div>
 
