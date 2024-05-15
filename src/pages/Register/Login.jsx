@@ -72,6 +72,7 @@ export default function Login() {
                 <Inputs
                   type="password"
                   icons={Password}
+                  id=""
                   placeholder="Password"
                   name="password"
                   {...register("password", {
