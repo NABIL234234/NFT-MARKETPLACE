@@ -36,17 +36,17 @@ export const postUserLogin = createAsyncThunk("user/login", async (newUser) => {
       newUser
     );
     return response.data;
+  
   } catch (error) {
     console.log(error);
   }
 });
 
 
-export const getCode = createAsyncThunk("user/identification", async (email) => {
+export const postCode = createAsyncThunk("user/identification", async ({email}) => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_MAIN_URL}/api/users/getResetCode`,
-     {params: {email}}
+    const response = await axios.post(
+      `${import.meta.env.VITE_MAIN_URL}/api/users/getResetCode?email=${email}`
     );
     return response.data;
   } catch (error) {
