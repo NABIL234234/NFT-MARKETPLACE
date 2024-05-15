@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom"; // Импортируем useNavigate
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { getCode } from "../../store/actions/asyncAction";
+import { postCode } from "../../store/actions/asyncAction";
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 
 export default function ConfirmAccount() {
@@ -16,9 +16,9 @@ export default function ConfirmAccount() {
 
   const onSubmit = async (data) => {
     try {
-      const resultAction = await dispatch(getCode(data));
+      const resultAction = await dispatch(postCode(data));
       console.log("Данные с сервера:", resultAction.payload);
-      navigate("/"); 
+      navigate("/identification"); 
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
