@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom"; // Импортируем useNavigate
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
+import { sendEmail } from "../../store/slices/confirnCode";
 
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-import { sendEmail } from "../../store/slices/confirnCode";
+
 
 export default function ConfirmAccount() {
   const {
@@ -21,7 +22,7 @@ export default function ConfirmAccount() {
       navigate("/identification")
   };
 
-  
+
   return (
     <>
       <div className="mt-[70px] mb-[100px]">
