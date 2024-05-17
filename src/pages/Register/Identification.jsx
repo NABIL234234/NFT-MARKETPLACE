@@ -1,24 +1,27 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { sendCode } from "../../store/actions/asyncAction";
+
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 
 export default function ConfirmAccount() {
   const {
     register,
-    handleSubmit, 
+    handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { email } = useSelector((state) => state.confirmCode);
 
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     try {
-      const resultAction = await dispatch(postUsers(data));
+      const resultAction = await dispatch(sendCode({ code: Object.values(data).join(""), email }));
       console.log("Данные с сервера:", resultAction.payload);
-      history.push("/");
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
@@ -32,53 +35,49 @@ export default function ConfirmAccount() {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col rdd:items-center gap-[30px]"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-41ё ">
               <img src={market} alt="market" />
               <NavLink to="/" className="nav_link  text-2xl rdd:text-3xl">
                 NFT Marketplace
               </NavLink>
             </div>
             <div className="flex flex-col justify-center items-center gap-[15px] max-w-[400px] text-white">
-              <h2 className="text-3xl mb:text-4xl font-bold">
-              Security Check
-              </h2>
-              <p >
-              Enter the verification code sent to your account:
-              </p>
+              <h2 className="text-3xl mb:text-4xl font-bold">Security Check</h2>
+              <p>Enter the verification code sent to your account:</p>
             </div>
 
             <div className="flex justify-center gap-2 mt-[10px]">
               <input
-                name="code"
-                {...register("code", {
+                name="code_1"
+                {...register("code_1", {
                   required: "Введи код подтверждения",
                 })}
                 className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
               />
               <input
-                name="code"
-                {...register("code", {
+                name="code_2"
+                {...register("code_2", {
                   required: "Введи код подтверждения",
                 })}
                 className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
               />
               <input
-                name="code"
-                {...register("code", {
+                name="code_3"
+                {...register("code_3", {
                   required: "Введи код подтверждения",
                 })}
                 className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
               />
               <input
-                name="code"
-                {...register("code", {
+                name="code_4"
+                {...register("code_4", {
                   required: "Введи код подтверждения",
                 })}
                 className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
               />
               <input
-                name="code"
-                {...register("code", {
+                name="code_5"
+                {...register("code_5", {
                   required: "Введи код подтверждения",
                 })}
                 className="flex items-center w-[40px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
