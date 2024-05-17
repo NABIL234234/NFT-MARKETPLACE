@@ -41,7 +41,8 @@ export const sendEmail = createAsyncThunk(
   }
 );
 
-export const sendCode = createAsyncThunk("user/sendCode", async ({ email, code }) => {
+
+export const sendCode = createAsyncThunk("confirmCode/sendCode", async ({ email, code }) => {
   try {
     const response = await axios.put(
       `${

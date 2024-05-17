@@ -1,11 +1,11 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom"; // Импортируем useNavigate
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { sendEmail } from "../../store/slices/confirnCode";
 
+// images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-
 
 export default function ConfirmAccount() {
   const {
@@ -13,15 +13,22 @@ export default function ConfirmAccount() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-     dispatch(sendEmail(data.email));
-      navigate("/identification")
+    try {
+      const resultAction = await dispatch(sendEmail(data.email)).unwrap();
+      if (resultAction && resultAction.data === "Reset code is sent successfully") {
+        navigate("/identification");
+      } else {
+        console.error("Unexpected server response:", resultAction);
+      }
+    } catch (error) {
+      console.error("Error during request execution:", error);
+    }
   };
-
 
   return (
     <>
@@ -33,7 +40,7 @@ export default function ConfirmAccount() {
           >
             <div className="flex items-center gap-4">
               <img src={market} alt="market" />
-              <NavLink to="/" className="nav_link  text-2xl rdd:text-3xl">
+              <NavLink to="/" className="nav_link text-2xl rdd:text-3xl">
                 NFT Marketplace
               </NavLink>
             </div>
@@ -53,7 +60,7 @@ export default function ConfirmAccount() {
                 placeholder="Email address"
                 name="email"
                 {...register("email", {
-                  required: "Введи свой @email",
+                  required: "Please enter your email",
                 })}
                 className="flex items-center w-[280px] rdd:w-[300px] mb:w-[400px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
               />
@@ -67,7 +74,7 @@ export default function ConfirmAccount() {
             <div className="flex flex-col gap-[20px]">
               <button
                 type="submit"
-                className="flex justify-center items-center w-[280px] rdd:w-[300px] mb:w-[400px] h-[40px] text-white bg-purple-500 rounded-sm transition ease-in-out  hover:bg-violet-600 active:bg-violet-700"
+                className="flex justify-center items-center w-[280px] rdd:w-[300px] mb:w-[400px] h-[40px] text-white bg-purple-500 rounded-sm transition ease-in-out hover:bg-violet-600 active:bg-violet-700"
               >
                 Next
               </button>
@@ -75,7 +82,7 @@ export default function ConfirmAccount() {
                 to="/login"
                 className="flex justify-center items-center text-purple-500 rounded-sm hover:text-violet-600"
               >
-                back
+                Back
               </NavLink>
             </div>
           </form>
