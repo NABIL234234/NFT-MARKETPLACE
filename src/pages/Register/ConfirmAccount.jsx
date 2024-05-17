@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom"; // Импортируем useNavigate
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { postCode } from "../../store/actions/asyncAction";
+import { useDispatch, useSelector } from "react-redux";
+
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
+import { sendEmail } from "../../store/slices/confirnCode";
 
 export default function ConfirmAccount() {
   const {
@@ -11,23 +12,16 @@ export default function ConfirmAccount() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    try {
-      const resultAction = await dispatch(postCode(data));
-      console.log("Данные с сервера:", resultAction.payload);
-      if (resultAction.payload.statusCode === 200) {
-        navigate("/identification");
-      } else {
-        console.log("error:", resultAction.payload.message);
-      }
-    } catch (error) {
-      console.error("Ошибка при выполнении запроса:", error);
-    }
+     dispatch(sendEmail(data.email));
+      navigate("/identification")
   };
 
+  
   return (
     <>
       <div className="mt-[70px] mb-[100px]">
