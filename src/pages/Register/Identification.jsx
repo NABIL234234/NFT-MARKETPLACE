@@ -1,3 +1,4 @@
+
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -15,6 +16,7 @@ export default function ConfirmAccount() {
   } = useForm();
 
   const { email } = useSelector((state) => state.confirmCode);
+  
 
   const dispatch = useDispatch();
 
@@ -41,9 +43,10 @@ export default function ConfirmAccount() {
                 NFT Marketplace
               </NavLink>
             </div>
-            <div className="flex flex-col justify-center items-center gap-[15px] max-w-[400px] text-white">
+            <div className="flex flex-col justify-center items-center gap-[15px] max-w-[450px] text-white">
               <h2 className="text-3xl mb:text-4xl font-bold">Security Check</h2>
               <p>Enter the verification code sent to your account:</p>
+              <span className="text-xl text-green-500">{email}</span>
             </div>
 
             <div className="flex justify-center gap-2 mt-[10px]">
