@@ -11,6 +11,8 @@ import Register from "../pages/Register/CreateAccount";
 import Login from "../pages/Register/Login";
 import ConfirmAccount from "../pages/Register/ConfirmAccount"
 import Identification from "../pages/Register/Identification";
+import NewPassword from "../pages/Register/NewPassword";
+import SuccessChange from "../pages/Register/SuccessChange";
 
 export default function RouterView() {
   const element = useRoutes([
@@ -25,6 +27,8 @@ export default function RouterView() {
     { path: "/login", element: <Login /> },
     { path: "/confirmAccount", element: <ConfirmAccount /> },
     { path: "/identification", element: <Identification /> },
+    { path: "/newPassword", element: <NewPassword /> },
+    { path: "/successChange", element: <SuccessChange /> },
   ]);
 
   return element;
