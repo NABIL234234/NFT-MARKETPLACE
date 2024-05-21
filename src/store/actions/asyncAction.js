@@ -51,5 +51,3 @@ export const postUserLogin = createAsyncThunk("user/login", async (newUser) => {
     throw error;
   }
 });
-
-
