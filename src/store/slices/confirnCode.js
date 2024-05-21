@@ -7,6 +7,22 @@ const initialState = {
   emailError: null,
 };
 
+export const sendEmail = createAsyncThunk(
+  "confirmCode/sendEmail",
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_MAIN_URL}/api/users/getResetCode`,
+        null,
+        { params: { email } }
+      );
+      return { email, data: response.data };
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 export const postEmail = createAsyncThunk(
   "user/identification",
   async ({ email }) => {
@@ -22,45 +38,45 @@ export const postEmail = createAsyncThunk(
   }
 );
 
-
-export const sendEmail = createAsyncThunk(
-  "confirmCode/sendEmail",
-  async (email, { rejectWithValue }) => {
+export const sendCode = createAsyncThunk(
+  "confirmCode/sendCode",
+  async ({ email, code }) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_MAIN_URL}/api/users/getResetCode`,
-        null,
-        {
-          params: { email },
-        }
+      const response = await axios.put(
+        `${import.meta.env.VITE_MAIN_URL}/api/users/confirmCode?email=${email}&code=${code}`
       );
-      return { email, data: response.data };
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+);
+
+export const sendNewPassword = createAsyncThunk(
+  "confirmCode/sendNewPassword",
+  async ({ email, newPassword }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_MAIN_URL}/api/users/dropForgottenPassword`,
+        null,
+        { params: { email, newPassword } }
+      );
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
-
-export const sendCode = createAsyncThunk("confirmCode/sendCode", async ({ email, code }) => {
-  try {
-    const response = await axios.put(
-      `${
-        import.meta.env.VITE_MAIN_URL
-      }/api/users/confirmCode?email=${email}&code=${code}`
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-});
-
-
 const confirmCodeSlice = createSlice({
   name: "confirmCode",
   initialState,
-  reducers: {},
+  reducers: {
+    setEmail: (state, action) => {
+      state.email = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(sendEmail.pending, (state) => {
@@ -74,8 +90,20 @@ const confirmCodeSlice = createSlice({
       .addCase(sendEmail.rejected, (state, action) => {
         state.emailLoading = false;
         state.emailError = action.payload || action.error.message;
+      })
+      .addCase(sendNewPassword.pending, (state) => {
+        state.emailLoading = true;
+        state.emailError = null;
+      })
+      .addCase(sendNewPassword.fulfilled, (state) => {
+        state.emailLoading = false;
+      })
+      .addCase(sendNewPassword.rejected, (state, action) => {
+        state.emailLoading = false;
+        state.emailError = action.payload || action.error.message;
       });
   },
 });
 
+export const { setEmail } = confirmCodeSlice.actions;
 export default confirmCodeSlice.reducer;
