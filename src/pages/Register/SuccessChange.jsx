@@ -20,7 +20,7 @@ export default function SuccessChange() {
             <p className="max-w-[300px] mt-2">
               Your account password has been changed:
             </p>
-            <span className="text-xl text-green-500">{email}</span>
+            <span className=" text-xl text-green-500">{email}</span>
           </div>
           <div className="flex flex-col gap-[20px] mt-[70px]">
             <NavLink
