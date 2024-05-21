@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sendEmail, setEmail } from "../../store/slices/confirnCode";
 
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
@@ -12,6 +12,10 @@ export default function ConfirmAccount() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { email } = useSelector((state) => state.confirmCode);
+
+  console.log(email);
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
