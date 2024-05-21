@@ -1,6 +1,5 @@
-
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { sendCode } from "../../store/slices/confirnCode";
@@ -14,19 +13,27 @@ export default function ConfirmAccount() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   const { email } = useSelector((state) => state.confirmCode);
-  
+
+  useEffect(() => {
+    if (email) return;
+    navigate("/confirmAccount");
+  }, []);
 
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     try {
-      const resultAction = await dispatch(sendCode({ code: Object.values(data).join(""), email }));
+      const resultAction = await dispatch(
+        sendCode({ code: Object.values(data).join(""), email })
+      );
       console.log("Данные с сервера:", resultAction.payload);
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
+    navigate("/newPassword");
   };
 
   return (
@@ -43,7 +50,7 @@ export default function ConfirmAccount() {
                 NFT Marketplace
               </NavLink>
             </div>
-            <div className="flex flex-col justify-center items-center gap-[15px] max-w-[450px] text-white">
+            <div className="flex flex-col justify-center items-center gap-[15px] max-w-[400px] text-white">
               <h2 className="text-3xl mb:text-4xl font-bold">Security Check</h2>
               <p>Enter the verification code sent to your account:</p>
               <span className="text-xl text-green-500">{email}</span>
