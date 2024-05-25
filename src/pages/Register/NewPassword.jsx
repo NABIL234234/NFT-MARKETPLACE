@@ -54,7 +54,7 @@ export default function NewPassword() {
       <div className="max-w-6xl px-5 mx-auto font-mono">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col rdd:items-center gap-[25px]"
+          className="flex flex-col rdd:items-center gap-[45px]"
         >
           <div className="flex items-center gap-4">
             <img src={market} alt="market" />
