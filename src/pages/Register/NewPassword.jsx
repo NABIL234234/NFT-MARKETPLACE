@@ -37,15 +37,19 @@ export default function NewPassword() {
       return;
     }
 
-    console.log("Email из состояния Redux:", email);
+    console.log("Email из состояния Redux:", email,);
 
     try {
       const resultAction = await dispatch(
-        sendNewPassword({ email, newPassword: data.password })
+        sendNewPassword({ email, newPassword: data.password, navigate })
       );
       console.log("Данные с сервера:", resultAction.payload);
+
+      // Перенаправление на другую страницу при успешном запросе
+     
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
+      // Остаемся на текущей странице в случае ошибки
     }
   };
 

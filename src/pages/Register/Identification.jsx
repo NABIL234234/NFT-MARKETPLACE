@@ -94,7 +94,9 @@ export default function ConfirmAccount() {
 
   const onSubmit = async () => {
     try {
-      const resultAction = await dispatch(sendCode({ code: otp, email, navigate }));
+      const resultAction = await dispatch(
+        sendCode({ code: otp, email, navigate })
+      );
       console.log("Данные с сервера:", resultAction.payload);
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
