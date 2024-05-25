@@ -37,19 +37,15 @@ export default function NewPassword() {
       return;
     }
 
-    console.log("Email из состояния Redux:", email,);
+    console.log("Email из состояния Redux:", email);
 
     try {
       const resultAction = await dispatch(
         sendNewPassword({ email, newPassword: data.password, navigate })
       );
       console.log("Данные с сервера:", resultAction.payload);
-
-      // Перенаправление на другую страницу при успешном запросе
-     
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
-      // Остаемся на текущей странице в случае ошибки
     }
   };
 
@@ -72,7 +68,7 @@ export default function NewPassword() {
             </h2>
             <p className="max-w-[300px]">Choose a secure password!</p>
           </div>
-          <div className="mt-[10px]">
+          <div className="mt-[10px] relative">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="New Password"
@@ -83,9 +79,9 @@ export default function NewPassword() {
                   message: "Пароль должен содержать как минимум 6 символа!",
                 },
               })}
-              className="relative flex items-center w-[280px] rdd:w-[300px] mb:w-[400px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
+              className=" flex items-center w-[280px] rdd:w-[300px] mb:w-[350px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
             />
-            <div className="absolute top-[46%] left-[60%]">
+            <div className="absolute top-[-6%] left-[85%]  mb:left-[88%]">
               <IconButton
                 onClick={() => setShowPassword(!showPassword)}
                 sx={{ color: "white" }}
@@ -109,7 +105,7 @@ export default function NewPassword() {
                 validate: (value) =>
                   value === password || "Пароли не совпадают!",
               })}
-              className="flex items-center w-[280px] rdd:w/[300px] mb:w-[400px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
+              className="flex items-center w-[280px] rdd:w-[300px] mb:w-[350px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
             />
 
             {errors.confirmPassword && (
@@ -121,7 +117,7 @@ export default function NewPassword() {
           <div className="flex flex-col gap-[20px]">
             <button
               type="submit"
-              className="flex justify-center items-center w-[280px] rdd:w-[300px] mb:w/[400px] h-[40px] text-white bg-purple-500 rounded-sm transition ease-in-out hover:bg-violet-600 active:bg-violet-700"
+              className="flex justify-center items-center w-[280px] rdd:w-[300px] mb:w-[350px] h-[40px] text-white bg-purple-500 rounded-sm transition ease-in-out hover:bg-violet-600 active:bg-violet-700"
             >
               Next
             </button>
