@@ -1,8 +1,8 @@
-// Index.js
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { postUsers } from "../../store/actions/asyncAction";
+import { NavLink } from "react-router-dom";
 import Inputs from "../../components/inputs/Inputs";
 
 // images
@@ -11,12 +11,13 @@ import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Email from "../../assets/IMAGE/PLAY.SVG/nav/email.svg";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
 
-export default function Index() {
+export default function Register() {
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
+    minLength,
   } = useForm();
   const dispatch = useDispatch();
 
@@ -72,7 +73,7 @@ export default function Index() {
               <Inputs
                 type="email"
                 icons={Email}
-                placeholder="Email Address"
+                placeholder="Email address"
                 name="email"
                 {...register("email", { required: "Введи свой @email " })}
               />
@@ -89,13 +90,20 @@ export default function Index() {
                 icons={Password}
                 placeholder="Password"
                 name="password"
-                {...register("password", { required: "Придумай новый пароль" })}
+                {...register("password", {
+                  required: "Придумай новый пароль",
+                  minLength: {
+                    value: 6,
+                    message: "Пароль должен содержать как минимум 6 символа!",
+                  },
+                })}
               />
               {errors.password && (
                 <span className="error absolute text-red-500 font-sans">
                   {errors.password.message}
                 </span>
               )}
+
             </div>
 
             <div>
@@ -107,7 +115,7 @@ export default function Index() {
                 {...register("confirmPassword", {
                   required: "Подтверди пароль",
                   validate: (value) =>
-                    value === password || "Пароли не совпадают",
+                    value === password || "Пароли не совпадают!",
                 })}
               />
               {errors.confirmPassword && (
@@ -117,13 +125,20 @@ export default function Index() {
               )}
             </div>
 
-            <div>
+            <div className="flex flex-col gap-6">
               <button
                 type="submit"
                 className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
               >
                 Create account
               </button>
+
+              <NavLink
+                className="flex justify-center w-[80px] p-[5px] bg-white"
+                to="/login"
+              >
+                login
+              </NavLink>
             </div>
           </div>
         </div>

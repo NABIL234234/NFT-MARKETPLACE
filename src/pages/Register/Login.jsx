@@ -2,23 +2,27 @@
 import Inputs from "../../components/inputs/Inputs";
 import { useDispatch } from "react-redux";
 import { postUserLogin } from "../../store/actions/asyncAction";
+import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 
 // images
 import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
 import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
-import { useForm } from "react-hook-form";
+import { FaKey } from "react-icons/fa";
+import { IoLogIn } from "react-icons/io5";
 
-export default function index() {
+export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    minLength,
   } = useForm();
 
   const dispatch = useDispatch();
 
-  const onSubmit = async (data) => { 
+  const onSubmit = async (data) => {
     try {
       const resultAction = await dispatch(postUserLogin(data));
       console.log("Данные с сервера:", resultAction.payload);
@@ -27,11 +31,9 @@ export default function index() {
     }
   };
 
-  
-
   return (
     <>
-      <section className="mdd:flex gap-[15px] md:gap-[40px] lg:gap-[60px] xl:gap-[180px]  font-mono">
+      <section className="mdd:flex gap-[15px] md:gap-[40px] lg:gap-[60px] xl:gap-[150px]  font-mono">
         <div>
           <img src={SingUpImg} alt="SingUpImg" />
         </div>
@@ -44,7 +46,7 @@ export default function index() {
               <h3 className="text-3xl  md:text-4xl lg:text-5xl font-semibold">
                 Login to your account
               </h3>
-              <p className=" max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
+              <p className="max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
                 Welcome! enter your details and start creating, collecting and
                 selling NFTs.
               </p>
@@ -70,10 +72,15 @@ export default function index() {
                 <Inputs
                   type="password"
                   icons={Password}
+                  id=""
                   placeholder="Password"
                   name="password"
                   {...register("password", {
                     required: "Придумай новый пароль",
+                    minLength: {
+                      value: 6,
+                      message: "Пароль должен содержать как минимум 6 символа!"
+                    }
                   })}
                 />
                 {errors.password && (
@@ -83,14 +90,21 @@ export default function index() {
                 )}
               </div>
 
+              <button
+                type="submit"
+                className="flex justify-center items-center gap-[10px] w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
+              >
+                <IoLogIn />
+                Login
+              </button>
               <div>
-                <button
-                  type="submit"
-                  className="w-[150px] h-[40px] rounded-xl bg-purple-500 text-white"
-     
-                >
-                  Login
-                </button>
+                <NavLink to="/register" className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-purple-500 text-white">
+                Are you registered?
+                </NavLink>
+              </div>
+              <div className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-white">
+                <FaKey />
+                <NavLink to="/confirmAccount">Don't remember your password?</NavLink>
               </div>
             </div>
           </div>

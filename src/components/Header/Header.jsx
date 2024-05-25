@@ -56,8 +56,8 @@ export default function Header() {
             </div>
             <div className="hidden lgg:flex items-center gap-4 bg-purple-500 p-4 rounded-xl transition ease-in-out delay-150  hover:bg-purple-700">
               <img className="w-[18%]" src={SingIn} alt="user" />
-              <NavLink to="/register" className="text-white">
-                Sign Up
+              <NavLink to="/login" className="text-white">
+                Sign In
               </NavLink>
             </div>
             <div className="flex lgg:hidden">
