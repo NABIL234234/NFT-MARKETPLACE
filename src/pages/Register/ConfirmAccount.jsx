@@ -20,10 +20,9 @@ export default function ConfirmAccount() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     dispatch(setEmail(data.email)); // Сохраняем email в Redux
-    await dispatch(sendEmail(data.email)); // Отправляем email
-    navigate("/identification");
+    dispatch(sendEmail({email: data.email, navigate})); // Отправляем email
   };
 
   return (
