@@ -48,7 +48,7 @@ const OTPInput = ({ length, onChange }) => {
         break;
     }
   };
-  
+
   return (
     <div onPaste={handlePaste} style={{ display: "flex", gap: "5px" }}>
       {values.map((value, index) => (
@@ -67,7 +67,7 @@ const OTPInput = ({ length, onChange }) => {
             textAlign: "center",
             borderRadius: "4px",
             border: "1px solid rgba(0,0,0,0.3)",
-            outline: "none"
+            outline: "none",
           }}
         />
       ))}
@@ -76,11 +76,15 @@ const OTPInput = ({ length, onChange }) => {
 };
 
 export default function ConfirmAccount() {
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { email } = useSelector((state) => state.confirmCode);
-  const { handleSubmit, register, formState: { errors } } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     if (!email) {
@@ -90,18 +94,23 @@ export default function ConfirmAccount() {
 
   const onSubmit = async () => {
     try {
-      const resultAction = await dispatch(sendCode({ code: otp, email }));
+      const resultAction = await dispatch(sendCode({ code: otp, email, navigate }));
       console.log("Данные с сервера:", resultAction.payload);
-      navigate("/newPassword");
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
+      if (error.response && error.response.status === 400) {
+        setOtp(""); // Очистка введенного кода
+      }
     }
   };
 
   return (
     <div className="mt-[70px] mb-[100px]">
       <div className="max-w-6xl px-5 mx-auto font-mono">
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center gap-[30px]">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center gap-[30px]"
+        >
           <div className="flex items-center gap-4">
             <img src={market} alt="market" />
             <NavLink to="/" className="nav_link text-2xl rdd:text-3xl">
