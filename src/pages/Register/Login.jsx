@@ -97,6 +97,11 @@ export default function Login() {
                 <IoLogIn />
                 Login
               </button>
+              <div>
+                <NavLink to="/register" className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-purple-500 text-white">
+                Are you registered?
+                </NavLink>
+              </div>
               <div className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-white">
                 <FaKey />
                 <NavLink to="/confirmAccount">Don't remember your password?</NavLink>
