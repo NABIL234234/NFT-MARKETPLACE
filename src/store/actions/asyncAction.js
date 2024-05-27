@@ -14,40 +14,49 @@ import axios from "axios";
 //   }
 // });
 
-export const postUsers = createAsyncThunk("user/register", async (newUser) => {
-  try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_MAIN_URL}/api/users/registration`,
-      newUser
-      // {
-      //   mode: "no-cors",
-      // }
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
+export const postUsers = createAsyncThunk(
+  "user/register",
+  async ({ newUser, navigate }) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_MAIN_URL}/api/users/registration`,
+        newUser
+        // {
+        //   mode: "no-cors",
+        // }
+      );
+      navigate("/");
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
   }
-});
+);
 
-export const postUserLogin = createAsyncThunk("user/login", async (newUser) => {
-  try {
-    // Преобразуем объект newUser в строку параметров(важно запомнить что авторизацию нужно делать в формате x-www-form-urlencoded)
-    const params = new URLSearchParams();
-    params.append("username", newUser.username);
-    params.append("password", newUser.password);
+export const postUserLogin = createAsyncThunk(
+  "user/login",
+  async ({ newUser, navigate }) => {
+    try {
+      // Преобразуем объект newUser в строку параметров(важно запомнить что авторизацию нужно делать в формате x-www-form-urlencoded)
+      const params = new URLSearchParams();
+      params.append("username", newUser.username);
+      params.append("password", newUser.password);
 
-    const response = await axios.post(
-      `${import.meta.env.VITE_MAIN_URL}/api/login`,
-      params,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
+      const response = await axios.post(
+        `${import.meta.env.VITE_MAIN_URL}/api/login`,
+        params,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
+      localStorage.setItem("accessToken", response.data.tokens.access_token);
+      navigate("/");
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
-});
+);
