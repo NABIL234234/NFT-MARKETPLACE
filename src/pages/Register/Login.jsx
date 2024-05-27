@@ -3,7 +3,7 @@ import Inputs from "../../components/inputs/Inputs";
 import { useDispatch } from "react-redux";
 import { postUserLogin } from "../../store/actions/asyncAction";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 // images
 import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
@@ -20,11 +20,12 @@ export default function Login() {
     minLength,
   } = useForm();
 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     try {
-      const resultAction = await dispatch(postUserLogin(data));
+      const resultAction = await dispatch(postUserLogin({ newUser: data, navigate }));
       console.log("Данные с сервера:", resultAction.payload);
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);

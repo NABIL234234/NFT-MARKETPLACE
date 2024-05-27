@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { postUsers } from "../../store/actions/asyncAction";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Inputs from "../../components/inputs/Inputs";
 
 // images
@@ -19,13 +19,15 @@ export default function Register() {
     watch,
     minLength,
   } = useForm();
+
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const password = watch("password");
 
   const onSubmit = async (data) => {
     try {
-      const resultAction = await dispatch(postUsers(data));
+      const resultAction = await dispatch(postUsers({ newUser: data, navigate }));
       console.log("Данные с сервера:", resultAction.payload);
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
