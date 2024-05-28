@@ -1,0 +1,77 @@
+.menu {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-start;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.menu_content {
+  width: 300px;
+  height: 100%;
+  background-color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  position: relative;
+  right: -300px;
+  animation: slideIn 0.3s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    right: 0;
+  }
+}
+
+// .close-btn {
+//   position: absolute;
+//   top: 20px;
+//   right: 20px;
+//   font-size: 24px;
+//   color: #b90000;
+//   background: none;
+//   border: none;
+//   cursor: pointer;
+// }
+
+.menu_content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.menu_content li {
+  margin: 20px 0;
+  width: 10 0%;
+}
+
+.menu_content a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.menu_content a:hover {
+  background-color: #333;
+}
