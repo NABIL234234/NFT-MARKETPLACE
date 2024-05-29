@@ -20,14 +20,16 @@ export default function Register() {
     minLength,
   } = useForm();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const password = watch("password");
 
   const onSubmit = async (data) => {
     try {
-      const resultAction = await dispatch(postUsers({ newUser: data, navigate }));
+      const resultAction = await dispatch(
+        postUsers({ newUser: data, navigate })
+      );
       console.log("Данные с сервера:", resultAction.payload);
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
@@ -105,7 +107,6 @@ export default function Register() {
                   {errors.password.message}
                 </span>
               )}
-
             </div>
 
             <div>
@@ -134,13 +135,6 @@ export default function Register() {
               >
                 Create account
               </button>
-
-              <NavLink
-                className="flex justify-center w-[80px] p-[5px] bg-white"
-                to="/login"
-              >
-                login
-              </NavLink>
             </div>
           </div>
         </div>
