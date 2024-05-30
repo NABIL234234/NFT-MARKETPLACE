@@ -29,7 +29,7 @@
   padding-top: 50px;
   position: relative;
   right: -300px;
-  animation: slideIn 0.3s forwards;
+  animation: slideIn 0.5s forwards;
 }
 
 @keyframes slideIn {
@@ -63,7 +63,7 @@
 
 .menu_content a {
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   font-size: 18px;
   width: 100%;
   text-align: center;
@@ -73,5 +73,5 @@
 }
 
 .menu_content a:hover {
-  background-color: #333;
+  background-color: #b324e3;
 }
