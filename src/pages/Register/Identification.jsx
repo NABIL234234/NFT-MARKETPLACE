@@ -6,7 +6,6 @@ import { sendCode } from "../../store/slices/confirnCode";
 
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-
 const OTPInput = ({ length, onChange }) => {
   const [values, setValues] = useState(Array(length).fill(""));
   const inputsRefs = useRef([]);
@@ -36,17 +35,27 @@ const OTPInput = ({ length, onChange }) => {
       case "ArrowLeft":
         if (index > 0) {
           inputsRefs.current[index - 1].focus();
+          e.preventDefault(); // Prevent default behavior
         }
         break;
       case "ArrowDown":
       case "ArrowRight":
         if (index < length - 1) {
           inputsRefs.current[index + 1].focus();
+          e.preventDefault(); // Prevent default behavior
         }
         break;
       default:
         break;
     }
+  };
+
+  const handleFocus = (index) => {
+    // Move cursor to the end of the input value
+    inputsRefs.current[index].setSelectionRange(
+      inputsRefs.current[index].value.length,
+      inputsRefs.current[index].value.length
+    );
   };
 
   return (
@@ -58,6 +67,7 @@ const OTPInput = ({ length, onChange }) => {
           type="text"
           value={value}
           onChange={(e) => handleChange(e, index)}
+          onFocus={() => handleFocus(index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
           maxLength="1"
           style={{

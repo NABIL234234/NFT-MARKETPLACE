@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.scss";
 import { NavLink } from "react-router-dom";
+import Menu from "../../components/Menu/Menu";
 
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 import SingIn from "../../../src/assets/IMAGE/PLAY.SVG/nav/WhiteUser.svg";
-import BurgerMenu from "../../../src/assets/IMAGE/HEADER/nav/burger.svg";
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+
+
   return (
     <>
       <header className="font-mono">
@@ -23,32 +35,17 @@ export default function Header() {
             <div className="lg:flex items-center ml-20">
               <ul className="hidden lgg:flex justify-between gap-x-12 text-white font-semibold text-xl">
                 <li>
-                  <NavLink
-                    to="/shop"
-                    exact="true"
-                
-                    className="nav_link"
-                  >
+                  <NavLink to="/shop" exact="true" className="nav_link">
                     Marketplace
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink
-                    to="/rankings"
-                    exact="true"
-             
-                    className="nav_link"
-                  >
+                  <NavLink to="/rankings" exact="true" className="nav_link">
                     Rankings
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink
-                    to="/wallet"
-                    exact="true"
-            
-                    className="nav_link"
-                  >
+                  <NavLink to="/wallet" exact="true" className="nav_link">
                     Connect a wallet
                   </NavLink>
                 </li>
@@ -61,11 +58,16 @@ export default function Header() {
               </NavLink>
             </div>
             <div className="flex lgg:hidden">
-              <img src={BurgerMenu} alt="" />
+              <div className={`burger-btn ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
           </div>
         </div>
       </header>
+      {menuOpen && <Menu  onClose={closeMenu}/>}
     </>
   );
 }
