@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendNewPassword } from "../../store/slices/confirnCode";
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { IconButton, InputAdornment } from "@mui/material";
+import { IconButton } from "@mui/material";
 
 export default function NewPassword() {
   const {

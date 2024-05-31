@@ -60,7 +60,7 @@ export default function Header() {
             <div className="flex lgg:hidden">
               <div className={`burger-btn ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                 <span></span>
-                <span>></span>
+                <span></span>
                 <span></span>
               </div>
             </div>

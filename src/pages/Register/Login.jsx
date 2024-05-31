@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode"; // Обратите внимание на правильный импорт
+import { jwtDecode } from "jwt-decode"; 
 import { postUserLogin } from "../../store/actions/asyncAction";
 import Inputs from "../../components/inputs/Inputs";
 
