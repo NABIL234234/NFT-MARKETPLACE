@@ -1,10 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode"; 
-import { postUserLogin } from "../../store/actions/asyncAction";
+import { jwtDecode } from "jwt-decode";
+import { getUserLogin } from "../../store/actions/asyncAction";
 import Inputs from "../../components/inputs/Inputs";
 
 // images
@@ -22,15 +22,17 @@ export default function Login() {
   } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const from = location.state?.from || "/";
 
   const onSubmit = async (data) => {
     try {
       const resultAction = await dispatch(
-        postUserLogin({ newUser: data, navigate })
+        getUserLogin({ newUser: data, navigate }) //token undefined
       );
       console.log("Данные с сервера:", resultAction.payload);
       localStorage.setItem("accessToken", resultAction.payload.token);
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
@@ -40,7 +42,7 @@ export default function Login() {
     const decoded = jwtDecode(credentialResponse.credential);
     console.log(decoded);
     localStorage.setItem("accessToken", credentialResponse.credential);
-    navigate("/");
+    navigate(from, { replace: true });
   };
 
   const handleGoogleError = () => {
@@ -56,7 +58,7 @@ export default function Login() {
         onSubmit={handleSubmit(onSubmit)}
         className="flex justify-center items-center p-[15px]"
       >
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
           <div className="text-white pt-[20px]">
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
               Login to your account

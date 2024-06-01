@@ -20,7 +20,7 @@ import PrivateRoute from "../components/Private/PrivateRoute";
 
 export default function RouterView() {
   const element = useRoutes([
-    { path: "/", element: <PrivateRoute><Home /></PrivateRoute> },
+    { path: "/", element: <Home /> },
     { path: "/shop", element: <PrivateRoute><Shop /></PrivateRoute> },
     { path: "/rankings", element: <PrivateRoute><Rankings /></PrivateRoute> },
     { path: "/wallet", element: <PrivateRoute><Wallet /></PrivateRoute> },

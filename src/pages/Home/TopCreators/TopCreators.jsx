@@ -1,8 +1,8 @@
 import React from "react";
 import CardCreators from "../../../components/CardCreators/CardCreators";
-
+import { useNavigate } from "react-router";
 // images
-import Rocket from "../../../../src/assets/IMAGE/SECTION/RocketRank.png";
+
 import KeepTrial from "../../../../src/assets/IMAGE/SECTION/Keepitreal.png";
 import DigiLab from "../../../../src/assets/IMAGE/SECTION/DIGIlab.png";
 import GravityOne from "../../../../src/assets/IMAGE/SECTION/gravityOne.png";
@@ -15,8 +15,21 @@ import RustyRobot from "../../../../src/assets/IMAGE/SECTION/RustyRobot.png";
 import Anumakid from "../../../../src/assets/IMAGE/SECTION/Anumakid.png";
 import Dotgu from "../../../../src/assets/IMAGE/SECTION/Dotgu.png";
 import Chiblier from "../../../../src/assets/IMAGE/SECTION/Chiblier.png";
+import ViewRankings from "../../../components/buttons/ViewRankings";
+
 
 export default function TopCreators() {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      navigate("/rankings");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <>
       <section className="pt-12 mdd:pt-40 px-5">
@@ -105,10 +118,7 @@ export default function TopCreators() {
                   ETH="19.11 ETH"
                 />
               </div>
-              <div className="flex w-full mb:w-48 items-center justify-center gap-3 rounded-xl text-white border-2 border-purple-500  p-4 mt-6 md:ml-auto">
-                <img src={Rocket} alt="Rocket" />
-                <a href="#">View Rankings</a>
-              </div>
+              <ViewRankings onClick={handleGetStarted} />
             </div>
 
             <div>

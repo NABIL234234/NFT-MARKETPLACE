@@ -10,8 +10,21 @@ import Odena from "../../../../src/assets/IMAGE/SECTION/Odena.png";
 import Nebula from "../../../../src/assets/IMAGE/PLAY.SVG/nav/Nebula.png";
 import Astro from "../../../../src/assets/IMAGE/SECTION/Astro.png";
 import Spaceone from "../../../../src/assets/IMAGE/PLAY.SVG/nav/spaceone.png";
+import { useNavigate } from "react-router";
 
 export default function MoreNft() {
+
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      navigate("/shop");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <>
       <div className="pt-12 mdd:pt-40">
@@ -48,7 +61,7 @@ export default function MoreNft() {
                   Bid="0.33 wETH"
                 />
               </div>
-              <See />
+              <See onClick={handleGetStarted} />
             </div>
 
             <div className="hidden mb:flex justify-start flex-wrap">
