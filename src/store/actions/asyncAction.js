@@ -33,24 +33,55 @@ export const postUsers = createAsyncThunk(
   }
 );
 
-export const postUserLogin = createAsyncThunk(
+// export const postUserLogin = createAsyncThunk(
+//   "user/login",
+//   async ({ newUser, navigate }) => {
+//     try {
+//       // Преобразуем объект newUser в строку параметров(важно запомнить что авторизацию нужно делать в формате x-www-form-urlencoded)
+//       const params = new URLSearchParams();
+//       params.append("username", newUser.username);
+//       params.append("password", newUser.password);
+
+//       const response = await axios.post(
+//         `${import.meta.env.VITE_MAIN_URL}/api/login`,
+//         params,
+//         {
+//           headers: {
+//             "Content-Type": "application/x-www-form-urlencoded",
+//           },
+//         }
+//       );
+//       localStorage.setItem("accessToken", response.data.tokens.access_token);
+//       navigate("/");
+//       return response.data;
+//     } catch (error) {
+//       console.log(error);
+//       throw error;
+//     }
+//   }
+// );
+
+export const getUserLogin = createAsyncThunk(
   "user/login",
   async ({ newUser, navigate }) => {
     try {
-      // Преобразуем объект newUser в строку параметров(важно запомнить что авторизацию нужно делать в формате x-www-form-urlencoded)
       const params = new URLSearchParams();
       params.append("username", newUser.username);
       params.append("password", newUser.password);
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_MAIN_URL}/api/login`,
-        params,
+      const response = await axios.get(
+        `${import.meta.env.VITE_MAIN_URL}/api/auth`,
         {
+          params: {
+            username: newUser.username,
+            password: newUser.password,
+          },
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
       );
+
       localStorage.setItem("accessToken", response.data.tokens.access_token);
       navigate("/");
       return response.data;

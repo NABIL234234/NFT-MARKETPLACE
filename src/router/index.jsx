@@ -14,16 +14,20 @@ import Identification from "../pages/Register/Identification";
 import NewPassword from "../pages/Register/NewPassword";
 import SuccessChange from "../pages/Register/SuccessChange";
 
+import CreateNft from "../pages/CreateNft/CreateNft"
+
 import PrivateRoute from "../components/Private/PrivateRoute";
 
 export default function RouterView() {
   const element = useRoutes([
-    { path: "/", element: <PrivateRoute><Home /></PrivateRoute> },
+    { path: "/", element: <Home /> },
     { path: "/shop", element: <PrivateRoute><Shop /></PrivateRoute> },
     { path: "/rankings", element: <PrivateRoute><Rankings /></PrivateRoute> },
     { path: "/wallet", element: <PrivateRoute><Wallet /></PrivateRoute> },
     { path: "/info", element: <PrivateRoute><Info /></PrivateRoute> },
     { path: "/profile", element: <PrivateRoute><Profile /></PrivateRoute> },
+
+    { path: "/createNft", element: <PrivateRoute><CreateNft /></PrivateRoute> },
 
     { path: "/register", element: <Register /> },
     { path: "/login", element: <Login /> },

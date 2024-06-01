@@ -1,8 +1,24 @@
 import React from "react";
-import RocketRank from "../../../../src/assets/IMAGE/SECTION/RocketRank.png";
+import Look from "../../../components/buttons/Look";
+
 import shroomieMini from "../../../../src/assets/IMAGE/PLAY.SVG/nav/shroomie-mini.png";
+import { useNavigate } from "react-router";
+
 
 export default function Mashroom() {
+
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      navigate("/shop");
+    } else {
+      navigate("/login");
+    }
+  };
+
+
   return (
     <>
       <div className="mt-20 pb-[40px] sm:pb-[60px] bg-[url('./src/assets/IMAGE/SECTION/mushroom-root.png')] bg-no-repeat bg-center bg-cover relative z-[1]">
@@ -22,10 +38,7 @@ export default function Mashroom() {
                   </h2>
                 </div>
 
-                <div className="flex w-[295px] md:w-48 items-center justify-center gap-3 rounded-xl text-white border-2 border-purple-500  bg-white  p-4 mt-6 ">
-                  <img src={RocketRank} alt="Rocket" />
-                  <a className="text-black font-semibold" href="#">See All</a>
-                </div>
+              <Look onClick={handleGetStarted} />
               </div>
 
               <div className="backdrop-blur-md bg-black/30 w-[295px] h-[144px] flex justify-center items-center rounded-xl  md:ml-auto mt-[30px] md:mt-auto">
