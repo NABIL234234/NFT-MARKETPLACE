@@ -1,6 +1,7 @@
 import React from "react";
 import SpaceMan from "../../../../src/assets/IMAGE/SECTION/SpaceMan.png";
-import Message from "../../../../src/assets/IMAGE/SECTION/message.svg";
+
+import Subscribe from "../../../components/buttons/Subscribe";
 
 export default function Digest() {
   return (
@@ -28,12 +29,7 @@ export default function Digest() {
                   type="email"
                 />
 
-                <div className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white border-2 bg-purple-500 border-purple-500 p-3 right-0 top-0 bottom-0">
-                  <img src={Message} alt="message" className="h-6 w-6" />
-                  <a href="#" className="text-sm">
-                    Subscribe
-                  </a>
-                </div>
+               <Subscribe />
               </div>
             </div>
 
