@@ -1,4 +1,6 @@
-import { useRoutes } from "react-router";
+import { useState, useEffect } from "react";
+import { useRoutes, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Home from "../pages/Home";
 import Shop from "../pages/Shop";
@@ -14,11 +16,26 @@ import Identification from "../pages/Register/Identification";
 import NewPassword from "../pages/Register/NewPassword";
 import SuccessChange from "../pages/Register/SuccessChange";
 
-import CreateNft from "../pages/CreateNft/CreateNft"
+import CreateNft from "../pages/CreateNft/CreateNft";
 
 import PrivateRoute from "../components/Private/PrivateRoute";
 
 export default function RouterView() {
+  const location = useLocation();
+  const [showLoading, setShowLoading] = useState(false);
+
+  
+  useEffect(() => {
+    const pagesWithLoading = ["/shop"]; 
+    const shouldShowLoading = pagesWithLoading.includes(location.pathname);
+    if (shouldShowLoading) {
+      setShowLoading(true);
+      setTimeout(() => {
+        setShowLoading(false);
+      }, 1000); 
+    }
+  }, [location]);
+
   const element = useRoutes([
     { path: "/", element: <Home /> },
     { path: "/shop", element: <PrivateRoute><Shop /></PrivateRoute> },
@@ -37,5 +54,32 @@ export default function RouterView() {
     { path: "/successChange", element: <SuccessChange /> },
   ]);
 
-  return element;
+  return (
+    <AnimatePresence exitBeforeEnter={false}>
+      {showLoading && (
+        <motion.div
+          key="loading"
+          className="flex justify-center items-center h-screen bg-purple-500"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          {/* Здесь разместите вашу креативную страницу загрузки */}
+          <div className="text-center text-2xl text-gray-800">
+            Загрузка...
+          </div>
+        </motion.div>
+      )}
+      {!showLoading && (
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          {element}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 }

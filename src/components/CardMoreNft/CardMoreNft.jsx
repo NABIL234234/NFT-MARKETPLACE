@@ -1,6 +1,6 @@
 import React from "react";
 import "./CardMoreNft.css";
-
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function CardMoreNft({
@@ -13,7 +13,9 @@ export default function CardMoreNft({
 }) {
   return (
     <>
-      <div className="Card">
+      <motion.div  whileHover={{ scale: 1.1 }}
+  onHoverStart={e => {}}
+  onHoverEnd={e => {}} className="Card">
         <Link to="/info">
           <div className="bg-zinc-800 rounded-3xl">
             <div className="w-full">
@@ -40,7 +42,7 @@ export default function CardMoreNft({
             </div>
           </div>
         </Link>
-      </div>
+      </motion.div>
     </>
   );
 }
