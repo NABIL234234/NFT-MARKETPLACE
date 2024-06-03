@@ -12,9 +12,9 @@ export default function Discover() {
   const handleGetStarted = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
-      navigate("/shop");
+      navigate("/createNft");
     } else {
-      navigate("/login", { state: { from: "/shop" } });
+      navigate("/login", { state: { from: "/createNft" } });
     }
   };
 
