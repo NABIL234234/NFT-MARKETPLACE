@@ -16,6 +16,8 @@ export default function CreateNft() {
     (state) => state.nft
   );
 
+  
+
   const onSubmit = async (data) => {
     try {
       const formData = new FormData();
@@ -32,6 +34,7 @@ export default function CreateNft() {
       console.error("Ошибка при выполнении запроса:", error);
     }
   };
+
 
   return (
     <div className="container mx-auto p-4">

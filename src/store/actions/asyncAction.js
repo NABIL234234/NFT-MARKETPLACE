@@ -21,9 +21,7 @@ export const postUsers = createAsyncThunk(
       const response = await axios.post(
         `${import.meta.env.VITE_MAIN_URL}/api/users/registration`,
         newUser
-        // {
-        //   mode: "no-cors",
-        // }
+       
       );
       navigate("/");
       return response.data;

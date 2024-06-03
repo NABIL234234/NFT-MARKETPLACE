@@ -15,7 +15,7 @@ export const createNft = createAsyncThunk(
       const response = await axios.post(`${import.meta.env.VITE_MAIN_URL}/api/nfts`, nftData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiaXNzIjoiaHR0cHM6Ly9uZnQtbWFya2V0LXBsYWNlLWYtMjMtYzZhNWVlOGY1MThkLmhlcm9rdWFwcC5jb20vYXBpL2xvZ2luIiwiZXhwIjoxNzE3MTcwNDExfQ.kRqNL0TuAtViS1fQecEt8Ib9LnrOJPrdTcyK3zSlc7U`  
+          'Authorization': ` Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3NDM4NjUyfQ.bKY36Z852PcsFJ9jqZPIEwzEZShxiv5WIxsG1aTgza4`  
         }
       });
       return response.data;
