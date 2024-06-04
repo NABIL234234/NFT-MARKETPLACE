@@ -14,7 +14,6 @@ export default function CreateNft() {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm();
   const dispatch = useDispatch();
   const { createdNft, nftLoading, nftError } = useSelector(
@@ -45,11 +44,10 @@ export default function CreateNft() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
-            Name <MdDriveFileRenameOutline />
+              Name <MdDriveFileRenameOutline />
             </label>
             <input
               type="text"
-            
               {...register("name", { required: true })}
               className={`appearance-none rounded-xl relative block w-full px-3 py-2 border ${
                 errors.name ? "border-red-500" : "border-gray-700"
@@ -65,7 +63,6 @@ export default function CreateNft() {
             </label>
             <input
               type="number"
-              
               {...register("price", { required: true })}
               className={`appearance-none rounded-xl relative block w-full px-3 py-2 border ${
                 errors.price ? "border-red-500" : "border-gray-700"
@@ -77,7 +74,7 @@ export default function CreateNft() {
           </div>
           <div>
             <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
-              Image (URL) <RiNftFill  className="pt-[2px]"/>
+              Image (URL) <RiNftFill className="pt-[2px]" />
             </label>
             <input
               type="file"

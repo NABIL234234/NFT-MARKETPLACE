@@ -74,9 +74,9 @@ export const getUserLogin = createAsyncThunk(
             username: newUser.username,
             password: newUser.password,
           },
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
         }
       );
 

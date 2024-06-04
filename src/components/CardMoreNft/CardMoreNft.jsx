@@ -1,6 +1,6 @@
 import React from "react";
 import "./CardMoreNft.css";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function CardMoreNft({
