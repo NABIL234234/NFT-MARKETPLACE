@@ -20,7 +20,7 @@ export const createNft = createAsyncThunk(
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3NDM4NjUyfQ.bKY36Z852PcsFJ9jqZPIEwzEZShxiv5WIxsG1aTgza4`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3NTgzOTQxfQ.DzkDNCEg3qzRrc2NjMF7Swk5JcuOIZURGKQQtU9qgjw`,
           },
         }
       );
