@@ -41,8 +41,8 @@ export default function RouterView() {
     { path: "/shop", element: <PrivateRoute><Shop /></PrivateRoute> },
     { path: "/rankings", element: <PrivateRoute><Rankings /></PrivateRoute> },
     { path: "/wallet", element: <PrivateRoute><Wallet /></PrivateRoute> },
-    { path: "/info", element: <PrivateRoute><Info /></PrivateRoute> },
-    { path: "/profile", element: <PrivateRoute><Profile /></PrivateRoute> },
+    { path: "/info/:id", element: <PrivateRoute><Info /></PrivateRoute> },
+    { path: "/profile/:id", element: <PrivateRoute><Profile /></PrivateRoute> },
 
     { path: "/createNft", element: <PrivateRoute><CreateNft /></PrivateRoute> },
 
@@ -64,9 +64,9 @@ export default function RouterView() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          {/* Здесь разместите вашу креативную страницу загрузки */}
-          <div className="text-center text-2xl text-gray-800">
-            Загрузка...
+  
+          <div className="text-center text-5xl text-White">
+            Loading...
           </div>
         </motion.div>
       )}
