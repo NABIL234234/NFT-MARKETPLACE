@@ -28,13 +28,15 @@ export default function CardMoreNft({
               <img className="w-full object-cover" src={imgUrl} alt="Galaxy" />
             </div>
             <div className="text-white p-6">
-              <div className="">
-                <h4 className="text-xl">{title}</h4>
-                <div className="flex gap-2 pt-[5px]">
-                  <img src={avatar} alt="Moon" />
-                  <h5 className="">{user}</h5>
+              <Link to={`/profile/${id}`}>
+                <div>
+                  <h4 className="text-xl">{title}</h4>
+                  <div className="flex gap-2 pt-[5px]">
+                    <img src={avatar} alt="Moon" />
+                    <h5 className="">{user}</h5>
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div className="flex pt-[25px]">
                 <div>
                   <h5 className="text-stone-400">Price $</h5>
