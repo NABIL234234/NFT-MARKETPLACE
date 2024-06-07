@@ -1,10 +1,19 @@
+// src/components/CardMoreNft/CardMoreNft.js
+
 import React from "react";
 import "./CardMoreNft.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { AiFillFire } from "react-icons/ai";
 
-export default function CardMoreNft({ imgUrl, title, avatar, user, price }) {
+export default function CardMoreNft({
+  id,
+  imgUrl,
+  title,
+  avatar,
+  user,
+  price,
+}) {
   return (
     <>
       <motion.div
@@ -13,7 +22,7 @@ export default function CardMoreNft({ imgUrl, title, avatar, user, price }) {
         onHoverEnd={(e) => {}}
         className="Card"
       >
-        <Link to="/info">
+        <Link to={`/info/${id}`}>
           <div className="bg-zinc-800 rounded-3xl w-full">
             <div className="w-full">
               <img className="w-full object-cover" src={imgUrl} alt="Galaxy" />
