@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfileInfo } from "../../../store/slices/nft";
 import "./Hero.css";
@@ -7,7 +7,7 @@ import GetStart from "../../../components/buttons/GetStart";
 // Изображения
 import Anumakid from "../../../assets/IMAGE/SECTION/Anumakig_profile.png";
 import Copy from "../../../assets/IMAGE/PLAY.SVG/nav/Copy.svg";
-import Plus from "../../../assets/IMAGE/PLAY.SVG/nav/Plus.svg";
+import { SlUserFollow } from "react-icons/sl";
 import Globe from "../../../assets/IMAGE/PLAY.SVG/nav/Globe.svg";
 import Discord from "../../../assets/IMAGE/SECTION/Discord.svg";
 import Youtube from "../../../assets/IMAGE/SECTION/Youtube.svg";
@@ -16,30 +16,46 @@ import Instagram from "../../../assets/IMAGE/SECTION/instagram.svg";
 import { useParams } from "react-router";
 
 export default function Hero() {
-  const {id} = useParams()
+  const { id } = useParams();
   const dispatch = useDispatch();
   const { profile, loading, error } = useSelector((state) => state.nft);
+  const [selectedTab, setSelectedTab] = useState("createdNfts");
+  const [followersCount, setFollowersCount] = useState(
+    profile?.followersCount || 0
+  );
+  const [isFollowed, setIsFollowed] = useState(
+    localStorage.getItem("isFollowed") === "true"
+  );
 
   useEffect(() => {
-    // Проверяем, что id существует и является числом перед отправкой запроса
     if (id) {
       dispatch(fetchProfileInfo(id));
     } else {
-      console.error('ID должен быть числом');
+      console.error("ID должен быть числом");
     }
-    console.log('get date')
+    console.log("get date");
   }, [dispatch, id]);
 
-  // Пока идет загрузка, отображаем соответствующее сообщение
   if (loading) {
     return <div>Загрузка...</div>;
   }
 
-  // Если профиль не найден, отображаем соответствующее сообщение
   if (!profile) {
     return <div>Профиль не найден</div>;
   }
 
+  const handleTabChange = (tab) => {
+    setSelectedTab(tab);
+  };
+
+  const handleFollow = () => {
+    if (!isFollowed) {
+      const newFollowersCount = followersCount + 1;
+      setFollowersCount(newFollowersCount);
+      setIsFollowed(true);
+      localStorage.setItem("isFollowed", "true");
+    }
+  };
 
   return (
     <>
@@ -60,10 +76,13 @@ export default function Hero() {
               <div>
                 <GetStart imgUrl={Copy} desc={"0xc0e3b79c"} />
               </div>
-              <div className="flex w-full mb:w-48 items-center justify-center gap-3 rounded-xl text-white border-2 border-purple-500 p-2 mt-6">
-                <img src={Plus} alt="Rocket" />
-                <a href="#">Follow</a>
-              </div>
+              <button
+                className="flex w-full mb:w-48 items-center justify-center gap-3 rounded-xl text-white border-2 border-purple-500 p-2 mt-6"
+                onClick={handleFollow}
+              >
+                <SlUserFollow />
+                Follow
+              </button>
             </div>
           </div>
           <div className="flex gap-[8px] sm:gap-[40px] smm:gap-[15px] mt-[30px] text-xl smm:text-2xl text-white">
@@ -72,17 +91,13 @@ export default function Hero() {
               <h2 className="text-sm smm:text-xl">Объем</h2>
             </div>
             <div>
-              <h2 className="font-semibold">{profile?.soldNfts || 0}+</h2>
+              <h2 className="font-semibold">+</h2>
               <h2 className="text-sm smm:text-xl">Продано NFT</h2>
             </div>
             <div>
-              <h2 className="font-semibold">{profile?.followersCount || 0}+</h2>
+              <h2 className="font-semibold">{followersCount}+</h2>
               <h2 className="text-sm smm:text-xl">Подписчики</h2>
             </div>
-          </div>
-          <div className="pt-[30px]">
-            <h4 className="text-stone-400 text-lg">Биография</h4>
-            <p className="text-white">{profile?.bio || "Нет биографии"}</p>
           </div>
           <div className="pt-[30px]">
             <h4 className="text-stone-400 text-lg">Ссылки</h4>
@@ -97,6 +112,7 @@ export default function Hero() {
                   <img src={Discord} alt="Discord" />
                 </a>
               )}
+
               {profile.youtube && (
                 <a href={profile.youtube}>
                   <img src={Youtube} alt="Youtube" />
@@ -116,20 +132,38 @@ export default function Hero() {
           </div>
         </div>
         <div className="flex mt-[80px]">
-          <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px]">
-            <h3 className="text-white font-semibold">Создано</h3>
-            <div className="hidden mb:flex bg-zinc-400 w-[47px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-              <h5 className="text-white">{profile?.createdNfts?.length || 0}</h5> 
+          <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px] relative">
+            <h3
+              className={`text-white font-semibold cursor-pointer ${
+                selectedTab === "createdNfts"
+                  ? "border-b-4 border-purple-600 transition-all duration-100 animate-slideInRight"
+                  : ""
+              }`}
+              onClick={() => handleTabChange("createdNfts")}
+            >
+              Создано
+            </h3>
+            <div>
+              <h5 className="text-white"></h5>
+            </div>
+          </div>
+          <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px] relative">
+            <h3
+              className={`text-white font-semibold cursor-pointer ${
+                selectedTab === "ownedByNfts"
+                  ? "border-b-4 border-purple-600 animate-slideInRight"
+                  : ""
+              }`}
+              onClick={() => handleTabChange("ownedByNfts")}
+            >
+              Принадлежит
+            </h3>
+            <div>
+              <h5 className="text-white"></h5>
             </div>
           </div>
           <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px]">
-            <h3 className="text-stone-400 font-semibold">Принадлежит</h3>
-            <div className="hidden mb:flex bg-zinc-400 w-[37px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-              <h5 className="text-white">{profile?.ownedByNfts?.length || 0}</h5>
-            </div>
-          </div>
-          <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px]">
-            <h3 className="text-stone-400 font-semibold">Коллекция</h3>
+            <h3 className="text-white font-semibold">Коллекция</h3>
             <div className="hidden mb:flex bg-zinc-400 w-[37px] pt-0.5 pb-0.5 px-2.5 rounded-full">
               <h5 className="text-white">{profile?.collection?.length || 0}</h5>
             </div>
