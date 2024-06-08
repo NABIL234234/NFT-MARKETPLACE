@@ -38,7 +38,7 @@ export default function NftsProfile() {
         setIsModalOpen(false);
       })
       .catch((err) => {
-        console.log(error);
+        console.log(err);
       });
   };
 
