@@ -21,7 +21,7 @@ export const createNft = createAsyncThunk(
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3Nzc0MDU2fQ.TLrLcq3JEjo8JEN89omd-gcoiiGmbM1XCd9TXPnmttQ`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3OTAzMjgwfQ.p7eMM3YLTVFfvaKa1nvu_AYTLK3VmlFObh30snuqRWY`,
           },
         }
       );
@@ -67,7 +67,21 @@ export const fetchProfileInfo = createAsyncThunk(
       const response = await axios.get(
         `${import.meta.env.VITE_MAIN_URL}/api/users/getProfile/${Number(id)}`
       );
-      console.log(response.data)
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const pushNftToMarket = createAsyncThunk(
+  "nft/pushToMarket",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_MAIN_URL}/api/nfts/pushNftToMarket?=${id}`
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -79,7 +93,8 @@ const nftSlice = createSlice({
   name: "nft",
   initialState,
   reducers: {
-    nft: {}
+    nft: {},
+    createdNfts: [], 
   },
   extraReducers: (builder) => {
     builder
@@ -89,7 +104,7 @@ const nftSlice = createSlice({
       })
       .addCase(createNft.fulfilled, (state, action) => {
         state.nftLoading = false;
-        state.createdNft = action.payload;
+        state.createdNfts = action.payload;
       })
       .addCase(createNft.rejected, (state, action) => {
         state.nftLoading = false;
@@ -129,7 +144,7 @@ const nftSlice = createSlice({
       })
       .addCase(fetchProfileInfo.fulfilled, (state, action) => {
         state.loading = false;
-        state.profile = action.payload; 
+        state.profile = action.payload;
       })
       .addCase(fetchProfileInfo.rejected, (state, action) => {
         state.loading = false;

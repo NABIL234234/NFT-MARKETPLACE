@@ -21,7 +21,6 @@ export const postUsers = createAsyncThunk(
       const response = await axios.post(
         `${import.meta.env.VITE_MAIN_URL}/api/users/registration`,
         newUser
-       
       );
       navigate("/");
       return response.data;
@@ -74,17 +73,31 @@ export const getUserLogin = createAsyncThunk(
             username: newUser.username,
             password: newUser.password,
           },
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
         }
       );
 
-      localStorage.setItem("accessToken", response.data.tokens.access_token);
-      navigate("/");
-      return response.data;
+      if (
+        response.data &&
+        response.data.data &&
+        response.data.data.tokens &&
+        response.data.data.tokens.access_token
+      ) {
+        localStorage.setItem(
+          "accessToken",
+          response.data.data.tokens.access_token
+        );
+        navigate("/");
+        return response.data.data; // Возвращаем правильные данные
+      } else {
+        // Если структура данных неожиданная, выбрасываем ошибку
+        console.error("Unexpected response structure:", response.data);
+        throw new Error("Unexpected response structure");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error during login request:", error);
       throw error;
     }
   }
