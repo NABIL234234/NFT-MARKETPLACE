@@ -9,6 +9,9 @@ const initialState = {
   profile: null,
   loading: false,
   error: null,
+  pushToMarket: null,
+  pushLoading: false,
+  pushError: null,
 };
 
 export const createNft = createAsyncThunk(
@@ -77,10 +80,16 @@ export const fetchProfileInfo = createAsyncThunk(
 
 export const pushNftToMarket = createAsyncThunk(
   "nft/pushToMarket",
-  async (id, { rejectWithValue }) => {
+  async (nftId, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_MAIN_URL}/api/nfts/pushNftToMarket?=${id}`
+        `${import.meta.env.VITE_MAIN_URL}/api/nfts/pushNftToMarket?nftId=${nftId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3OTAzMjgwfQ.p7eMM3YLTVFfvaKa1nvu_AYTLK3VmlFObh30snuqRWY`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -89,12 +98,13 @@ export const pushNftToMarket = createAsyncThunk(
   }
 );
 
+
 const nftSlice = createSlice({
   name: "nft",
   initialState,
   reducers: {
     nft: {},
-    createdNfts: [], 
+    createdNfts: [],
   },
   extraReducers: (builder) => {
     builder
@@ -149,7 +159,20 @@ const nftSlice = createSlice({
       .addCase(fetchProfileInfo.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || action.error.message;
-      });
+      })
+
+      .addCase(pushNftToMarket.pending, (state) => {
+        state.pushLoading = true;
+        state.pushError = null;
+      })
+      .addCase(pushNftToMarket.fulfilled, (state, action) => {
+        state.pushLoading = false;
+        state.pushToMarket = action.payload;
+      })
+      .addCase(pushNftToMarket.rejected, (state, action) => {
+        state.pushLoading = false;
+        state.pushError = action.payload || action.payload.error.message;
+      })
   },
 });
 

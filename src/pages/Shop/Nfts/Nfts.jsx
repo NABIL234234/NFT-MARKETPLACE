@@ -19,8 +19,6 @@ export default function Nfts() {
     return <div>Loading...</div>;
   }
 
-
-
   return (
     <div className="pt-[60px] bg-zinc-700">
       <div className="max-w-6xl mx-auto px-5 font-mono">

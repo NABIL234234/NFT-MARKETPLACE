@@ -90,7 +90,7 @@ export const getUserLogin = createAsyncThunk(
           response.data.data.tokens.access_token
         );
         navigate("/");
-        return response.data.data; // Возвращаем правильные данные
+        return response.data.data; 
       } else {
         // Если структура данных неожиданная, выбрасываем ошибку
         console.error("Unexpected response structure:", response.data);
