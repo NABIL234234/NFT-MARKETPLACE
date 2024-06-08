@@ -12,6 +12,8 @@ const initialState = {
   pushToMarket: null,
   pushLoading: false,
   pushError: null,
+    createdNfts: [],
+    nftsForSale: []
 };
 
 export const createNft = createAsyncThunk(
@@ -35,8 +37,8 @@ export const createNft = createAsyncThunk(
   }
 );
 
-export const fetchAllNfts = createAsyncThunk(
-  "nft/allNft",
+export const fetchNftsForSale = createAsyncThunk(
+  "nft/nftsForSale",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
@@ -78,33 +80,31 @@ export const fetchProfileInfo = createAsyncThunk(
   }
 );
 
-export const pushNftToMarket = createAsyncThunk(
-  "nft/pushToMarket",
-  async (nftId, { rejectWithValue }) => {
-    try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_MAIN_URL}/api/nfts/pushNftToMarket?nftId=${nftId}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3OTAzMjgwfQ.p7eMM3YLTVFfvaKa1nvu_AYTLK3VmlFObh30snuqRWY`,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
+  export const pushNftToMarket = createAsyncThunk(
+    "nft/pushToMarket",
+    async (nftId, { rejectWithValue }) => {
+      try {
+        const response = await axios.put(
+          `${import.meta.env.VITE_MAIN_URL}/api/nfts/pushNftToMarket?nftId=${nftId}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3OTAzMjgwfQ.p7eMM3YLTVFfvaKa1nvu_AYTLK3VmlFObh30snuqRWY`,
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response?.data || error.message);
+      }
     }
-  }
-);
+  );
 
 
 const nftSlice = createSlice({
   name: "nft",
   initialState,
   reducers: {
-    nft: {},
-    createdNfts: [],
   },
   extraReducers: (builder) => {
     builder
@@ -121,15 +121,15 @@ const nftSlice = createSlice({
         state.nftError = action.payload || action.payload.error.message;
       })
 
-      .addCase(fetchAllNfts.pending, (state) => {
+      .addCase(fetchNftsForSale.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchAllNfts.fulfilled, (state, action) => {
+      .addCase(fetchNftsForSale.fulfilled, (state, action) => {
         state.loading = false;
-        state.nft = action.payload;
+        state.nftsForSale = action.payload;
       })
-      .addCase(fetchAllNfts.rejected, (state, action) => {
+      .addCase(fetchNftsForSale.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || action.error.message;
       })
