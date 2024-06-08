@@ -28,7 +28,7 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const resultAction = await dispatch(
-        getUserLogin({ newUser: data, navigate }) //token undefined
+        getUserLogin({ newUser: data, navigate })
       );
       console.log("Данные с сервера:", resultAction.payload);
       localStorage.setItem("accessToken", resultAction.payload.token);

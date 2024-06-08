@@ -4,7 +4,7 @@ import React from "react";
 import "./CardMoreNft.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { AiFillFire } from "react-icons/ai";
+import { MdSell } from "react-icons/md";
 
 export default function CardMoreNft({
   id,
@@ -13,6 +13,7 @@ export default function CardMoreNft({
   avatar,
   user,
   price,
+  onIconClick, 
 }) {
   return (
     <>
@@ -22,33 +23,34 @@ export default function CardMoreNft({
         onHoverEnd={(e) => {}}
         className="Card"
       >
-        <Link to={`/info/${id}`}>
-          <div className="bg-zinc-800 rounded-3xl w-full">
+        <div className="bg-zinc-800 rounded-3xl w-full">
+          <Link to={`/info/${id}`}>
             <div className="w-full">
               <img className="w-full object-cover" src={imgUrl} alt="Galaxy" />
             </div>
-            <div className="text-white p-6">
-              <Link to={`/profile/${id}`}>
-                <div>
-                  <h4 className="text-xl">{title}</h4>
-                  <div className="flex gap-2 pt-[5px]">
-                    <img src={avatar} alt="Moon" />
-                    <h5 className="">{user}</h5>
-                  </div>
+          </Link>
+
+          <div className="text-white p-6">
+            <Link to={`/profile/${id}`}>
+              <div>
+                <h4 className="text-xl">{title}</h4>
+                <div className="flex gap-2 pt-[5px]">
+                  <img src={avatar} alt="Moon" />
+                  <h5 className="">{user}</h5>
                 </div>
-              </Link>
-              <div className="flex pt-[25px]">
-                <div>
-                  <h5 className="text-stone-400">Price $</h5>
-                  <h5 className="">{price}</h5>
-                </div>
-                <div className="ml-auto pt-6">
-                  <AiFillFire />
-                </div>
+              </div>
+            </Link>
+            <div className="flex pt-[25px]">
+              <div>
+                <h5 className="text-stone-400">Price $</h5>
+                <h5 className="">{price}</h5>
+              </div>
+              <div className="ml-auto pt-6">
+                <MdSell className="w-[22px] cursor-pointer" onClick={onIconClick} />{" "}
               </div>
             </div>
           </div>
-        </Link>
+        </div>
       </motion.div>
     </>
   );
