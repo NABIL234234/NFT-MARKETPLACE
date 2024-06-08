@@ -2,6 +2,18 @@
   width: calc((100% - 40px) / 3);
   margin-right: 20px;
   margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #2c2c2c;
+}
+
+.Card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.Card .text-white {
+  padding: 20px;
 }
 
 .Card:nth-child(3n) {
@@ -11,24 +23,37 @@
 @media (max-width: 778px) {
   .Card {
     width: calc((100% - 20px) / 2);
-  }  
+  }
   .Card:nth-child(3n) {
-    margin-right: 20px; 
-  }  
+    margin-right: 20px;
+  }
   .Card:nth-child(2n) {
     margin-right: 0;
-  }  
+  }
 }
 
 @media (max-width: 500px) {
   .Card {
     width: 100%;
     margin-right: 0;
-  }  
+  }
   .Card:nth-child(3n) {
     margin-right: 0;
-  }  
+  }
   .Card:nth-child(2n) {
     margin-right: 0;
-  }  
+  }
+}
+
+.Card .flex {
+  display: flex;
+  align-items: center;
+}
+
+.Card .justify-between {
+  justify-content: space-between;
+}
+
+.Card .text-stone-400 {
+  color: #9CA3AF;
 }
