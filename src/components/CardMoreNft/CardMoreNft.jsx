@@ -31,24 +31,20 @@ export default function CardMoreNft({
           </div>
         </Link>
 
-        <div className="text-white p-4">
+        <div className="text-white p-4 relative">
           <Link to={`/profile/${id}`}>
             <h4 className="text-xl font-semibold mb-2">{title}</h4>
             <div className="flex items-center mb-2">
-              <img
-                className="w-8 h-8 rounded-full mr-2"
-                src={avatar}
-                alt="Moon"
-              />
+              <img src={avatar} alt="Moon" />
               <h5 className="">{user}</h5>
             </div>
           </Link>
-          <div className="flex justify-between mb-2 mt-5">
+          <div className="flex justify-between mb-2 mt-5 ">
             <div>
               <h5 className="text-stone-400">Price $</h5>
               <h5 className="">{price}</h5>
             </div>
-            <div className="ml-auto pt-6">
+            <div className="absolute top-[17%] left-[90%]">
               <MdSell
                 className="w-[22px] cursor-pointer"
                 onClick={onIconClick}
