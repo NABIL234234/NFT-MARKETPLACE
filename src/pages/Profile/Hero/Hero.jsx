@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProfileInfo } from "../../../store/slices/nft";
-import { changeProfilePhoto } from "../../../store/slices/nft";
+import { fetchProfileInfo, changeProfilePhoto } from "../../../store/slices/nft";
 import "./Hero.css";
 import { motion } from "framer-motion";
 import { CiInstagram } from "react-icons/ci";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SlUserFollow } from "react-icons/sl";
 import { useParams } from "react-router";
-
-import DefaulPhoto from "../../../assets/IMAGE/SECTION/Astro.png"
+import DefaultPhoto from "../../../assets/IMAGE/SECTION/Astro.png";
 
 const TABS = [
   { label: "Created", value: "createdNfts" },
@@ -21,15 +19,9 @@ export default function Hero() {
   const dispatch = useDispatch();
   const { profile, loading, error } = useSelector((state) => state.nft);
   const [selectedTab, setSelectedTab] = useState("createdNfts");
-  const [followersCount, setFollowersCount] = useState(
-    profile?.followersCount || 0
-  );
-  const [isFollowed, setIsFollowed] = useState(
-    localStorage.getItem("isFollowed") === "true"
-  );
-  const [imagePreview, setImagePreview] = useState(
-    profile?.avatar || "/path/to/default-avatar.png"
-  );
+  const [followersCount, setFollowersCount] = useState(profile?.followersCount || 0);
+  const [isFollowed, setIsFollowed] = useState(localStorage.getItem("isFollowed") === "true");
+  const [imagePreview, setImagePreview] = useState(localStorage.getItem("profileImage") || DefaultPhoto);
 
   useEffect(() => {
     if (id) {
@@ -41,7 +33,7 @@ export default function Hero() {
 
   useEffect(() => {
     if (profile) {
-      setImagePreview(profile.avatar || "/path/to/default-avatar.png");
+      setImagePreview(profile.avatar || DefaultPhoto);
     }
   }, [profile]);
 
@@ -71,8 +63,22 @@ export default function Hero() {
     if (photoData) {
       const formData = new FormData();
       formData.append("image", photoData);
-      dispatch(changeProfilePhoto(formData));
-      setImagePreview(URL.createObjectURL(photoData));
+
+      // Показать временное превью
+      const temporaryImageURL = URL.createObjectURL(photoData);
+      setImagePreview(temporaryImageURL);
+
+      dispatch(changeProfilePhoto(formData)).then((response) => {
+        if (response.payload && response.payload.avatarUrl) { // Убедитесь, что возвращаем правильный URL
+          const newAvatarUrl = response.payload.avatarUrl; // Используйте URL, возвращенный сервером
+          setImagePreview(newAvatarUrl);
+          localStorage.setItem("profileImage", newAvatarUrl);
+        }
+      }).catch((error) => {
+        console.error("Error changing profile photo:", error);
+        // Вернуться к предыдущему изображению в случае ошибки
+        setImagePreview(localStorage.getItem("profileImage") || DefaultPhoto);
+      });
     }
   };
 
@@ -82,10 +88,7 @@ export default function Hero() {
       <div className="max-w-6xl mx-auto px-5 font-mono">
         <div className="relative avatar-container">
           <label htmlFor="avatar-upload" className="avatar-label">
-            <img
-              src={imagePreview}
-              className="avatar-image"
-            />
+            <img src={imagePreview} className="avatar-image" alt="Profile" />
           </label>
           <input
             id="avatar-upload"
