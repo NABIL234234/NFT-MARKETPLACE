@@ -26,7 +26,7 @@ export const createNft = createAsyncThunk(
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3OTAzMjgwfQ.p7eMM3YLTVFfvaKa1nvu_AYTLK3VmlFObh30snuqRWY`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY`,
           },
         }
       );
@@ -89,7 +89,7 @@ export const fetchProfileInfo = createAsyncThunk(
           {},
           {
             headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE3OTAzMjgwfQ.p7eMM3YLTVFfvaKa1nvu_AYTLK3VmlFObh30snuqRWY`,
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY  `,
             },
           }
         );
