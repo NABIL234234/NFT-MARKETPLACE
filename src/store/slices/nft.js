@@ -12,8 +12,11 @@ const initialState = {
   pushToMarket: null,
   pushLoading: false,
   pushError: null,
-    createdNfts: [],
-    nftsForSale: []
+  createdNfts: [],
+  nftsForSale: [],
+  changeAvatar: null,
+  avatarLoading: false,
+  avatarError: null,
 };
 
 export const createNft = createAsyncThunk(
@@ -80,32 +83,54 @@ export const fetchProfileInfo = createAsyncThunk(
   }
 );
 
-  export const pushNftToMarket = createAsyncThunk(
-    "nft/pushToMarket",
-    async (nftId, { rejectWithValue }) => {
-      try {
-        const response = await axios.put(
-          `${import.meta.env.VITE_MAIN_URL}/api/nfts/pushNftToMarket?nftId=${nftId}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY  `,
-            },
-          }
-        );
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response?.data || error.message);
-      }
-    }
-  );
+export const changeProfilePhoto = createAsyncThunk(
+  "nft/changePhoto",
+  async (photoData, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_MAIN_URL}/api/users/changeProfilePhoto`,
+        photoData,
+        {
 
+          headers: {
+            "Content-Type": "multipart/from-data",
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY`,
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const pushNftToMarket = createAsyncThunk(
+  "nft/pushToMarket",
+  async (nftId, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${
+          import.meta.env.VITE_MAIN_URL
+        }/api/nfts/pushNftToMarket?nftId=${nftId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY  `,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
 
 const nftSlice = createSlice({
   name: "nft",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(createNft.pending, (state) => {
@@ -121,6 +146,8 @@ const nftSlice = createSlice({
         state.nftError = action.payload || action.payload.error.message;
       })
 
+
+
       .addCase(fetchNftsForSale.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -133,6 +160,8 @@ const nftSlice = createSlice({
         state.loading = false;
         state.error = action.payload || action.error.message;
       })
+
+
 
       .addCase(fetchNftInfo.pending, (state) => {
         state.loading = true;
@@ -148,6 +177,8 @@ const nftSlice = createSlice({
         state.nft = {};
       })
 
+
+
       .addCase(fetchProfileInfo.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -161,6 +192,8 @@ const nftSlice = createSlice({
         state.error = action.payload || action.error.message;
       })
 
+
+
       .addCase(pushNftToMarket.pending, (state) => {
         state.pushLoading = true;
         state.pushError = null;
@@ -173,6 +206,24 @@ const nftSlice = createSlice({
         state.pushLoading = false;
         state.pushError = action.payload || action.payload.error.message;
       })
+
+
+
+
+      .addCase(changeProfilePhoto.pending, (state) => {
+        state.avatarLoading = true;
+        state.avatarError = null;
+      })
+      .addCase(changeProfilePhoto.fulfilled, (state, action) => {
+        state.avatarLoading = false;
+        state.changeAvatar = action.payload;
+      })
+      .addCase(changeProfilePhoto.rejected, (state, action) => {
+        state.avatarLoading = false;
+        state.avatarError = action.payload || action.payload.error.message;
+      })
+
+
   },
 });
 

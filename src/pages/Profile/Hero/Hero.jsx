@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfileInfo } from "../../../store/slices/nft";
+import { changeProfilePhoto } from "../../../store/slices/nft";
 import "./Hero.css";
 import { motion } from "framer-motion";
 import { CiInstagram } from "react-icons/ci";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SlUserFollow } from "react-icons/sl";
 import { useParams } from "react-router";
-import Anumakid from "../../../assets/IMAGE/SECTION/Anumakig_profile.png";
 
 const TABS = [
   { label: "Created", value: "createdNfts" },
   { label: "Owned", value: "ownedByNfts" },
-  // { label: "Коллекция", value: "collection" },
 ];
 
 export default function Hero() {
@@ -20,8 +19,13 @@ export default function Hero() {
   const dispatch = useDispatch();
   const { profile, loading, error } = useSelector((state) => state.nft);
   const [selectedTab, setSelectedTab] = useState("createdNfts");
-  const [followersCount, setFollowersCount] = useState(profile?.followersCount || 0);
-  const [isFollowed, setIsFollowed] = useState(localStorage.getItem("isFollowed") === "true");
+  const [followersCount, setFollowersCount] = useState(
+    profile?.followersCount || 0
+  );
+  const [isFollowed, setIsFollowed] = useState(
+    localStorage.getItem("isFollowed") === "true"
+  );
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     if (id) {
@@ -52,16 +56,31 @@ export default function Hero() {
     }
   };
 
+  const changeAvatar = (event) => {
+    const photoData = event.target.files[0];
+    setSelectedImage(photoData);
+  };
+
+  const handleUpload = () => {
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append("image", selectedImage);
+      dispatch(changeProfilePhoto(formData));
+    }
+  };
   return (
     <>
       <div className="HeaderChannel" />
       <div className="max-w-6xl mx-auto px-5 font-mono">
-        <div className="absolute top-[370px] lgg:top-[393px] z-[1]">
-          <img src={profile?.profileImage || Anumakid} alt={profile?.username || "Profile"} />
+        <div>
+          <input type="file" onChange={changeAvatar} />
+          <button onClick={handleUpload}>Загрузить</button>
         </div>
         <div className="pt-[80px]">
           <div className="block mdd:flex items-center">
-            <h2 className="text-white text-4xl font-semibold">{profile?.username || "Unknown user"}</h2>
+            <h2 className="text-white text-4xl font-semibold">
+              {profile?.username || "Unknown user"}
+            </h2>
             <div className="flex gap-[20px] ml-auto">
               <button
                 className="flex w-full mb:w-48 items-center justify-center gap-3 rounded-xl transition ease-in-out delay-15 text-white border-2 border-purple-500 hover:bg-purple-500 active:bg-purple-700 p-4 mt-6"
@@ -89,8 +108,15 @@ export default function Hero() {
           <div className="pt-[30px]">
             <h4 className="text-stone-400 text-lg">Links</h4>
             <div className="w-72% flex gap-[12px] pt-[5px] text-purple-500">
-              <a href="https://www.instagram.com/magic_nftmarcketplace?igsh=ZmplY3c0ZTI4eWI5" className="text-3xl"><CiInstagram /></a>
-              <a href="https://t.me/magic_nft_marketplace" className="text-3xl"><FaTelegramPlane /></a>
+              <a
+                href="https://www.instagram.com/magic_nftmarcketplace?igsh=ZmplY3c0ZTI4eWI5"
+                className="text-3xl"
+              >
+                <CiInstagram />
+              </a>
+              <a href="https://t.me/magic_nft_marketplace" className="text-3xl">
+                <FaTelegramPlane />
+              </a>
             </div>
           </div>
         </div>
@@ -99,7 +125,9 @@ export default function Hero() {
             {TABS.map((tab) => (
               <div key={tab.value} className="relative">
                 <h3
-                  className={`text-white  cursor-pointer text-xl ${selectedTab === tab.value ? "text-purple-600" : ""}`}
+                  className={`text-white  cursor-pointer text-xl ${
+                    selectedTab === tab.value ? "text-purple-600" : ""
+                  }`}
                   onClick={() => handleTabChange(tab.value)}
                 >
                   {tab.label}
