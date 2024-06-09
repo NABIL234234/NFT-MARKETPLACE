@@ -31,7 +31,7 @@ export default function Nfts() {
                 title={nft.name}
                 avatar={nft.userAvatar}
                 user={nft.userName}
-                price={`${nft.price} ETH`}
+                price={`${nft.price}`}
               />
             ))}
         </div>

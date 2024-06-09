@@ -3,10 +3,8 @@ import { NavLink } from "react-router-dom";
 
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-import Discord from "../../../src/assets/IMAGE/SECTION/Discord.svg";
-import Youtube from "../../../src/assets/IMAGE/SECTION/Youtube.svg";
-import Twitter from "../../../src/assets/IMAGE/SECTION/Twitter.svg";
-import Instagram from "../../../src/assets/IMAGE/SECTION/instagram.svg";
+import { CiInstagram } from "react-icons/ci";
+import { FaTelegramPlane } from "react-icons/fa";
 import Border from "../../../src/assets/IMAGE/SECTION/Border.svg";
 
 
@@ -32,11 +30,9 @@ export default function Footer() {
                 </h4>
                 <h4 className="pt-[20px]">Join our community</h4>
               </div>
-              <div className="w-22%]  flex gap-[12px] pt-[15px]">
-                <img src={Discord} alt="Discord" />
-                <img src={Youtube} alt="Youtube" />
-                <img src={Twitter} alt="Twitter" />
-                <img src={Instagram} alt="Instagram" />
+              <div className="flex gap-[12px] pt-[15px] text-3xl text-purple-500">
+              <a href="https://www.instagram.com/magic_nftmarcketplace?igsh=ZmplY3c0ZTI4eWI5" className="text-3xl"><CiInstagram /></a>
+              <a href="https://t.me/magic_nft_marketplace" className="text-3xl"><FaTelegramPlane /></a>
               </div>
             </div>
             <div className="mt-[30px] text-xl  flex flex-col gap-[12px]  text-white">
