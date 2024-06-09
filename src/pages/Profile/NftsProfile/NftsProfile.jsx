@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchProfileInfo, pushNftToMarket } from "../../../store/slices/nft";
+import { fetchProfileInfo, pushNftToMarket, deleteNft } from "../../../store/slices/nft";
 import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -42,6 +42,18 @@ export default function NftsProfile() {
       });
   };
 
+
+  const handleDeleteNft = (nftId) => {
+    dispatch(deleteNft(nftId))
+    .unwrap()
+    .then(() => {
+      dispatch(fetchProfileInfo(id));
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   const openModal = (nft) => {
     setSelectedNft(nft);
     setIsModalOpen(true);
@@ -65,6 +77,7 @@ export default function NftsProfile() {
               user={profile.username}
               price={`${nft.price}`}
               onIconClick={() => openModal(nft)}
+               onDelete={() => handleDeleteNft(nft.id)}
             />
           ))}
         </div>
