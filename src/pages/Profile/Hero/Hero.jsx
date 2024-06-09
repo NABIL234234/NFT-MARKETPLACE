@@ -9,6 +9,8 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { SlUserFollow } from "react-icons/sl";
 import { useParams } from "react-router";
 
+import DefaulPhoto from "../../../assets/IMAGE/SECTION/Astro.png"
+
 const TABS = [
   { label: "Created", value: "createdNfts" },
   { label: "Owned", value: "ownedByNfts" },
@@ -25,7 +27,9 @@ export default function Hero() {
   const [isFollowed, setIsFollowed] = useState(
     localStorage.getItem("isFollowed") === "true"
   );
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(
+    profile?.avatar || "/path/to/default-avatar.png"
+  );
 
   useEffect(() => {
     if (id) {
@@ -35,8 +39,14 @@ export default function Hero() {
     }
   }, [dispatch, id]);
 
+  useEffect(() => {
+    if (profile) {
+      setImagePreview(profile.avatar || "/path/to/default-avatar.png");
+    }
+  }, [profile]);
+
   if (loading) {
-    return <div>Loading..ю</div>;
+    return <div>Loading...</div>;
   }
 
   if (!profile) {
@@ -58,25 +68,33 @@ export default function Hero() {
 
   const changeAvatar = (event) => {
     const photoData = event.target.files[0];
-    setSelectedImage(photoData);
-  };
-
-  const handleUpload = () => {
-    if (selectedImage) {
+    if (photoData) {
       const formData = new FormData();
-      formData.append("image", selectedImage);
+      formData.append("image", photoData);
       dispatch(changeProfilePhoto(formData));
+      setImagePreview(URL.createObjectURL(photoData));
     }
   };
+
   return (
     <>
       <div className="HeaderChannel" />
       <div className="max-w-6xl mx-auto px-5 font-mono">
-        <div>
-          <input type="file" onChange={changeAvatar} />
-          <button onClick={handleUpload}>Загрузить</button>
+        <div className="relative avatar-container">
+          <label htmlFor="avatar-upload" className="avatar-label">
+            <img
+              src={imagePreview}
+              className="avatar-image"
+            />
+          </label>
+          <input
+            id="avatar-upload"
+            type="file"
+            onChange={changeAvatar}
+            style={{ display: "none" }}
+          />
         </div>
-        <div className="pt-[80px]">
+        <div>
           <div className="block mdd:flex items-center">
             <h2 className="text-white text-4xl font-semibold">
               {profile?.username || "Unknown user"}
@@ -120,7 +138,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center mt-[80px] relative">
+        <div className="flex flex-col items-center mt-[20px] relative">
           <div className="flex gap-[116px] pb-2">
             {TABS.map((tab) => (
               <div key={tab.value} className="relative">
