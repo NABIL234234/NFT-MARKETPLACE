@@ -1,126 +1,113 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchProfileInfo, pushNftToMarket, deleteNft } from "../../../store/slices/nft";
 import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
-// images
-
-import MoonDancer from "../../../../src/assets/IMAGE/PLAY.SVG/nav/MoonDancer.png";
-import NftsGrib from "../../../assets/IMAGE/SECTION/NftsGrib.png";
-import Nfts032 from "../../../assets/IMAGE/SECTION/Nfts032.png";
-import Nfts024 from "../../../assets/IMAGE/SECTION/Nfts024.png";
-import NftsBear from "../../../assets/IMAGE/SECTION/NftsBear.png";
-import NftsDog from "../../../assets/IMAGE/SECTION/NftsDog.png";
-import NftsRobot from "../../../assets/IMAGE/SECTION/NftsRobot.png";
-import NftsCherry from "../../../assets/IMAGE/SECTION/NftsCherry.png";
-import NftsSpaceTravel from "../../../assets/IMAGE/SECTION/NftsSpaceTravel.png";
-import NftsSunset from "../../../assets/IMAGE/SECTION/NftsSunset.png";
-import NftsDesert from "../../../assets/IMAGE/SECTION/NftsDesert.png";
-import NftsIceCream from "../../../assets/IMAGE/SECTION/NftsIceCream.png";
-import NftsDog2 from "../../../assets/IMAGE/SECTION/NftsDog2.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export default function NftsProfile() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { profile, loading, error } = useSelector((state) => state.nft);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNft, setSelectedNft] = useState(null);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchProfileInfo(id));
+    }
+  }, [id, dispatch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!profile) {
+    return <div>No profile data available.</div>;
+  }
+
+  const handleSellNft = (nftId) => {
+    dispatch(pushNftToMarket(nftId))
+      .unwrap()
+      .then(() => {
+        dispatch(fetchProfileInfo(id)); // обновление профиля после продажи
+        setIsModalOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+  const handleDeleteNft = (nftId) => {
+    dispatch(deleteNft(nftId))
+    .unwrap()
+    .then(() => {
+      dispatch(fetchProfileInfo(id));
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const openModal = (nft) => {
+    setSelectedNft(nft);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedNft(null);
+    setIsModalOpen(false);
+  };
+
   return (
-    <>
-      <div className="pt-[60px] bg-zinc-700">
-        <div className="max-w-6xl mx-auto px-5 font-mono">
-          <div className="flex justify-start items-center flex-wrap ">
+    <div className="pt-[60px] bg-zinc-700">
+      <div className="max-w-6xl mx-auto px-5 font-mono">
+        <div className="flex justify-start items-center flex-wrap">
+          {profile.data.createdNfts.map((nft) => (
             <CardMoreNft
-              imgUrl={NftsGrib}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
+              key={nft.id}
+              imgUrl={nft.nftImage}
+              title={nft.name}
+              avatar={profile.profileImage}
+              user={profile.username}
+              price={`${nft.price}`}
+              onIconClick={() => openModal(nft)}
+               onDelete={() => handleDeleteNft(nft.id)}
             />
-            <CardMoreNft
-              imgUrl={Nfts032}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={Nfts024}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsBear}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsDog}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsRobot}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsCherry}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsSpaceTravel}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsSunset}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsDesert}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsIceCream}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-            <CardMoreNft
-              imgUrl={NftsDog2}
-              title="Distant Galaxy"
-              avatar={MoonDancer}
-              user="MoonDancer"
-              price="1.63 ETH"
-              Bid="0.33 wETH"
-            />
-          </div>
+          ))}
         </div>
       </div>
-    </>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded shadow-lg">
+            <h2 className="text-xl mb-4">Подтвердите продажу</h2>
+            <p>
+              Вы действительно хотите продать {selectedNft.name} за{" "}
+              {selectedNft.price}?
+            </p>
+            <div className="flex justify-end mt-4">
+              <button
+                className="bg-purple-600 text-white px-4 py-2 rounded mr-2"
+                onClick={() => handleSellNft(selectedNft.id)}
+              >
+                Продать
+              </button>
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded"
+                onClick={closeModal}
+              >
+                Отмена
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

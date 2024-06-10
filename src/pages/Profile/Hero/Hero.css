@@ -5,4 +5,58 @@
   object-fit: cover;
   background-size: 100%;
   height: 350px;
+  position: relative;
+}
+
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  top: -80px;
+  left: -490px;
+}
+
+.avatar-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-image: url('../../../assets//IMAGE/SECTION/NftsSpaceTravel.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.avatar-label::after {
+  content: "Change Avatar";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 12px;
+  display: none;
+}
+
+.avatar-label:hover::after {
+  display: block;
 }

@@ -1,88 +1,167 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfileInfo, changeProfilePhoto } from "../../../store/slices/nft";
 import "./Hero.css";
-import GetStart from "../../../components/buttons/GetStart";
+import { motion } from "framer-motion";
+import { CiInstagram } from "react-icons/ci";
+import { FaTelegramPlane } from "react-icons/fa";
+import { SlUserFollow } from "react-icons/sl";
+import { useParams } from "react-router";
+import DefaultPhoto from "../../../assets/IMAGE/SECTION/Astro.png";
 
-// images
-import Anumakid from "../../../assets/IMAGE/SECTION/Anumakig_profile.png";
-import Copy from "../../../assets/IMAGE/PLAY.SVG/nav/Copy.svg";
-import Plus from "../../../assets/IMAGE/PLAY.SVG/nav/Plus.svg";
-import Globe from "../../../assets/IMAGE/PLAY.SVG/nav/Globe.svg";
-import Discord from "../../../assets/IMAGE/SECTION/Discord.svg";
-import Youtube from "../../../assets/IMAGE/SECTION/Youtube.svg";
-import Twitter from "../../../assets/IMAGE/SECTION/Twitter.svg";
-import Instagram from "../../../assets/IMAGE/SECTION/instagram.svg";
+const TABS = [
+  { label: "Created", value: "createdNfts" },
+  { label: "Owned", value: "ownedByNfts" },
+];
 
 export default function Hero() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { profile, loading, error } = useSelector((state) => state.nft);
+  const [selectedTab, setSelectedTab] = useState("createdNfts");
+  const [followersCount, setFollowersCount] = useState(profile?.followersCount || 0);
+  const [isFollowed, setIsFollowed] = useState(localStorage.getItem("isFollowed") === "true");
+  const [imagePreview, setImagePreview] = useState(localStorage.getItem("profileImage") || DefaultPhoto);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchProfileInfo(id));
+    } else {
+      console.error("ID должен быть числом");
+    }
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (profile) {
+      setImagePreview(profile.avatar || DefaultPhoto);
+    }
+  }, [profile]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!profile) {
+    return <div>Profile not found</div>;
+  }
+
+  const handleTabChange = (tab) => {
+    setSelectedTab(tab);
+  };
+
+  const handleFollow = () => {
+    if (!isFollowed) {
+      const newFollowersCount = followersCount + 1;
+      setFollowersCount(newFollowersCount);
+      setIsFollowed(true);
+      localStorage.setItem("isFollowed", "true");
+    }
+  };
+
+  const changeAvatar = (event) => {
+    const photoData = event.target.files[0];
+    if (photoData) {
+      const formData = new FormData();
+      formData.append("image", photoData);
+
+      // Показать временное превью
+      const temporaryImageURL = URL.createObjectURL(photoData);
+      setImagePreview(temporaryImageURL);
+
+      dispatch(changeProfilePhoto(formData)).then((response) => {
+        if (response.payload && response.payload.avatarUrl) { // Убедитесь, что возвращаем правильный URL
+          const newAvatarUrl = response.payload.avatarUrl; // Используйте URL, возвращенный сервером
+          setImagePreview(newAvatarUrl);
+          localStorage.setItem("profileImage", newAvatarUrl);
+        }
+      }).catch((error) => {
+        console.error("Error changing profile photo:", error);
+        // Вернуться к предыдущему изображению в случае ошибки
+        setImagePreview(localStorage.getItem("profileImage") || DefaultPhoto);
+      });
+    }
+  };
+
   return (
     <>
       <div className="HeaderChannel" />
       <div className="max-w-6xl mx-auto px-5 font-mono">
-        <div className="absolute top-[370px] lgg:top-[393px] z-[1] ">
-          <img src={Anumakid} alt="Anumakid" />
+        <div className="relative avatar-container">
+          <label htmlFor="avatar-upload" className="avatar-label">
+            <img src={imagePreview} className="avatar-image" alt="Profile" />
+          </label>
+          <input
+            id="avatar-upload"
+            type="file"
+            onChange={changeAvatar}
+            style={{ display: "none" }}
+          />
         </div>
-        <div className="pt-[80px]">
+        <div>
           <div className="block mdd:flex items-center">
-            <h2 className=" text-white text-6xl font-semibold">Anumakid</h2>
+            <h2 className="text-white text-4xl font-semibold">
+              {profile?.username || "Unknown user"}
+            </h2>
             <div className="flex gap-[20px] ml-auto">
-              <div>
-                <GetStart imgUrl={Copy} desc={0xc0e3b79c} />
-              </div>
-
-              <div className="flex w-full mb:w-48 items-center justify-center gap-3 rounded-xl text-white border-2 border-purple-500 p-2 mt-6  ">
-                <img src={Plus} alt="Rocket" />
-                <a href="#">Follow</a>
-              </div>
+              <button
+                className="flex w-full mb:w-48 items-center justify-center gap-3 rounded-xl transition ease-in-out delay-15 text-white border-2 border-purple-500 hover:bg-purple-500 active:bg-purple-700 p-4 mt-6"
+                onClick={handleFollow}
+              >
+                <SlUserFollow />
+                Follow
+              </button>
             </div>
           </div>
           <div className="flex gap-[8px] sm:gap-[40px] smm:gap-[15px] mt-[30px] text-xl smm:text-2xl text-white">
             <div>
-              <h2 className="font-semibold">250k+</h2>
+              <h2 className="font-semibold">{profile?.volume}+</h2>
               <h2 className="text-sm smm:text-xl">Volume</h2>
             </div>
             <div>
-              <h2 className="font-semibold">50k+</h2>
-              <h2 className="text-sm smm:text-xl">NFTs Sold</h2>
+              <h2 className="font-semibold">+</h2>
+              <h2 className="text-sm smm:text-xl">Sold NFT</h2>
             </div>
             <div>
-              <h2 className="font-semibold">3000k+</h2>
-              <h2 className="text-sm smm:text-xl">Followers</h2>
+              <h2 className="font-semibold">{followersCount}+</h2>
+              <h2 className="text-sm smm:text-xl">Subscribers</h2>
             </div>
-          </div>
-          <div className="pt-[30px]">
-            <h4 className="text-stone-400 text-lg">Bio</h4>
-            <p className="text-white">
-              The internet's friendliest designer kid.
-            </p>
           </div>
           <div className="pt-[30px]">
             <h4 className="text-stone-400 text-lg">Links</h4>
-            <div className="w-22%]  flex gap-[12px] pt-[5px]">
-              <img src={Globe} alt="Globe" />
-              <img src={Discord} alt="Discord" />
-              <img src={Youtube} alt="Youtube" />
-              <img src={Twitter} alt="Twitter" />
-              <img src={Instagram} alt="Instagram" />
+            <div className="w-72% flex gap-[12px] pt-[5px] text-purple-500">
+              <a
+                href="https://www.instagram.com/magic_nftmarcketplace?igsh=ZmplY3c0ZTI4eWI5"
+                className="text-3xl"
+              >
+                <CiInstagram />
+              </a>
+              <a href="https://t.me/magic_nft_marketplace" className="text-3xl">
+                <FaTelegramPlane />
+              </a>
             </div>
           </div>
         </div>
-        <div className="flex mt-[80px] ">
-          <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px]">
-            <h3 className="text-white font-semibold">Created</h3>
-            <div className="hidden mb:flex bg-zinc-400 w-[47px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-              <h5 className="text-white">300</h5>
-            </div>
-          </div>
-          <div className="flex justify-center items-center  gap-[16px] w-[525px] pb-[14.5px]">
-            <h3 className="text-stone-400 font-semibold">Owned</h3>
-            <div className="hidden mb:flex bg-zinc-400 w-[37px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-              <h5 className="text-white">70</h5>
-            </div>
-          </div>
-          <div className="flex justify-center items-center  gap-[16px] w-[525px] pb-[14.5px]">
-            <h3 className="text-stone-400 font-semibold">Collection</h3>
-            <div className="hidden mb:flex bg-zinc-400 w-[37px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-              <h5 className="text-white">70</h5>
-            </div>
+        <div className="flex flex-col items-center mt-[20px] relative">
+          <div className="flex gap-[116px] pb-2">
+            {TABS.map((tab) => (
+              <div key={tab.value} className="relative">
+                <h3
+                  className={`text-white  cursor-pointer text-xl ${
+                    selectedTab === tab.value ? "text-purple-600" : ""
+                  }`}
+                  onClick={() => handleTabChange(tab.value)}
+                >
+                  {tab.label}
+                </h3>
+                {selectedTab === tab.value && (
+                  <motion.div
+                    layoutId="underline"
+                    className="absolute bottom-0 h-0.5 bg-purple-600 w-full"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>

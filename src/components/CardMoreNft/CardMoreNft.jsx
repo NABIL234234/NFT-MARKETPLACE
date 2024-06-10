@@ -1,46 +1,63 @@
 import React from "react";
 import "./CardMoreNft.css";
-
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { MdSell } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 export default function CardMoreNft({
+  id,
   imgUrl,
   title,
   avatar,
   user,
   price,
-  Bid,
+  onIconClick,
+  onDelete
 }) {
   return (
-    <>
-      <div className="Card">
-        <Link to="/info">
-          <div className="bg-zinc-800 rounded-3xl">
-            <div className="w-full">
-              <img className="w-full object-cover" src={imgUrl} alt="Galaxy" />
-            </div>
-            <div className="text-white p-6">
-              <div className="">
-                <h4 className="text-xl">{title}</h4>
-                <div className="flex gap-2 pt-[5px]">
-                  <img src={avatar} alt="Moon" />
-                  <h5 className="">{user}</h5>
-                </div>
-              </div>
-              <div className="flex pt-[25px]">
-                <div>
-                  <h5 className="text-stone-400">Price</h5>
-                  <h5 className="">{price}</h5>
-                </div>
-                <div className="ml-auto">
-                  <h5 className="text-stone-400">Highest Bid</h5>
-                  <h5 className="">{Bid}</h5>
-                </div>
-              </div>
-            </div>
+    <motion.div
+      whileHover={{ scale: 1.1 }}
+      onHoverStart={(e) => {}}
+      onHoverEnd={(e) => {}}
+      className="Card"
+    >
+      <div className="w-full">
+        <Link to={`/info/${id}`}>
+          <div className="w-full h-[40vh] overflow-hidden">
+            <img
+              className="w-full h-full object-cover"
+              src={imgUrl}
+              alt="Galaxy"
+            />
           </div>
         </Link>
+
+        <div className="text-white p-4 relative">
+          <Link to={`/profile/${id}`}>
+            <h4 className="text-xl font-semibold mb-2">{title}</h4>
+            <div className="flex items-center mb-2">
+              <img src={avatar} alt="Moon" />
+              <h5 className="">{user}</h5>
+            </div>
+          </Link>
+          <div className="flex justify-between mb-2 mt-5 ">
+            <div>
+              <h5 className="text-stone-400">Price $</h5>
+              <h5 className="">{price}</h5>
+            </div>
+            <div className="absolute top-[17%] left-[90%]">
+              <MdSell
+                className="w-[22px] cursor-pointer"
+                onClick={onIconClick}
+              />
+            </div>
+            <div>
+            <MdDelete  onClick={onDelete}/>
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+    </motion.div>
   );
 }

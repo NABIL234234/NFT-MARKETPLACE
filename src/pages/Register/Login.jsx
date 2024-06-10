@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import { getUserLogin } from "../../store/actions/asyncAction";
 import Inputs from "../../components/inputs/Inputs";
-
-// images
+import { FaKey, FaUser, FaUnlockAlt } from "react-icons/fa";
+import { IoLogIn } from "react-icons/io5";
+import { IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
 import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
-import { FaKey } from "react-icons/fa";
-import { IoLogIn } from "react-icons/io5";
 
 export default function Login() {
   const {
@@ -20,6 +20,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -28,11 +29,17 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const resultAction = await dispatch(
-        getUserLogin({ newUser: data, navigate }) //token undefined
+        getUserLogin({ newUser: data, navigate })
       );
-      console.log("Данные с сервера:", resultAction.payload);
-      localStorage.setItem("accessToken", resultAction.payload.token);
-      navigate(from, { replace: true });
+      if (getUserLogin.fulfilled.match(resultAction)) {
+        console.log("Данные с сервера:", resultAction.payload);
+        const token = resultAction.payload.tokens.access_token;
+        console.log("Полученный токен:", token);
+        localStorage.setItem("accessToken", token);
+        navigate(from, { replace: true });
+      } else {
+        console.error("Ошибка при выполнении запроса:", resultAction.payload);
+      }
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
@@ -64,17 +71,17 @@ export default function Login() {
               Login to your account
             </h3>
             <p className="max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
-              Welcome! enter your details and start creating, collecting and
+              Welcome! Enter your details and start creating, collecting, and
               selling NFTs.
             </p>
           </div>
           <div className="flex flex-col gap-[10px] md:gap-[25px] pt-[15px] mdd:pt-[20px]">
-            <div>
+            <div className="relative">
+              <FaUser className="absolute top-[29%] left-[4%] z-10 text-xl" />
               <Inputs
                 type="text"
                 icons={User}
-                placeholder="UserName"
-                name="username"
+                placeholder="Username"
                 {...register("username", {
                   required: "Введите имя пользователя",
                 })}
@@ -85,12 +92,12 @@ export default function Login() {
                 </span>
               )}
             </div>
-            <div>
+            <div className="relative">
+              <FaUnlockAlt className="absolute top-[29%] left-[4%] z-10 text-xl" />
               <Inputs
-                type="password"
+                type={showPassword ? "text" : "password"}
                 icons={Password}
                 placeholder="Password"
-                name="password"
                 {...register("password", {
                   required: "Введите пароль",
                   minLength: {
@@ -99,6 +106,20 @@ export default function Login() {
                   },
                 })}
               />
+              <div className="absolute top-[-6%] left-[84%]  mb:left-[64%]">
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)}
+                  sx={{
+                    color: "white",
+                    position: "absolute",
+                    right: 10,
+                    top: 10,
+                  }}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </div>
               {errors.password && (
                 <span className="error absolute text-red-500 font-sans">
                   {errors.password.message}

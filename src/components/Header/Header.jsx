@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import "./Header.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Menu from "../../components/Menu/Menu";
+
 
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-import SingIn from "../../../src/assets/IMAGE/PLAY.SVG/nav/WhiteUser.svg";
+import { FaUserAlt } from "react-icons/fa";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -17,8 +20,6 @@ export default function Header() {
   const closeMenu = () => {
     setMenuOpen(false);
   };
-
-
 
   return (
     <>
@@ -51,14 +52,18 @@ export default function Header() {
                 </li>
               </ul>
             </div>
-            <div className="hidden lgg:flex items-center gap-4 bg-purple-500 p-4 rounded-xl transition ease-in-out delay-150  hover:bg-purple-700">
-              <img className="w-[18%]" src={SingIn} alt="user" />
-              <NavLink to="/login" className="text-white">
-                Sign In
-              </NavLink>
-            </div>
+            <button
+              onClick={() => navigate("/login")}
+              className="hidden lgg:flex items-center gap-4 p-4 rounded-xl transition ease-in-out delay-15  text-white  hover:text-black bg-purple-500  hover:bg-white active:bg-purple-400"
+            > 
+              <FaUserAlt />
+              Sign In
+            </button>
             <div className="flex lgg:hidden">
-              <div className={`burger-btn ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+              <div
+                className={`burger-btn ${menuOpen ? "open" : ""}`}
+                onClick={toggleMenu}
+              >
                 <span></span>
                 <span></span>
                 <span></span>
@@ -67,7 +72,7 @@ export default function Header() {
           </div>
         </div>
       </header>
-      {menuOpen && <Menu  onClose={closeMenu}/>}
+      {menuOpen && <Menu onClose={closeMenu} />}
     </>
   );
 }

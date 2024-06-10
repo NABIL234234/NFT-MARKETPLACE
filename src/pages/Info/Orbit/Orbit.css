@@ -1,9 +1,25 @@
+/* Assuming you have a stylesheet where you can add these styles */
 .Orbitians {
   background-image: url(../../../assets/IMAGE/SECTION/Orbitians.png);
-  background-repeat:no-repeat;
-  background-position:center;
+  background-repeat: no-repeat;
+  background-position: center;
   object-fit: cover;
-  background-size: 100%;
+  background-size: cover;
   height: 650px;
   width: 100%;
+  position: relative;
+  padding: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.Orbitians::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
 }
