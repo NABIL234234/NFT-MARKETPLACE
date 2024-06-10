@@ -22,7 +22,7 @@ export const postUsers = createAsyncThunk(
         `${import.meta.env.VITE_MAIN_URL}/api/users/registration`,
         newUser
       );
-      navigate("/");
+      navigate("/login");
       return response.data;
     } catch (error) {
       console.error(error);
