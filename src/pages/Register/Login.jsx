@@ -20,7 +20,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ export default function Login() {
         const token = resultAction.payload.tokens.access_token;
         console.log("Полученный токен:", token);
         localStorage.setItem("accessToken", token);
+        window.dispatchEvent(new Event("storage"));
         navigate(from, { replace: true });
       } else {
         console.error("Ошибка при выполнении запроса:", resultAction.payload);
@@ -50,6 +51,7 @@ export default function Login() {
     const decoded = jwtDecode(credentialResponse.credential);
     console.log(decoded);
     localStorage.setItem("accessToken", credentialResponse.credential);
+    window.dispatchEvent(new Event("storage"));
     navigate(from, { replace: true });
   };
 
@@ -107,7 +109,7 @@ export default function Login() {
                   },
                 })}
               />
-              <div className="absolute top-[-6%] left-[490px] pl:left-[299px] mb:left-[300px] ">
+              <div className="absolute top-[-6%] left-[84%] mb:left-[55%]">
                 <IconButton
                   onClick={() => setShowPassword(!showPassword)}
                   sx={{

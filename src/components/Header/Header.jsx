@@ -1,17 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
 import Menu from "../../components/Menu/Menu";
-
 
 // images
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
-import { FaUserAlt } from "react-icons/fa";
 
 export default function Header() {
   const navigate = useNavigate();
-
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const checkAuthentication = () => {
+    const token = localStorage.getItem("accessToken");
+    setIsAuthenticated(!!token);
+  };
+
+  useEffect(() => {
+    checkAuthentication();
+
+    const handleStorageChange = () => {
+      checkAuthentication();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -19,6 +37,12 @@ export default function Header() {
 
   const closeMenu = () => {
     setMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    setIsAuthenticated(false);
+    navigate("/login");
   };
 
   return (
@@ -52,13 +76,28 @@ export default function Header() {
                 </li>
               </ul>
             </div>
-            <button
-              onClick={() => navigate("/login")}
-              className="hidden lgg:flex items-center gap-4 p-4 rounded-xl transition ease-in-out delay-15  text-white  hover:text-black bg-purple-500  hover:bg-white active:bg-purple-400"
-            > 
-              <FaUserAlt />
-              Sign In
-            </button>
+            {isAuthenticated ? (
+              <div className="flex items-center gap-4">
+                <NavLink to="/profile/1" className="nav_link">
+                  <FaUserAlt />
+                  Мой Профиль
+                </NavLink>
+                <button
+                  onClick={handleLogout}
+                  className="hidden lgg:flex items-center gap-4 p-4 rounded-xl transition ease-in-out delay-15 text-white hover:text-black bg-purple-500 hover:bg-white active:bg-purple-400"
+                >
+                  Выйти
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => navigate("/login")}
+                className="hidden lgg:flex items-center gap-4 p-4 rounded-xl transition ease-in-out delay-15 text-white hover:text-black bg-purple-500 hover:bg-white active:bg-purple-400"
+              >
+                <FaUserAlt />
+                Sign In
+              </button>
+            )}
             <div className="flex lgg:hidden">
               <div
                 className={`burger-btn ${menuOpen ? "open" : ""}`}
