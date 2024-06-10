@@ -18,8 +18,9 @@ export default function Hero() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { profile, loading, error } = useSelector((state) => state.nft);
+  const data = profile?.data || {};
   const [selectedTab, setSelectedTab] = useState("createdNfts");
-  const [followersCount, setFollowersCount] = useState(profile?.followersCount || 0);
+  const [followersCount, setFollowersCount] = useState(data?.followersCount || 0);
   const [isFollowed, setIsFollowed] = useState(localStorage.getItem("isFollowed") === "true");
   const [imagePreview, setImagePreview] = useState(localStorage.getItem("profileImage") || DefaultPhoto);
 
@@ -32,10 +33,10 @@ export default function Hero() {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (profile) {
-      setImagePreview(profile.avatar || DefaultPhoto);
+    if (data) {
+      setImagePreview(data.avatar || DefaultPhoto);
     }
-  }, [profile]);
+  }, [data]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -100,7 +101,7 @@ export default function Hero() {
         <div>
           <div className="block mdd:flex items-center">
             <h2 className="text-white text-4xl font-semibold">
-              {profile?.username || "Unknown user"}
+              {data?.username || "Unknown user"}
             </h2>
             <div className="flex gap-[20px] ml-auto">
               <button
@@ -114,7 +115,7 @@ export default function Hero() {
           </div>
           <div className="flex gap-[8px] sm:gap-[40px] smm:gap-[15px] mt-[30px] text-xl smm:text-2xl text-white">
             <div>
-              <h2 className="font-semibold">{profile?.volume}+</h2>
+              <h2 className="font-semibold">{data?.volume}+</h2>
               <h2 className="text-sm smm:text-xl">Volume</h2>
             </div>
             <div>
