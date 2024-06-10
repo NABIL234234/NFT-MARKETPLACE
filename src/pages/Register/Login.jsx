@@ -20,6 +20,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -106,11 +107,11 @@ export default function Login() {
                   },
                 })}
               />
-              <div className="absolute top-[-6%] left-[84%]  mb:left-[64%]">
+              <div className="absolute top-[-6%] left-[490px] pl:left-[299px] mb:left-[300px] ">
                 <IconButton
                   onClick={() => setShowPassword(!showPassword)}
                   sx={{
-                    color: "white",
+                    color: "black",
                     position: "absolute",
                     right: 10,
                     top: 10,

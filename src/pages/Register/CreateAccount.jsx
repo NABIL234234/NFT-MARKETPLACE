@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { postUsers } from "../../store/actions/asyncAction";
@@ -10,6 +10,10 @@ import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
 import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Email from "../../assets/IMAGE/PLAY.SVG/nav/email.svg";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
+import { FaUser, FaUnlockAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function Register() {
   const {
@@ -19,7 +23,7 @@ export default function Register() {
     watch,
     minLength,
   } = useForm();
-
+  const [showPassword, setShowPassword] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -56,7 +60,8 @@ export default function Register() {
             </p>
           </div>
           <div className="flex flex-col gap-[10px] md:gap-[30px] pt-[15px] mdd:pt-[20px]">
-            <div>
+            <div className="relative">
+              <FaUser className="absolute top-[29%] left-[4%] z-10 text-xl" />
               <Inputs
                 type="text"
                 icons={User}
@@ -66,6 +71,7 @@ export default function Register() {
                   required: "Введи имя пользователя",
                 })}
               />
+
               {errors.username && (
                 <span className="error absolute text-red-500 font-sans">
                   {errors.username.message}
@@ -73,7 +79,8 @@ export default function Register() {
               )}
             </div>
 
-            <div>
+            <div className="relative">
+              <MdEmail className="absolute top-[29%] left-[4%] z-10 text-xl" />
               <Inputs
                 type="email"
                 icons={Email}
@@ -81,6 +88,7 @@ export default function Register() {
                 name="email"
                 {...register("email", { required: "Введи свой @email " })}
               />
+
               {errors.email && (
                 <span className="error absolute text-red-500 font-sans">
                   {errors.email.message}
@@ -88,9 +96,10 @@ export default function Register() {
               )}
             </div>
 
-            <div>
+            <div className="relative">
+              <FaUnlockAlt className="absolute top-[29%] left-[4%] z-10 text-xl" />
               <Inputs
-                type="password"
+                type={showPassword ? "text" : "password"}
                 icons={Password}
                 placeholder="Password"
                 name="password"
@@ -102,6 +111,20 @@ export default function Register() {
                   },
                 })}
               />
+              <div className="absolute top-[-6%] left-[84%] mb:left-[75%]">
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)}
+                  sx={{
+                    color: "black",
+                    position: "absolute",
+                    right: 10,
+                    top: 10,
+                  }}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </div>
               {errors.password && (
                 <span className="error absolute text-red-500 font-sans">
                   {errors.password.message}
@@ -109,9 +132,10 @@ export default function Register() {
               )}
             </div>
 
-            <div>
+            <div className="relative">
+              <FaUnlockAlt className="absolute top-[29%] left-[4%] z-10 text-xl" />
               <Inputs
-                type="password"
+                type={showPassword ? "text" : "password"}
                 icons={Password}
                 placeholder="Confirm Password"
                 name="confirmPassword"
