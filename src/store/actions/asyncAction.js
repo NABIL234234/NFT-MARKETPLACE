@@ -58,14 +58,11 @@ export const postUsers = createAsyncThunk(
 //   }
 // );
 
+
 export const getUserLogin = createAsyncThunk(
   "user/login",
-  async ({ newUser, navigate }) => {
+  async ({ newUser, navigate }, { rejectWithValue }) => {
     try {
-      const params = new URLSearchParams();
-      params.append("username", newUser.username);
-      params.append("password", newUser.password);
-
       const response = await axios.get(
         `${import.meta.env.VITE_MAIN_URL}/api/auth`,
         {
@@ -79,26 +76,23 @@ export const getUserLogin = createAsyncThunk(
         }
       );
 
-      if (
-        response.data &&
-        response.data.data &&
-        response.data.data.tokens &&
-        response.data.data.tokens.access_token
-      ) {
-        localStorage.setItem(
-          "accessToken",
-          response.data.data.tokens.access_token
-        );
+      console.log("Ответ сервера:", response.data);
+
+      // Проверяем структуру данных в ответе сервера
+      const data = response.data.data;
+      console.log("Данные:", data);
+
+      if (data && data.tokens && data.tokens.access_token) {
+        const accessToken = data.tokens.access_token;
+        localStorage.setItem("accessToken", accessToken);
         navigate("/");
-        return response.data.data; 
+        return data;
       } else {
-        // Если структура данных неожиданная, выбрасываем ошибку
-        console.error("Unexpected response structure:", response.data);
-        throw new Error("Unexpected response structure");
+        throw new Error("Токен не найден в ответе сервера");
       }
     } catch (error) {
       console.error("Error during login request:", error);
-      throw error;
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );

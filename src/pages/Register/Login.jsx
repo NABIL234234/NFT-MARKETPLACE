@@ -3,20 +3,16 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import { getUserLogin } from "../../store/actions/asyncAction";
 import Inputs from "../../components/inputs/Inputs";
-
-// images
-import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
-import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
-import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
-import { FaKey } from "react-icons/fa";
+import { FaKey, FaUser, FaUnlockAlt } from "react-icons/fa";
 import { IoLogIn } from "react-icons/io5";
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { FaUser } from "react-icons/fa";
-import { FaUnlockAlt } from "react-icons/fa";
+import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
+import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
+import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
 
 export default function Login() {
   const {
@@ -35,9 +31,15 @@ export default function Login() {
       const resultAction = await dispatch(
         getUserLogin({ newUser: data, navigate })
       );
-      console.log("Данные с сервера:", resultAction.payload);
-      localStorage.setItem("accessToken", resultAction.payload.token);
-      navigate(from, { replace: true });
+      if (getUserLogin.fulfilled.match(resultAction)) {
+        console.log("Данные с сервера:", resultAction.payload);
+        const token = resultAction.payload.tokens.access_token;
+        console.log("Полученный токен:", token);
+        localStorage.setItem("accessToken", token);
+        navigate(from, { replace: true });
+      } else {
+        console.error("Ошибка при выполнении запроса:", resultAction.payload);
+      }
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
@@ -91,7 +93,7 @@ export default function Login() {
               )}
             </div>
             <div className="relative">
-            <FaUnlockAlt className="absolute top-[29%] left-[4%] z-10 text-xl"/>
+              <FaUnlockAlt className="absolute top-[29%] left-[4%] z-10 text-xl" />
               <Inputs
                 type={showPassword ? "text" : "password"}
                 icons={Password}
