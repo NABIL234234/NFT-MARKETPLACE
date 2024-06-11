@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { createNft } from "../../store/slices/nft";
 import { RiNftFill } from "react-icons/ri";
 import { MdOutlinePriceChange, MdDriveFileRenameOutline } from "react-icons/md";
@@ -14,6 +15,7 @@ export default function CreateNft() {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { createdNft, nftLoading, nftError } = useSelector(
     (state) => state.nft
   );
@@ -34,6 +36,10 @@ export default function CreateNft() {
       }
       const resultAction = await dispatch(createNft(formData));
       console.log("Созданный NFT:", resultAction.payload);
+      if (resultAction.payload) {
+        const userId = localStorage.getItem("userId"); // Получаем userId из localStorage
+        navigate(`/profile/${userId}`);
+      }
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
@@ -107,20 +113,18 @@ export default function CreateNft() {
               )}
             </div>
 
-            <div>
-              <button
-                type="submit"
-                className={`w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white hover:text-black bg-purple-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
-                  nftLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                disabled={nftLoading}
-              >
-                {nftLoading ? "Создание..." : "Создать NFT"}
-              </button>
-              {nftError && (
-                <p className="text-red-500 text-xs mt-2">Ошибка: {nftError}</p>
-              )}
-            </div>
+            <button
+              type="submit"
+              className={`w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white hover:text-black bg-purple-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
+                nftLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={nftLoading}
+            >
+              {nftLoading ? "Создание..." : "Создать NFT"}
+            </button>
+            {nftError && (
+              <p className="text-red-500 text-xs mt-2">Ошибка: {nftError}</p>
+            )}
           </form>
         </div>
         <div className="w-full md:w-1/2 flex  p-4">
