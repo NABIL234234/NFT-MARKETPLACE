@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode"; // Используйте правильный импорт
 import { getUserLogin } from "../../store/actions/asyncAction";
 import Inputs from "../../components/inputs/Inputs";
 import { FaKey, FaUser, FaUnlockAlt } from "react-icons/fa";
@@ -22,10 +22,10 @@ export default function Login() {
   } = useForm();
 
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const from = location.state?.from || "/";
+  const navigate = useNavigate(); // Используем useNavigate для перехода на страницу профиля
 
   const onSubmit = async (data) => {
     try {
@@ -34,9 +34,10 @@ export default function Login() {
       );
       if (getUserLogin.fulfilled.match(resultAction)) {
         console.log("Данные с сервера:", resultAction.payload);
-        const token = resultAction.payload.tokens.access_token;
-        console.log("Полученный токен:", token);
-        localStorage.setItem("accessToken", token);
+        const { id, tokens } = resultAction.payload;
+        console.log("Полученный токен:", tokens.access_token);
+        localStorage.setItem("accessToken", tokens.access_token);
+        localStorage.setItem("userId", id);
         window.dispatchEvent(new Event("storage"));
         navigate(from, { replace: true });
       } else {
@@ -49,10 +50,11 @@ export default function Login() {
 
   const handleGoogleSuccess = (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
-    console.log(decoded);
+    console.log("Decoded Google Token:", decoded);
     localStorage.setItem("accessToken", credentialResponse.credential);
+    localStorage.setItem("userId", decoded.sub); // Используем sub как userId
     window.dispatchEvent(new Event("storage"));
-    navigate(from, { replace: true });
+    navigate(`/profile/${decoded.sub}`); // Переходим на страницу профиля с использованием sub в качестве ID пользователя
   };
 
   const handleGoogleError = () => {
