@@ -1,17 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import Menu from "../../components/Menu/Menu";
-
-
-// images
-import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 import { FaUserAlt } from "react-icons/fa";
+import Menu from "../../components/Menu/Menu";
+import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 
 export default function Header() {
   const navigate = useNavigate();
-
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    setIsAuthenticated(!!token);
+    if (token) {
+      const storedUserId = localStorage.getItem("userId");
+      if (storedUserId) {
+        setUserId(storedUserId);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const token = localStorage.getItem("accessToken");
+      setIsAuthenticated(!!token);
+      if (token) {
+        const storedUserId = localStorage.getItem("userId");
+        if (storedUserId) {
+          setUserId(storedUserId);
+        }
+      }
+    };
+    
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -19,6 +46,14 @@ export default function Header() {
 
   const closeMenu = () => {
     setMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userId");
+    setIsAuthenticated(false);
+    setUserId(null);
+    navigate("/login");
   };
 
   return (
@@ -46,33 +81,42 @@ export default function Header() {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/wallet" exact="true" className="nav_link">
+                  <NavLink to="/connectWallet" exact="true" className="nav_link">
                     Connect a wallet
                   </NavLink>
                 </li>
+                <li>
+                  {isAuthenticated ? (
+                    <button
+                      onClick={handleLogout}
+                      className="nav_link flex items-center gap-2"
+                    >
+                      Logout
+                    </button>
+                  ) : (
+                    <NavLink to="/login" exact="true" className="nav_link flex items-center gap-2">
+                      <FaUserAlt />
+                      Login
+                    </NavLink>
+                  )}
+                </li>
+                <li>
+                  {isAuthenticated && userId && (
+                    <NavLink to={`/profile/${userId}`} exact="true" className="nav_link flex items-center gap-2">
+                      <FaUserAlt />
+                      Profile
+                    </NavLink>
+                  )}
+                </li>
               </ul>
-            </div>
-            <button
-              onClick={() => navigate("/login")}
-              className="hidden lgg:flex items-center gap-4 p-4 rounded-xl transition ease-in-out delay-15  text-white  hover:text-black bg-purple-500  hover:bg-white active:bg-purple-400"
-            > 
-              <FaUserAlt />
-              Sign In
-            </button>
-            <div className="flex lgg:hidden">
-              <div
-                className={`burger-btn ${menuOpen ? "open" : ""}`}
-                onClick={toggleMenu}
-              >
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+              <button className="lgg:hidden" onClick={toggleMenu}>
+                <FaUserAlt className="text-white text-2xl" />
+              </button>
             </div>
           </div>
         </div>
       </header>
-      {menuOpen && <Menu onClose={closeMenu} />}
+      {menuOpen && <Menu menuOpen={menuOpen} closeMenu={closeMenu} />}
     </>
   );
 }

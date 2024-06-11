@@ -15,8 +15,20 @@ export default function Nfts() {
     dispatch(fetchNftsForSale());
   }, [dispatch]);
 
+  const handleIconClick = (id) => {
+    console.log(`Icon clicked for NFT ID: ${id}`);
+  };
+
+  const handleDelete = (id) => {
+    console.log(`Delete clicked for NFT ID: ${id}`);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   return (
@@ -27,11 +39,15 @@ export default function Nfts() {
             data.map((nft) => (
               <CardMoreNft
                 key={nft.id}
+                id={nft.id}
                 imgUrl={nft.nftImage}
                 title={nft.name}
                 avatar={nft.userAvatar}
-                user={nft.userName}
+                user={nft.owner}
                 price={`${nft.price}`}
+                ownerId={nft.ownerId}
+                onIconClick={() => handleIconClick(nft.id)}
+                onDelete={() => handleDelete(nft.id)}
               />
             ))}
         </div>

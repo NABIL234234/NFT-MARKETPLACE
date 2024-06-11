@@ -39,7 +39,7 @@ export const createNft = createAsyncThunk(
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbXSwiZXhwIjoxNzE4MTIwMDY2fQ.sNYgoXzFHqkh9Yi54Ro8wTXTzVdfslK8U5OoFak5ca0`,
           },
         }
       );
@@ -86,8 +86,8 @@ export const deleteNft = createAsyncThunk(
         `${import.meta.env.VITE_MAIN_URL}/api/nfts/${nftId}`,
         {
           headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY`,
-          }
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbXSwiZXhwIjoxNzE4MTIwMDY2fQ.sNYgoXzFHqkh9Yi54Ro8wTXTzVdfslK8U5OoFak5ca0`,
+          },
         }
       );
       return response.data;
@@ -122,7 +122,7 @@ export const changeProfilePhoto = createAsyncThunk(
         {
           headers: {
             "Content-Type": "multipart/from-data",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbXSwiZXhwIjoxNzE4MTIwMDY2fQ.sNYgoXzFHqkh9Yi54Ro8wTXTzVdfslK8U5OoFak5ca0`,
           },
         }
       );
@@ -144,7 +144,7 @@ export const pushNftToMarket = createAsyncThunk(
         {},
         {
           headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MDExNTM0fQ.VLqhWkRFTRQx5MdMDymNEYqytjJv_Vxf4wgq-TrpMpY  `,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbXSwiZXhwIjoxNzE4MTIwMDY2fQ.sNYgoXzFHqkh9Yi54Ro8wTXTzVdfslK8U5OoFak5ca0 `,
           },
         }
       );
