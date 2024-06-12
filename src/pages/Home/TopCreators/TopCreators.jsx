@@ -127,75 +127,75 @@ export default function TopCreators() {
                   number="1"
                   imgUrl={KeepTrial}
                   nickName="Keepitreal"
-                  ETH="34.53 ETH"
+                  ETH="34.53 $"
                 />
                 <CardCreators
                   number="2"
                   imgUrl={DigiLab}
                   nickName="DigiLab"
-                  ETH="32.52 ETH"
+                  ETH="32.52 $"
                 />
                 <CardCreators
                   number="3"
                   imgUrl={GravityOne}
                   nickName="GravityOne"
-                  ETH="30.04 ETH"
+                  ETH="30.04 $"
                 />
                 <CardCreators
                   number="4"
                   imgUrl={Juanie}
                   nickName="Juanie"
-                  ETH="30.01 ETH"
+                  ETH="30.01 $"
                 />
 
                 <CardCreators
                   number="5"
                   imgUrl={BlueWhale}
                   nickName="BlueWhale"
-                  ETH="29.02 ETH"
+                  ETH="29.02 $"
                 />
                 <CardCreators
                   number="6"
                   imgUrl={MrFox}
                   nickName="Mr Fox"
-                  ETH="29.00 ETH"
+                  ETH="29.00 $"
                 />
                 <CardCreators
                   number="7"
                   imgUrl={ShroomieAang}
                   nickName="Shroomie Aang"
-                  ETH="28.22 ETH"
+                  ETH="28.22 $"
                 />
                 <CardCreators
                   number="8"
                   imgUrl={Robotica}
                   nickName="Robotica"
-                  ETH="27.33 ETH"
+                  ETH="27.33 $"
                 />
 
                 <CardCreators
                   number="9"
                   imgUrl={RustyRobot}
                   nickName="RustyRobot"
-                  ETH="25.34 ETH"
+                  ETH="25.34 $"
                 />
                 <CardCreators
                   number="10"
                   imgUrl={Anumakid}
                   nickName="Anumakid"
-                  ETH="25.24 ETH"
+                  ETH="25.24 $"
                 />
                 <CardCreators
                   number="11"
                   imgUrl={Dotgu}
                   nickName="Dotgu"
-                  ETH="20.22 ETH "
+                  ETH="20.22 $ "
                 />
                 <CardCreators
                   number="12"
                   imgUrl={Chiblier}
                   nickName="Chiblier"
-                  ETH="19.11 ETH"
+                  ETH="19.11 $"
                 />
               </div>
             </div>
