@@ -1,0 +1,57 @@
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+.error-message-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.error-message {
+  background-color: rgb(48, 47, 47);
+  color: rgb(255, 3, 3);
+  padding: 0.4rem;
+  margin-bottom: 12px;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  animation: slideUp 0.5s ease-in-out;
+  max-width: 300px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-message.close {
+  animation: slideDown 0.5s ease-in-out;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: -42px;
+}

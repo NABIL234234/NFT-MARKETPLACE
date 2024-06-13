@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { getUserLogin, getGoogleToken, RedirectGoogle } from "../../store/actions/asyncAction";
@@ -12,9 +12,12 @@ import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
 import User from "../../assets/IMAGE/PLAY.SVG/nav/User.png";
 import Password from "../../assets/IMAGE/PLAY.SVG/nav/LockKey.svg";
 
+import "./login.scss";
+
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,30 +32,28 @@ export default function Login() {
     }
   }, []);
 
-
   const handleGoogleLogin = async (token) => {
-  try {
-    const resultActionToken = await dispatch(getGoogleToken({ token, navigate }));
-    if (getGoogleToken.fulfilled.match(resultActionToken)) {
-      const { id, tokens } = resultActionToken.payload;
-      localStorage.setItem("accessToken", tokens.access_token);
-      localStorage.setItem("userId", id);
-      window.dispatchEvent(new Event("storage"));
+    try {
+      const resultActionToken = await dispatch(getGoogleToken({ token, navigate }));
+      if (getGoogleToken.fulfilled.match(resultActionToken)) {
+        const { id, tokens } = resultActionToken.payload;
+        localStorage.setItem("accessToken", tokens.access_token);
+        localStorage.setItem("userId", id);
+        window.dispatchEvent(new Event("storage"));
 
-      const resultActionRedirect = await dispatch(RedirectGoogle({ token, navigate }));
-      if (RedirectGoogle.fulfilled.match(resultActionRedirect)) {
-        navigate(from, { replace: true });
+        const resultActionRedirect = await dispatch(RedirectGoogle({ token, navigate }));
+        if (RedirectGoogle.fulfilled.match(resultActionRedirect)) {
+          navigate(from, { replace: true });
+        } else {
+          console.error("Ошибка при перенаправлении:", resultActionRedirect.payload);
+        }
       } else {
-        console.error("Ошибка при перенаправлении:", resultActionRedirect.payload);
+        console.error("Ошибка при получении токена:", resultActionToken.payload);
       }
-    } else {
-      console.error("Ошибка при получении токена:", resultActionToken.payload);
+    } catch (error) {
+      console.error("Ошибка при выполнении запроса:", error);
     }
-  } catch (error) {
-    console.error("Ошибка при выполнении запроса:", error);
-  }
-};
-
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -64,11 +65,16 @@ export default function Login() {
         window.dispatchEvent(new Event("storage"));
         navigate(from, { replace: true });
       } else {
+        setLoginError("Неправильное имя пользователя или пароль");
         console.error("Ошибка при выполнении запроса:", resultAction.payload);
       }
     } catch (error) {
       console.error("Ошибка при выполнении запроса:", error);
     }
+  };
+
+  const handleCloseError = () => {
+    setLoginError("");
   };
 
   return (
@@ -127,16 +133,16 @@ export default function Login() {
                 </span>
               )}
             </div>
-            <button type="submit" className="flex justify-center items-center gap-[10px] w-[150px] h-[40px] rounded-xl bg-purple-500 text-white">
+            <button type="submit" className="flex justify-center items-center gap-[10px] w-[150px] h-[40px] rounded-xl bg-purple-500 text-white transition ease-in-out delay-150 hover:bg-white hover:text-black active:bg-purple-400">
               <IoLogIn />
               Login
             </button>
             <div>
-              <NavLink to="/register" className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-purple-500 text-white">
+              <NavLink to="/register" className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-purple-500 text-white transition ease-in-out delay-150 hover:bg-white hover:text-black active:bg-purple-400">
                 Are you registered?
               </NavLink>
             </div>
-            <div className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-white">
+            <div className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-white text-black transition ease-in-out delay-150 hover:bg-purple-500 hover:text-white active:bg-purple-400">
               <FaKey />
               <NavLink to="/confirmAccount">
                 Don't remember your password?
@@ -144,13 +150,23 @@ export default function Login() {
             </div>
             <a
               href="https://nft-market-place-f-23-c6a5ee8f518d.herokuapp.com/api/auth/google"
-              className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-blue-500 text-white"
+              className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-blue-500 text-white transition ease-in-out delay-150 hover:bg-white hover:text-blue-500 active:bg-blue-400"
             >
               Login with Google
             </a>
           </div>
         </div>
       </form>
+      {loginError && (
+        <div className="error-message-container">
+          <div className="error-message">
+            {loginError}
+            <button className="close-button" onClick={handleCloseError}>
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
