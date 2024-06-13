@@ -39,7 +39,7 @@ export const createNft = createAsyncThunk(
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbXSwiZXhwIjoxNzE4MTIwMDY2fQ.sNYgoXzFHqkh9Yi54Ro8wTXTzVdfslK8U5OoFak5ca0`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MzUwNjI1fQ.KWrWx9ACIX8eF4f9lu9yYWAgyEB17tn2Dlfz8ftuYpg`,
           },
         }
       );
@@ -86,7 +86,7 @@ export const deleteNft = createAsyncThunk(
         `${import.meta.env.VITE_MAIN_URL}/api/nfts/${nftId}`,
         {
           headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbXSwiZXhwIjoxNzE4MTIwMDY2fQ.sNYgoXzFHqkh9Yi54Ro8wTXTzVdfslK8U5OoFak5ca0`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MzUwNjI1fQ.KWrWx9ACIX8eF4f9lu9yYWAgyEB17tn2Dlfz8ftuYpg`,
           },
         }
       );
@@ -122,7 +122,7 @@ export const changeProfilePhoto = createAsyncThunk(
         {
           headers: {
             "Content-Type": "multipart/from-data",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbXSwiZXhwIjoxNzE4MTIwMDY2fQ.sNYgoXzFHqkh9Yi54Ro8wTXTzVdfslK8U5OoFak5ca0`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MzUwNjI1fQ.KWrWx9ACIX8eF4f9lu9yYWAgyEB17tn2Dlfz8ftuYpg`,
           },
         }
       );
@@ -144,7 +144,7 @@ export const pushNftToMarket = createAsyncThunk(
         {},
         {
           headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbXSwiZXhwIjoxNzE4MTIwMDY2fQ.sNYgoXzFHqkh9Yi54Ro8wTXTzVdfslK8U5OoFak5ca0 `,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4MzUwNjI1fQ.KWrWx9ACIX8eF4f9lu9yYWAgyEB17tn2Dlfz8ftuYpg `,
           },
         }
       );
