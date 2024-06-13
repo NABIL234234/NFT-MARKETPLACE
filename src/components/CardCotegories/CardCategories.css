@@ -15,10 +15,16 @@
     margin-top: 20px;
   }
 
-  .CardCategories:nth-child(4n) {
-    margin-right: 0px;
-  }
+  .CardCategories:nth-child(4n),
   .CardCategories:nth-child(2n) {
-    margin-right: 0px;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 447px) {
+  .CardCategories {
+    width: 100%;
+    margin-right: 0;
+    margin-top: 20px;
   }
 }
