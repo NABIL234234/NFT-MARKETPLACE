@@ -1,10 +1,13 @@
 import React from "react";
 import "./CardCreators.css";
+import { motion } from "framer-motion";
 
 export default function CardCreators({ number, imgUrl, nickName, ETH }) {
   return (
     <>
-      <div className="CardCreators ">
+      <motion.div  whileHover={{ scale: 1.1 }}
+      onHoverStart={(e) => {}}
+      onHoverEnd={(e) => {}} className="CardCreators ">
         <div className="bg-zinc-700 flex lg:flex-col self-stratch flex-wrap justify-center items-center p-5 gap-[10px] rd:gap-5 rounded-3xl font-mono flex-row ">
           <div className="relative">
             <div className="hidden absolute right-32 bg-zinc-800 pt-0.5 pb-0.5 px-2.5 rounded-full">
@@ -24,7 +27,7 @@ export default function CardCreators({ number, imgUrl, nickName, ETH }) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

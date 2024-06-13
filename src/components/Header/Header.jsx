@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAlt, FaBars } from "react-icons/fa"; // Импортируем FaBars
 import Menu from "../../components/Menu/Menu";
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 
@@ -109,8 +109,8 @@ export default function Header() {
                   )}
                 </li>
               </ul>
-              <button className="lgg:hidden" onClick={toggleMenu}>
-                <FaUserAlt className="text-white text-2xl" />
+              <button className="lgg:hidden burger-btn" onClick={toggleMenu}>
+                <FaBars className="text-white text-2xl" /> {/* Заменяем FaUserAlt на FaBars */}
               </button>
             </div>
           </div>
