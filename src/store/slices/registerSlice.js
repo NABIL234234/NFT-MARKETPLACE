@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { postUsers } from "../actions/asyncAction";
+import { getGoogleToken, RedirectGoogle, postUsers } from "../actions/asyncAction";
 
 const initialState = {
   loading: false,
@@ -14,13 +14,39 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(postUsers.pending, (state) => {
-        (state.status = true), (state.error = null);
+        state.loading = true;
+        state.error = null;
       })
       .addCase(postUsers.fulfilled, (state, action) => {
-        (state.status = false), (state.user = action.payload);
+        state.loading = false;
+        state.user = action.payload;
       })
       .addCase(postUsers.rejected, (state, action) => {
-        state.status = false;
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(getGoogleToken.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getGoogleToken.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(getGoogleToken.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(RedirectGoogle.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(RedirectGoogle.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(RedirectGoogle.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.error.message;
       });
   },

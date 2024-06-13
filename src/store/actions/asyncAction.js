@@ -58,7 +58,6 @@ export const postUsers = createAsyncThunk(
 //   }
 // );
 
-
 export const getUserLogin = createAsyncThunk(
   "user/login",
   async ({ newUser, navigate }, { rejectWithValue }) => {
@@ -92,6 +91,39 @@ export const getUserLogin = createAsyncThunk(
       }
     } catch (error) {
       console.error("Error during login request:", error);
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const getGoogleToken = createAsyncThunk(
+  "auth/getGoogleToken",
+  async ({ token, navigate }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_MAIN_URL}/api/auth/getGoogleToken`,
+        { params: { token } } // передача токена в параметрах запроса
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+
+export const RedirectGoogle = createAsyncThunk(
+  "auth/RedirectGoogle",
+  async ({ token, navigate }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_MAIN_URL}/api/auth/google`,
+        { params: { token } } // передача токена в параметрах запроса
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
       return rejectWithValue(error.response?.data || error.message);
     }
   }
