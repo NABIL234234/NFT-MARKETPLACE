@@ -7,7 +7,7 @@ import MetamaskFox from "../../assets/IMAGE/PLAY.SVG/nav/MetamaskFox.svg";
 import WalletConnect from "../../assets/IMAGE/PLAY.SVG/nav/WalletConnect.svg";
 import CoinBase from "../../assets/IMAGE/PLAY.SVG/nav/Coinbase.svg";
 
-export default function () {
+export default function Wallet() {
   return (
     <div className="mdd:flex gap-[20px] md:gap-[40px] lg:gap-[60px] xl:gap-[180px] font-mono smm:text-black ">
       <div>

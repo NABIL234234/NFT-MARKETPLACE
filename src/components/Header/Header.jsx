@@ -81,7 +81,7 @@ export default function Header() {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/connectWallet" exact="true" className="nav_link">
+                  <NavLink to="/wallet" exact="true" className="nav_link">
                     Connect a wallet
                   </NavLink>
                 </li>
