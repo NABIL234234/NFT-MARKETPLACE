@@ -92,7 +92,7 @@ export default function Login() {
               Welcome! Enter your details and start creating, collecting, and selling NFTs.
             </p>
           </div>
-          <div className="flex flex-col gap-[10px] md:gap-[25px] pt-[15px] mdd:pt-[20px]">
+          <div className="flex flex-col gap-[25px] md:gap-[25px] pt-[15px] mdd:pt-[20px]">
             <div className="relative">
               <FaUser className="absolute top-[29%] left-[4%] z-10 text-xl" />
               <Inputs
@@ -118,7 +118,7 @@ export default function Login() {
                   minLength: { value: 6, message: "Пароль должен содержать как минимум 6 символов!" }
                 })}
               />
-              <div className="absolute top-[-6%] left-[84%] mb:left-[55%]">
+              <div className="absolute top-[-6%] left-[300px]">
                 <IconButton
                   onClick={() => setShowPassword(!showPassword)}
                   sx={{ color: "black", position: "absolute", right: 10, top: 10 }}

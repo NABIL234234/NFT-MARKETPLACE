@@ -11,7 +11,7 @@ const Inputs = forwardRef(({ icons, placeholder, type, onChange, value, name, id
       <input
         ref={ref}
         id={id}
-        className="relative w-[300px] rd:w-[350px] mdd:w-[300px] p-[14px] pl-[55px] rounded-3xl outline-none "
+        className="relative w-[300px] rd:w-[300px] mdd:w-[300px] p-[14px] pl-[55px] rounded-3xl outline-none "
         type={type}
         placeholder={placeholder}
         value={value}
