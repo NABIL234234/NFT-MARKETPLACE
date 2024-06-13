@@ -1,12 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import SpaceMan from "../../../../src/assets/IMAGE/SECTION/SpaceMan.png";
 
-import Subscribe from "../../../components/buttons/Subscribe";
+const Popup = ({ onClose }) => {
+  return (
+    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+      <div className="flex flex-col bg-white p-[70px] rounded-lg shadow-lg transform scale-100 opacity-100 transition-transform transition-opacity duration-500">
+        <p className="mb-4">Review submitted!</p>
+        <button className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded" onClick={onClose}>
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default function Digest() {
+  const [showPopup, setShowPopup] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSend = (event) => {
+    event.preventDefault(); // Prevent the default form submission action
+
+    if (inputValue.trim() === "") {
+      setError("Please enter text before submitting.");
+    } else {
+      // Logic for sending data (e.g., to a server)
+      // Show the popup after submission
+      setShowPopup(true);
+      setError("");
+      setInputValue(""); // Clear the input field after submission
+    }
+  };
+
+  const handleClose = () => {
+    setShowPopup(false);
+  };
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+    if (event.target.value.trim() !== "") {
+      setError("");
+    }
+  };
+
   return (
-    <div className="pt-[40px]">
-      <div className="max-w-6xl mx-auto font-mono ">
+    <form className="pt-[40px]" onSubmit={handleSend}>
+      <div className="max-w-6xl mx-auto font-mono">
         <div className="flex flex-col mdd:flex-row gap-[30px] mdd:gap-[80px] bg-zinc-700 rounded-3xl p-[60px]  mb-[80px]">
           <div>
             <img src={SpaceMan} alt="spaceman" />
@@ -14,29 +54,35 @@ export default function Digest() {
           <div>
             <div className="text-white pt-[14px]">
               <h2 className="max-w-[400px] text-4xl font-bold">
-                Join our weekly Digest
+                Submit a complaint or review
               </h2>
               <p className="max-w-[370px] pt-[10px]">
-                Get Exclusive Promotions & Updates Straight To Your Inbox.
+                Systemic problems? Write about them
               </p>
             </div>
 
             <div className="relative mt-8 mb-[40px]">
-              <div className=" flex flex-col gap-2 mdd:relative w-full h-[56px]">
+              <div className="flex flex-col gap-2 mdd:relative w-full h-[56px]">
                 <input
                   className="bg-white p-4 rounded-3xl w-full h-full z-0 focus:outline-none mdd:pr-[140px]"
-                  placeholder="Enter your email here"
-                  type="email"
+                  placeholder="Write here"
+                  type="text"
+                  value={inputValue}
+                  onChange={handleChange}
                 />
-
-               <Subscribe />
+                {error && <p className="text-red-500">{error}</p>}
+                <button
+                  type="submit"
+                  className="bg-purple-500 hover:bg-white text-white hover:text-black font-bold py-2 px-4 rounded-3xl"
+                >
+                  Send
+                </button>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
-    </div>
+      {showPopup && <Popup onClose={handleClose} />}
+    </form>
   );
 }
