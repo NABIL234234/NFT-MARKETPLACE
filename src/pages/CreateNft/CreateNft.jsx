@@ -7,6 +7,7 @@ import { RiNftFill } from "react-icons/ri";
 import { MdOutlinePriceChange, MdDriveFileRenameOutline } from "react-icons/md";
 import LiveNftCard from "../../components/LiveNftCard/LiveNftCard";
 import nftImagePreview from "../../assets/IMAGE/SECTION/Astro.png";
+import { FaFileImage } from "react-icons/fa";
 
 export default function CreateNft() {
   const {
@@ -94,7 +95,7 @@ export default function CreateNft() {
                 </p>
               )}
             </div>
-            <div>
+            <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
                 Изображение (URL) <RiNftFill className="pt-[2px]" />
               </label>
@@ -102,15 +103,12 @@ export default function CreateNft() {
                 type="file"
                 {...register("nftImage", { required: true })}
                 onChange={handleImageChange}
-                className={`appearance-none rounded-xl relative block w-full px-3 py-2 border ${
-                  errors.nftImage ? "border-red-500" : "border-gray-700"
-                } bg-gray-700 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500`}
+                className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer"
               />
-              {errors.nftImage && (
-                <p className="text-red-500 text-xs mt-1">
-                  Это поле обязательно.
-                </p>
-              )}
+              <div className="flex items-center gap-3 bg-gray-700 rounded-xl p-3">
+                <FaFileImage  className="text-purple-500"/>
+                <span className="text-white">Выбрать изображение</span>
+              </div>
             </div>
 
             <button
