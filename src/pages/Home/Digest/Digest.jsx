@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import SpaceMan from "../../../../src/assets/IMAGE/SECTION/SpaceMan.png";
+import { IoMdMailUnread } from "react-icons/io";
 
 const Popup = ({ onClose }) => {
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div className="flex flex-col bg-white p-[70px] rounded-lg shadow-lg transform scale-100 opacity-100 transition-transform transition-opacity duration-500">
         <p className="mb-4">Review submitted!</p>
-        <button className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded" onClick={onClose}>
+        <button
+          className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
+          onClick={onClose}
+        >
           Close
         </button>
       </div>
@@ -70,11 +74,12 @@ export default function Digest() {
                   value={inputValue}
                   onChange={handleChange}
                 />
-                {error && <p className="text-red-500">{error}</p>}
+                {error && <p className="text-red-500 absolute top-16">{error}</p>}
                 <button
                   type="submit"
-                  className="bg-purple-500 hover:bg-white text-white hover:text-black font-bold py-2 px-4 rounded-3xl"
+                  className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white hover:text-black border-2 bg-purple-500 hover:bg-white border-purple-500 hover:border-black  transition ease-in-out delay-15 p-3 pl-[42px] pr-[42px] right-0 top-0 bottom-0"
                 >
+                  <IoMdMailUnread />
                   Send
                 </button>
               </div>
