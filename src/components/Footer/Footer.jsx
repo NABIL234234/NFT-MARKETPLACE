@@ -130,8 +130,8 @@ export default function Footer() {
                 <div className=" flex flex-col gap-2 mdd:relative w-full h-[56px]">
                   <input
                     className="bg-white p-4 rounded-3xl w-full h-full z-0 focus:outline-none mdd:pr-[140px]"
-                    placeholder="Enter your email here"
-                    type="email"
+                    placeholder="White here"
+                    type="text"
                     value={inputValue}
                     onChange={handleChange}
                   />
