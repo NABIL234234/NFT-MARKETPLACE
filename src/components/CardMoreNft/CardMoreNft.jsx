@@ -35,7 +35,7 @@ export default function CardMoreNft({
 
         <div className="text-white p-4 relative bg-zinc-900">
           <Link to={`/profile/${ownerId}`}>
-            <h4 className="text-xl font-semibold mb-2">{title}</h4>
+            <h4 className="text-xl font-semibold mb-2">{title || "No Title"}</h4>
             <div className="flex items-center mb-2">
               <img src={avatar} alt="User" />
               <h5>{user}</h5>
