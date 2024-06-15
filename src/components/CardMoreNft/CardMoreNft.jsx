@@ -9,19 +9,14 @@ export default function CardMoreNft({
   imgUrl,
   title,
   avatar,
-  user,
+  creatorUsername,
   price,
   onIconClick,
   onDelete,
   ownerId,
 }) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.1 }}
-      onHoverStart={(e) => {}}
-      onHoverEnd={(e) => {}}
-      className="Card"
-    >
+    <motion.div whileHover={{ scale: 1.1 }} className="Card">
       <div className="w-full">
         <Link to={`/info/${id}`}>
           <div className="w-full h-[40vh] overflow-hidden">
@@ -34,13 +29,15 @@ export default function CardMoreNft({
         </Link>
 
         <div className="text-white p-4 relative bg-zinc-900">
-          <Link to={`/profile/${ownerId}`}>
-            <h4 className="text-xl font-semibold mb-2">{title || "No Title"}</h4>
-            <div className="flex items-center mb-2">
-              <img src={avatar} alt="User" />
-              <h5>{user}</h5>
-            </div>
-          </Link>
+          <div>
+            <h4 className="text-xl font-semibold mb-2">
+              {title || "No Title"}
+            </h4>
+            <Link to={`/profile/${ownerId}`} className="flex items-center mb-2">
+              <img src={avatar} />
+              <h5>{creatorUsername}</h5>
+            </Link>
+          </div>
           <div className="flex justify-between mb-2 mt-5">
             <div>
               <h5 className="text-stone-400">Price $</h5>
@@ -51,7 +48,10 @@ export default function CardMoreNft({
                 className="w-[22px] cursor-pointer"
                 onClick={onIconClick}
               />
-              <MdDelete className="w-[22px] cursor-pointer" onClick={onDelete} />
+              <MdDelete
+                className="w-[22px] cursor-pointer"
+                onClick={onDelete}
+              />
             </div>
           </div>
         </div>
