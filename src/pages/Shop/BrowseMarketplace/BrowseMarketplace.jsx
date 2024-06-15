@@ -10,7 +10,11 @@ import Search from "../../../assets/IMAGE/PLAY.SVG/nav/search.svg";
 
 export default function BrowseMarketplace() {
   const dispatch = useDispatch();
-  const { nftsForSale: { data }, loading, error } = useSelector((state) => state.nft);
+  const {
+    nftsForSale: { data },
+    loading,
+    error,
+  } = useSelector((state) => state.nft);
   const [nftList, setNftList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -39,14 +43,6 @@ export default function BrowseMarketplace() {
   useEffect(() => {
     setNftList(data);
   }, [data]);
-
-  const handleIconClick = (id) => {
-    console.log(`Icon clicked for NFT ID: ${id}`);
-  };
-
-  const handleDelete = (id) => {
-    console.log(`Delete clicked for NFT ID: ${id}`);
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -77,7 +73,7 @@ export default function BrowseMarketplace() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="flex mt-[80px]">
+          <div className="flex mt-[80px] mb-[12px]">
             <div className="flex justify-center items-center gap-[16px] w-[525px]">
               <h3 className="text-white font-semibold">NFTs</h3>
               <div className="bg-zinc-400 w-[47px] pt-0.5 pb-0.5 px-2.5 rounded-full">
@@ -105,11 +101,9 @@ export default function BrowseMarketplace() {
                   imgUrl={nft.nftImage}
                   title={nft.name}
                   avatar={nft.userAvatar}
-                  user={nft.owner}
+                  creatorUsername={nft.ownerUsername}
                   price={`${nft.price}`}
                   ownerId={nft.ownerId}
-                  onIconClick={() => handleIconClick(nft.id)}
-                  onDelete={() => handleDelete(nft.id)}
                 />
               ))
             ) : (
