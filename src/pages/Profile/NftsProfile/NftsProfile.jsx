@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  fetchProfileInfo,
-  pushNftToMarket,
-  deleteNft,
-} from "../../../store/slices/nft";
+import { fetchProfileInfo, pushNftToMarket, deleteNft, cancelSelling } from "../../../store/slices/nft";
 import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -15,6 +11,11 @@ export default function NftsProfile() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNft, setSelectedNft] = useState(null);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchProfileInfo(id));
+  }, [dispatch, id]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -40,6 +41,18 @@ export default function NftsProfile() {
       });
   };
 
+  const handleCancelSelling = (nftId) => {
+    dispatch(cancelSelling(nftId))
+      .unwrap()
+      .then(() => {
+        dispatch(fetchProfileInfo(id));
+        setIsCancelModalOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleDeleteNft = (nftId) => {
     dispatch(deleteNft(nftId))
       .unwrap()
@@ -51,14 +64,20 @@ export default function NftsProfile() {
       });
   };
 
-  const openModal = (nft) => {
+  const openSellModal = (nft) => {
     setSelectedNft(nft);
     setIsModalOpen(true);
+  };
+
+  const openCancelModal = (nft) => {
+    setSelectedNft(nft);
+    setIsCancelModalOpen(true);
   };
 
   const closeModal = () => {
     setSelectedNft(null);
     setIsModalOpen(false);
+    setIsCancelModalOpen(false);
   };
 
   return (
@@ -75,8 +94,10 @@ export default function NftsProfile() {
               creatorUsername={nft.ownerUsername}
               price={`${nft.price}`}
               ownerId={nft.ownerId}
-              onIconClick={() => openModal(nft)}
+              isForSale={nft.isForSale} // добавляем флаг продажи
+              onIconClick={() => openSellModal(nft)}
               onDelete={() => handleDeleteNft(nft.id)}
+              onCancel={() => openCancelModal(nft)} 
             />
           ))}
         </div>
@@ -87,8 +108,7 @@ export default function NftsProfile() {
           <div className="bg-white p-4 rounded shadow-lg">
             <h2 className="text-xl mb-4">Confirm Sale</h2>
             <p>
-              Are you sure you want to sell {selectedNft.name} for{" "}
-              {selectedNft.price}?
+              Are you sure you want to sell {selectedNft.name} for {selectedNft.price}?
             </p>
             <div className="flex justify-end mt-4">
               <button
@@ -102,6 +122,31 @@ export default function NftsProfile() {
                 onClick={closeModal}
               >
                 Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isCancelModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded shadow-lg">
+            <h2 className="text-xl mb-4">Cancel Sale</h2>
+            <p>
+              Are you sure you want to cancel the sale of {selectedNft.name}?
+            </p>
+            <div className="flex justify-end mt-4">
+              <button
+                className="bg-red-600 text-white px-4 py-2 rounded mr-2"
+                onClick={() => handleCancelSelling(selectedNft.id)}
+              >
+                Cancel Sale
+              </button>
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded"
+                onClick={closeModal}
+              >
+                Close
               </button>
             </div>
           </div>

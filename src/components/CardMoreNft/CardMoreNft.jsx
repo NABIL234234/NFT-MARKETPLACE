@@ -3,6 +3,7 @@ import "./CardMoreNft.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MdSell, MdDelete } from "react-icons/md";
+import { FcCancel } from "react-icons/fc";
 
 export default function CardMoreNft({
   id,
@@ -13,6 +14,7 @@ export default function CardMoreNft({
   price,
   onIconClick,
   onDelete,
+  onCancel,
   ownerId,
 }) {
   return (
@@ -52,6 +54,7 @@ export default function CardMoreNft({
                 className="w-[22px] cursor-pointer"
                 onClick={onDelete}
               />
+              <FcCancel onClick={onCancel}/>
             </div>
           </div>
         </div>
