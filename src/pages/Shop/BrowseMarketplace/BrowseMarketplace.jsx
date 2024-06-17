@@ -1,12 +1,69 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNftsForSale } from "../../../store/slices/nft";
-import { BsBandaidFill } from "react-icons/bs";
+import { fetchNftsForSale, transactions } from "../../../store/slices/nft";
 import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
 import Title from "../../../components/Title/Title";
-
-// images
 import Search from "../../../assets/IMAGE/PLAY.SVG/nav/search.svg";
+
+const Modal = ({
+  isOpen,
+  onClose,
+  onSell,
+  nftName,
+  nftPrice,
+  onPaymentChange,
+}) => {
+  const [paymentMethod, setPaymentMethod] = useState("META_MASK_WALLET");
+
+  const handleSell = () => {
+    onSell(paymentMethod);
+    onClose();
+  };
+
+  const handleChange = (e) => {
+    setPaymentMethod(e.target.value);
+    onPaymentChange(e.target.value);
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+      <div className="bg-white p-6 rounded-lg text-center">
+        <h2 className="text-lg font-bold mb-4">Confirm Sale</h2>
+        <p>
+          Are you sure you want to sell {nftName} for {nftPrice}?
+        </p>
+        <div className="mt-4">
+          <label className="block mb-2">Select Payment Method:</label>
+          <select
+            className="p-2 border border-gray-300 rounded"
+            value={paymentMethod}
+            onChange={handleChange}
+          >
+            <option value="META_MASK_WALLET">MetaMask Wallet</option>
+            <option value="PAYPAL">PayPal</option>
+            <option value="CREDIT_CARD">Credit Card</option>
+          </select>
+        </div>
+        <div className="mt-6 flex justify-center gap-4">
+          <button
+            className="bg-purple-700 text-white px-4 py-2 rounded"
+            onClick={handleSell}
+          >
+            Sell
+          </button>
+          <button
+            className="bg-gray-300 text-black px-4 py-2 rounded"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function BrowseMarketplace() {
   const dispatch = useDispatch();
@@ -17,6 +74,10 @@ export default function BrowseMarketplace() {
   } = useSelector((state) => state.nft);
   const [nftList, setNftList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNft, setSelectedNft] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState("META_MASK_WALLET");
 
   useEffect(() => {
     dispatch(fetchNftsForSale());
@@ -44,6 +105,23 @@ export default function BrowseMarketplace() {
     setNftList(data);
   }, [data]);
 
+  const handleSellClick = (nft) => {
+    setSelectedNft(nft);
+    setIsModalOpen(true);
+  };
+
+  const handleSell = (paymentMethod) => {
+    if (selectedNft) {
+      dispatch(
+        transactions({ nftId: selectedNft.id, meansOfPayment: paymentMethod })
+      );
+    }
+  };
+
+  const handlePaymentChange = (method) => {
+    setSelectedPaymentMethod(method);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -62,7 +140,7 @@ export default function BrowseMarketplace() {
           />
           <div className="relative">
             <img
-              className="absolute top-[56%] left-[88%] rdd:left-[90%] rd:left-[92%] smm:left-[93%] sm:left-[94%] mdd:left-[95%] lgg:left-[96%] w-[22px]"
+              className="absolute  top-[56%] left-[88%] rdd:left-[90%] rd:left-[92%] smm:left-[93%] sm:left-[94%] mdd:left-[95%] lgg:left-[96%] w-[22px]"
               src={Search}
               alt="search"
             />
@@ -70,17 +148,16 @@ export default function BrowseMarketplace() {
               className="w-full p-[13px] rounded-2xl bg-zinc-700 text-white outline-none pr-[60px] mt-[30px]"
               type="text"
               placeholder="Search your favourite NFTs"
-              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="flex mt-[80px] mb-[12px]">
-            <div className="flex justify-center items-center gap-[16px] w-[525px]">
+          <div className="flex mt-[80px] ">
+            <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px]">
               <h3 className="text-white font-semibold">NFTs</h3>
               <div className="bg-zinc-400 w-[47px] pt-0.5 pb-0.5 px-2.5 rounded-full">
                 <h5 className="text-white">300</h5>
               </div>
             </div>
-            <div className="flex justify-center items-center gap-[16px] w-[525px]">
+            <div className="flex justify-center items-center  gap-[16px] w-[525px] pb-[14.5px]">
               <h3 className="text-stone-400 font-semibold">Collection</h3>
               <div className="bg-zinc-400 w-[37px] pt-0.5 pb-0.5 px-2.5 rounded-full">
                 <h5 className="text-white">70</h5>
@@ -90,7 +167,7 @@ export default function BrowseMarketplace() {
         </div>
       </div>
 
-      <div className="pt-[60px] bg-zinc-700">
+      <div className="pt-16 bg-zinc-800">
         <div className="max-w-6xl mx-auto px-5 font-mono">
           <div className="flex justify-start items-center flex-wrap">
             {nftList && nftList.length > 0 ? (
@@ -104,17 +181,29 @@ export default function BrowseMarketplace() {
                   creatorUsername={nft.ownerUsername}
                   price={`${nft.price}`}
                   ownerId={nft.ownerId}
+                  onIconClick={() => handleIconClick(nft.id)}
+                  onDelete={() => handleDelete(nft.id)}
+                  onCancel={() => handleCancel(nft.id)}
+                  onWalletClick={() => handleSellClick(nft)}
                 />
               ))
             ) : (
-              <div className="flex justify-center text-center gap-2 w-full text-2xl text-purple-500">
-                <h3>No NFTs found </h3>
-                <BsBandaidFill />
-              </div>
+              <div>No NFT found</div>
             )}
           </div>
         </div>
       </div>
+
+      {selectedNft && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSell={handleSell}
+          nftName={selectedNft.name}
+          nftPrice={selectedNft.price}
+          onPaymentChange={handlePaymentChange}
+        />
+      )}
     </>
   );
 }

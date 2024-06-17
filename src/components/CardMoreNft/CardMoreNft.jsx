@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MdSell, MdDelete } from "react-icons/md";
 import { FcCancel } from "react-icons/fc";
+import { FaWallet } from "react-icons/fa";
 
 export default function CardMoreNft({
   id,
@@ -15,6 +16,7 @@ export default function CardMoreNft({
   onIconClick,
   onDelete,
   onCancel,
+  onWalletClick,
   ownerId,
 }) {
   return (
@@ -55,6 +57,10 @@ export default function CardMoreNft({
                 onClick={onDelete}
               />
               <FcCancel onClick={onCancel}/>
+              <FaWallet
+                className="w-[22px] cursor-pointer" 
+                onClick={() => onWalletClick(id)} // Передаем id NFT при нажатии на иконку кошелька
+              />
             </div>
           </div>
         </div>
