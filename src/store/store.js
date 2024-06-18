@@ -5,6 +5,7 @@ import userSlice from "./slices/registerSlice";
 import confirmCodeReducer from "./slices/confirnCode";
 import nftSlice from "./slices/nft";
 import rankingsSlice from "./slices/rankings";
+import walletSlice from "./slices/Wallet"
 
 const persistConfig = {
   key: "root",
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   confirmCode: confirmCodeReducer,
   nft: nftSlice,
   rankings: rankingsSlice,
+  wallet: walletSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

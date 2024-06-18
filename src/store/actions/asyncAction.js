@@ -16,19 +16,65 @@ import axios from "axios";
 
 export const postUsers = createAsyncThunk(
   "user/register",
-  async ({ newUser, navigate }) => {
+  async ({ newUser, navigate }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_MAIN_URL}/api/users/registration`,
-        newUser
+        `${import.meta.env.VITE_MAIN_URL}/api/registrations`,
+        newUser,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-      navigate("/login");
-      return response.data;
+      // Если регистрация прошла успешно, переходим к шагу подтверждения
+      if (response.status === 201) {
+        return { data: response.data, navigate };
+      } else {
+        throw new Error("Ошибка при регистрации пользователя");
+      }
+      
     } catch (error) {
-      console.error(error);
+      console.error("Ошибка при выполнении запроса регистрации:", error);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
+
+
+export const confirmRegistration = createAsyncThunk(
+  "user/confirmRegistration",
+  async ({ email, password, code, navigate }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_MAIN_URL}/api/registrations/confirm`,
+        null,
+        {
+          params: {
+            email,
+            code,
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data) {
+        localStorage.setItem("accessToken", response.data.tokens.access_token);
+        navigate("/profile");
+        return response.data;
+      } else {
+        throw new Error("Ошибка при подтверждении регистрации");
+      }
+    } catch (error) {
+      console.error("Error during confirmation request:", error);
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+
 
 // export const postUserLogin = createAsyncThunk(
 //   "user/login",
@@ -101,8 +147,8 @@ export const getGoogleToken = createAsyncThunk(
   async ({ token, navigate }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_MAIN_URL}/api/auth/getGoogleToken`,
-        { params: { token } } // передача токена в параметрах запроса
+        `${import.meta.env.VITE_GOOGLE_URL}/api/auth/getGoogleToken`,
+        { params: { token } } 
       );
       return response.data;
     } catch (error) {
@@ -118,8 +164,8 @@ export const RedirectGoogle = createAsyncThunk(
   async ({ token, navigate }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_MAIN_URL}/api/auth/google`,
-        { params: { token } } // передача токена в параметрах запроса
+        `${import.meta.env.VITE_GOOGLE_URL}/api/auth/google`,
+        { params: { token } } 
       );
       return response.data;
     } catch (error) {
