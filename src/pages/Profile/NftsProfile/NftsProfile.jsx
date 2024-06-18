@@ -92,9 +92,10 @@ export default function NftsProfile() {
               title={nft.name}
               avatar={nft.userAvatar}
               creatorUsername={nft.ownerUsername}
-              price={`${nft.price}`}
+              dollarPrice={`${nft.dollarPrice}`}
+              ethereumPrice={`${nft.ethereumPrice}`}
               ownerId={nft.ownerId}
-              isForSale={nft.isForSale} // добавляем флаг продажи
+              isForSale={nft.isForSale} 
               onIconClick={() => openSellModal(nft)}
               onDelete={() => handleDeleteNft(nft.id)}
               onCancel={() => openCancelModal(nft)} 

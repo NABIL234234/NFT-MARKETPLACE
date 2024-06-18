@@ -42,8 +42,6 @@ const Modal = ({
             onChange={handleChange}
           >
             <option value="META_MASK_WALLET">MetaMask Wallet</option>
-            <option value="PAYPAL">PayPal</option>
-            <option value="CREDIT_CARD">Credit Card</option>
           </select>
         </div>
         <div className="mt-6 flex justify-center gap-4">
@@ -167,7 +165,7 @@ export default function BrowseMarketplace() {
         </div>
       </div>
 
-      <div className="pt-16 bg-zinc-800">
+      <div className="pt-16 bg-zinc-700">
         <div className="max-w-6xl mx-auto px-5 font-mono">
           <div className="flex justify-start items-center flex-wrap">
             {nftList && nftList.length > 0 ? (
@@ -179,7 +177,8 @@ export default function BrowseMarketplace() {
                   title={nft.name}
                   avatar={nft.userAvatar}
                   creatorUsername={nft.ownerUsername}
-                  price={`${nft.price}`}
+                  dollarPrice={`${nft.dollarPrice}`}
+                  ethereumPrice={`${nft.ethereumPrice}`}
                   ownerId={nft.ownerId}
                   onIconClick={() => handleIconClick(nft.id)}
                   onDelete={() => handleDelete(nft.id)}

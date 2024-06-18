@@ -30,6 +30,8 @@ export default function CreateNft() {
     try {
       const formData = new FormData();
       formData.append("nftImage", data.nftImage[0]);
+      formData.append("ethereumPrice", data.dollarPrice);
+
       for (let key in data) {
         if (key !== "nftImage") {
           formData.append(key, data[key]);
@@ -83,13 +85,13 @@ export default function CreateNft() {
               </label>
               <input
                 type="number"
-                {...register("price", { required: true })}
+                {...register("dollarPrice", { required: true })}
                 onChange={(e) => setNftPrice(e.target.value)}
                 className={`appearance-none rounded-xl relative block w-full px-3 py-2 border ${
-                  errors.price ? "border-red-500" : "border-gray-700"
+                  errors.dollarPrice ? "border-red-500" : "border-gray-700"
                 } bg-gray-700 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500`}
               />
-              {errors.price && (
+              {errors.dollarPrice && (
                 <p className="text-red-500 text-xs mt-1">
                   Это поле обязательно.
                 </p>
@@ -131,7 +133,7 @@ export default function CreateNft() {
             title={nftName || "Название NFT"}
             avatar={previewImage}
             user={"Moon"}
-            price={nftPrice || "0"}
+           
           />
         </div>
       </div>

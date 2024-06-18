@@ -12,7 +12,8 @@ export default function CardMoreNft({
   title,
   avatar,
   creatorUsername,
-  price,
+  dollarPrice,
+  ethereumPrice,
   onIconClick,
   onDelete,
   onCancel,
@@ -45,7 +46,11 @@ export default function CardMoreNft({
           <div className="flex justify-between mb-2 mt-5">
             <div>
               <h5 className="text-stone-400">Price $</h5>
-              <h5 className="">{price}</h5>
+              <h6 className="">{dollarPrice}</h6>
+            </div>
+            <div>
+              <h5>ETH</h5>
+              <h6>{ethereumPrice}</h6>
             </div>
             <div className="flex items-center space-x-4">
               <MdSell
@@ -56,10 +61,10 @@ export default function CardMoreNft({
                 className="w-[22px] cursor-pointer"
                 onClick={onDelete}
               />
-              <FcCancel onClick={onCancel}/>
+              <FcCancel onClick={onCancel} />
               <FaWallet
-                className="w-[22px] cursor-pointer" 
-                onClick={() => onWalletClick(id)} // Передаем id NFT при нажатии на иконку кошелька
+                className="w-[22px] cursor-pointer"
+                onClick={() => onWalletClick(id)}
               />
             </div>
           </div>
