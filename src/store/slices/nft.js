@@ -28,7 +28,7 @@ const initialState = {
   transactionsError: null,
 };
 
-const BearerToken = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb2hhbiIsInJvbGVzIjpbIlVTRVIiXSwiZXhwIjoxNzE4NjI2ODc2fQ.cil4V6woYZCel1ccg8Bw-_H368FfA_KkKvF_wdZipTo`;
+const BearerToken = `Bearer ${localStorage.getItem("accessToken")}`;
 
 export const createNft = createAsyncThunk(
   "nft/createNft",
