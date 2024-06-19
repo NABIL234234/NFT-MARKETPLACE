@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProfileInfo, changeProfilePhoto } from "../../../store/slices/nft";
+import {
+  fetchProfileInfo,
+  changeProfilePhoto,
+} from "../../../store/slices/nft";
 import "./Hero.css";
 import { motion } from "framer-motion";
 import { CiInstagram } from "react-icons/ci";
@@ -19,7 +22,9 @@ export default function Hero() {
   const { profile, loading } = useSelector((state) => state.nft); // Удален неиспользуемый error
   const data = profile?.data || {};
   const [selectedTab, setSelectedTab] = useState("createdNfts");
-  const [followersCount, setFollowersCount] = useState(data?.followersCount || 0);
+  const [followersCount, setFollowersCount] = useState(
+    data?.followersCount || 0
+  );
   const [isFollowed, setIsFollowed] = useState(false);
   const [imagePreview, setImagePreview] = useState();
 
@@ -107,7 +112,7 @@ export default function Hero() {
               </button>
             </div>
           </div>
-          <div className="flex gap-8 sm:gap-40 smm:gap-15 mt-30 text-xl smm:text-2xl text-white">
+          <div className="flex gap-8 sm:gap-40 smm:gap-15 mt-[20px] text-xl smm:text-2xl text-white">
             <div>
               <h2 className="font-semibold">{data?.volume}+</h2>
               <h2 className="text-sm smm:text-xl">Volume</h2>
@@ -121,9 +126,9 @@ export default function Hero() {
               <h2 className="text-sm smm:text-xl">Subscribers</h2>
             </div>
           </div>
-          <div className="pt-30">
+          <div className="pt-[20px]">
             <h4 className="text-stone-400 text-lg">Links</h4>
-            <div className="w-72 flex gap-12 pt-5 text-purple-500">
+            <div className="w-72 flex gap-[20px] pt-5 text-purple-500">
               <a
                 href="https://www.instagram.com/magic_nftmarcketplace?igsh=ZmplY3c0ZTI4eWI5"
                 className="text-3xl"
@@ -137,7 +142,7 @@ export default function Hero() {
           </div>
         </div>
         <div className="flex flex-col items-center mt-20 relative">
-          <div className="flex gap-[190px] pb-2">
+          <div className="flex gap-[150px] pb-2">
             {TABS.map((tab) => (
               <div key={tab.value} className="relative">
                 <h3
