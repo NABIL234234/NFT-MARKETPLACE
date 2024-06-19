@@ -19,6 +19,8 @@ export default function CardMoreNft({
   onCancel,
   onWalletClick,
   ownerId,
+  iconsAvailable = false,
+  BuyIcon = false,
 }) {
   return (
     <motion.div whileHover={{ scale: 1.1 }} className="Card">
@@ -53,19 +55,27 @@ export default function CardMoreNft({
               <h6>{ethereumPrice}</h6>
             </div>
             <div className="flex items-center space-x-4">
-              <MdSell
-                className="w-[22px] cursor-pointer"
-                onClick={onIconClick}
-              />
-              <MdDelete
-                className="w-[22px] cursor-pointer"
-                onClick={onDelete}
-              />
-              <FcCancel onClick={onCancel} />
-              <FaWallet
-                className="w-[22px] cursor-pointer"
-                onClick={() => onWalletClick(id)}
-              />
+              {iconsAvailable && (
+                <>
+                  <MdSell
+                    className="w-[22px] cursor-pointer"
+                    onClick={onIconClick}
+                  />
+                  <MdDelete
+                    className="w-[22px] cursor-pointer"
+                    onClick={onDelete}
+                  />
+                  <FcCancel onClick={onCancel} />
+                </>
+              )}
+              {BuyIcon && (
+                <>
+                  <FaWallet
+                    className="w-[22px] cursor-pointer"
+                    onClick={() => onWalletClick(id)}
+                  />
+                </>
+              )}
             </div>
           </div>
         </div>

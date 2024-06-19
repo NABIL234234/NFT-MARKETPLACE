@@ -99,6 +99,7 @@ export default function NftsProfile() {
               onIconClick={() => openSellModal(nft)}
               onDelete={() => handleDeleteNft(nft.id)}
               onCancel={() => openCancelModal(nft)} 
+              iconsAvailable
             />
           ))}
         </div>
