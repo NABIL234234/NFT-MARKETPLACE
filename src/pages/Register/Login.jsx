@@ -149,7 +149,7 @@ export default function Login() {
               </NavLink>
             </div>
             <a
-              href="https://nft-market-place-f-23-c6a5ee8f518d.herokuapp.com/api/auth/google"
+              href="https://nft-market-place-f-23-c6a5ee8f518d.herokuapp.com/api/auth/getGoogleToken"
               className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-blue-500 text-white transition ease-in-out delay-150 hover:bg-white hover:text-blue-500 active:bg-blue-400"
             >
               Login with Google
