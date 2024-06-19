@@ -6,8 +6,7 @@ import { motion } from "framer-motion";
 import { CiInstagram } from "react-icons/ci";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SlUserFollow } from "react-icons/sl";
-import { useParams } from "react-router";
-import DefaultPhoto from "../../../assets/IMAGE/SECTION/Astro.png";
+import { useParams } from "react-router-dom"; // Исправлен импорт для useParams
 
 const TABS = [
   { label: "Created", value: "createdNfts" },
@@ -17,12 +16,12 @@ const TABS = [
 export default function Hero() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { profile, loading, error } = useSelector((state) => state.nft);
+  const { profile, loading } = useSelector((state) => state.nft); // Удален неиспользуемый error
   const data = profile?.data || {};
   const [selectedTab, setSelectedTab] = useState("createdNfts");
   const [followersCount, setFollowersCount] = useState(data?.followersCount || 0);
-  const [isFollowed, setIsFollowed] = useState(localStorage.getItem("isFollowed") === "true");
-  const [imagePreview, setImagePreview] = useState(localStorage.getItem("profileImage") || DefaultPhoto);
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [imagePreview, setImagePreview] = useState();
 
   useEffect(() => {
     if (id) {
@@ -34,7 +33,8 @@ export default function Hero() {
 
   useEffect(() => {
     if (data) {
-      setImagePreview(data.avatar || DefaultPhoto);
+      setImagePreview(data.avatar);
+      setIsFollowed(data.isFollowed || false);
     }
   }, [data]);
 
@@ -55,7 +55,6 @@ export default function Hero() {
       const newFollowersCount = followersCount + 1;
       setFollowersCount(newFollowersCount);
       setIsFollowed(true);
-      localStorage.setItem("isFollowed", "true");
     }
   };
 
@@ -63,23 +62,18 @@ export default function Hero() {
     const photoData = event.target.files[0];
     if (photoData) {
       const formData = new FormData();
-      formData.append("image", photoData);
+      formData.append("multipartFile", photoData);
 
-      // Показать временное превью
-      const temporaryImageURL = URL.createObjectURL(photoData);
-      setImagePreview(temporaryImageURL);
-
-      dispatch(changeProfilePhoto(formData)).then((response) => {
-        if (response.payload && response.payload.avatarUrl) { // Убедитесь, что возвращаем правильный URL
-          const newAvatarUrl = response.payload.avatarUrl; // Используйте URL, возвращенный сервером
-          setImagePreview(newAvatarUrl);
-          localStorage.setItem("profileImage", newAvatarUrl);
-        }
-      }).catch((error) => {
-        console.error("Error changing profile photo:", error);
-        // Вернуться к предыдущему изображению в случае ошибки
-        setImagePreview(localStorage.getItem("profileImage") || DefaultPhoto);
-      });
+      dispatch(changeProfilePhoto(formData))
+        .then((response) => {
+          if (response.payload && response.payload.avatarUrl) {
+            const newAvatarUrl = response.payload.avatarUrl;
+            setImagePreview(newAvatarUrl);
+          }
+        })
+        .catch((error) => {
+          console.error("Error changing profile photo:", error);
+        });
     }
   };
 
@@ -99,11 +93,11 @@ export default function Hero() {
           />
         </div>
         <div>
-          <div className="block mdd:flex items-center">
+          <div className="block md:flex items-center">
             <h2 className="text-white text-4xl font-semibold">
               {data?.username || "Unknown user"}
             </h2>
-            <div className="flex gap-[20px] ml-auto">
+            <div className="flex gap-20 ml-auto">
               <button
                 className="flex w-full mb:w-48 items-center justify-center gap-3 rounded-xl transition ease-in-out delay-15 text-white border-2 border-purple-500 hover:bg-purple-500 active:bg-purple-700 p-4 mt-6"
                 onClick={handleFollow}
@@ -113,7 +107,7 @@ export default function Hero() {
               </button>
             </div>
           </div>
-          <div className="flex gap-[8px] sm:gap-[40px] smm:gap-[15px] mt-[30px] text-xl smm:text-2xl text-white">
+          <div className="flex gap-8 sm:gap-40 smm:gap-15 mt-30 text-xl smm:text-2xl text-white">
             <div>
               <h2 className="font-semibold">{data?.volume}+</h2>
               <h2 className="text-sm smm:text-xl">Volume</h2>
@@ -127,9 +121,9 @@ export default function Hero() {
               <h2 className="text-sm smm:text-xl">Subscribers</h2>
             </div>
           </div>
-          <div className="pt-[30px]">
+          <div className="pt-30">
             <h4 className="text-stone-400 text-lg">Links</h4>
-            <div className="w-72% flex gap-[12px] pt-[5px] text-purple-500">
+            <div className="w-72 flex gap-12 pt-5 text-purple-500">
               <a
                 href="https://www.instagram.com/magic_nftmarcketplace?igsh=ZmplY3c0ZTI4eWI5"
                 className="text-3xl"
@@ -142,12 +136,12 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center mt-[20px] relative">
-          <div className="flex gap-[116px] pb-2">
+        <div className="flex flex-col items-center mt-20 relative">
+          <div className="flex gap-116 pb-2">
             {TABS.map((tab) => (
               <div key={tab.value} className="relative">
                 <h3
-                  className={`text-white  cursor-pointer text-xl ${
+                  className={`text-white cursor-pointer text-xl ${
                     selectedTab === tab.value ? "text-purple-600" : ""
                   }`}
                   onClick={() => handleTabChange(tab.value)}
