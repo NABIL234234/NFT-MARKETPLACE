@@ -76,12 +76,6 @@ export default function Login() {
   const handleCloseError = () => {
     setLoginError("");
   };
-
-  const handleCloseError = () => {
-    setLoginError("");
-  };
-
-
   
   return (
     <section className="mdd:flex gap-[15px] md:gap-[40px] lg:gap-[60px] xl:gap-[150px] font-mono">
