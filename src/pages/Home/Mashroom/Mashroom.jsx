@@ -63,7 +63,7 @@ export default function Mashroom() {
       animate={controls}
       variants={fadeInUp}
       transition={{ duration: 0.5 }}
-      className="mt-20 pb-[40px] sm:pb-[60px] bg-[url('./src/assets/IMAGE/SECTION/mushroom-root.png')] bg-no-repeat bg-center bg-cover relative z-[1]"
+      className="mt-20 pb-[40px] sm:pb-[60px] bg-[url('./src/assets/IMAGE/SECTION/mushroom.png')] bg-no-repeat bg-center bg-cover relative z-[1]"
     >
       <div className="max-w-6xl mx-auto px-5 font-mono ">
         <div className="h-full">
