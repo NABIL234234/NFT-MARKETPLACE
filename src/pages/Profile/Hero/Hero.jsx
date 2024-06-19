@@ -137,7 +137,7 @@ export default function Hero() {
           </div>
         </div>
         <div className="flex flex-col items-center mt-20 relative">
-          <div className="flex gap-116 pb-2">
+          <div className="flex gap-[190px] pb-2">
             {TABS.map((tab) => (
               <div key={tab.value} className="relative">
                 <h3
