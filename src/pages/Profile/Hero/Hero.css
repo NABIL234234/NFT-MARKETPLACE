@@ -23,7 +23,7 @@
   overflow: hidden;
   cursor: pointer;
   top: -80px;
-  left: -490px;
+  left: -44%;
 }
 
 .avatar-label {
@@ -59,4 +59,28 @@
 
 .avatar-label:hover::after {
   display: block;
+}
+
+
+
+@media (max-width:1200px) {
+  .avatar-container {
+    left: -42%;
+  }
+}
+
+@media (max-width:800px) {
+  .avatar-container {
+    left: -39%;
+  }
+}
+@media (max-width:680px) {
+  .avatar-container {
+    left: -37%;
+  }
+}
+@media (max-width:500px) {
+  .avatar-container {
+    left: -2%;
+  }
 }

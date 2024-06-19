@@ -12,9 +12,14 @@ import { FcOk } from "react-icons/fc";
 
 export default function Wallet() {
   const dispatch = useDispatch();
-  const { walletLoading, wallet, walletError } = useSelector(
-    (state) => state.wallet
-  );
+  const {
+    walletLoading,
+    wallet,
+    walletError,
+    bankCardLoading,
+    bankCard,
+    bankCardError,
+  } = useSelector((state) => state.wallet);
   const [walletAddress, setWalletAddress] = useState("");
   const [walletPassword, setWalletPassword] = useState("");
   const [walletModalOpen, setWalletModalOpen] = useState(false);
@@ -53,7 +58,7 @@ export default function Wallet() {
       </div>
       <div className="flex justify-center items-center p-[20px] rounded-lg shadow-lg">
         <div className="flex flex-col">
-          <div className=" text-white pt-[30px]">
+          <div className="text-white pt-[30px]">
             <h3 className="text-4xl lg:text-5xl font-semibold">
               Connect wallet
             </h3>
@@ -92,6 +97,18 @@ export default function Wallet() {
               ) : (
                 <p>Error: {walletError.message}</p>
               )}
+            </div>
+          )}
+          {bankCardLoading && <p className="pt-4">Loading...</p>}
+          {bankCard && (
+            <div className="pt-4 flex items-center text-green-500">
+              <FcOk />
+              Bank card connected successfully!
+            </div>
+          )}
+          {bankCardError && (
+            <div className="pt-4 text-red-500">
+              <p>Error: {bankCardError}</p>
             </div>
           )}
         </div>
