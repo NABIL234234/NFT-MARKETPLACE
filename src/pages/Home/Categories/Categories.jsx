@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import CardCotegories from "../../../components/CardCotegories/CardCotegories";
 
-
 // images
-
 import Artback from "../../../../src/assets/IMAGE/SECTION/Art-back.png";
 import PaintBrush from "../../../../src/assets/IMAGE/PLAY.SVG/nav/PaintBrush.svg";
 import Collectiblse from "../../../../src/assets/IMAGE/SECTION/Collectiblse.png";
@@ -22,10 +22,30 @@ import VirtualWorlds from "../../../../src/assets/IMAGE/SECTION/Virtual-Worlds.p
 import Planet from "../../../../src/assets/IMAGE/PLAY.SVG/nav/Planet.svg";
 
 export default function Categories() {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: true });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <>
-      <div className="pt-12 mdd:pt-40">
-        <div className="max-w-6xl px-5 mx-auto font-mono">
+    <div className="pt-12 mdd:pt-40">
+      <div className="max-w-6xl px-5 mx-auto font-mono">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={controls}
+          variants={fadeInUp}
+          transition={{ duration: 0.5 }}
+        >
           <div className="text-white pb-[20px] mdd:pb-[60px]">
             <h2 className="font-semibold text-4xl">Browse Categories</h2>
           </div>
@@ -50,7 +70,6 @@ export default function Categories() {
               secondImgUrl={Camera}
               desc="Photography"
             />
-
             <CardCotegories
               imgUrl={Videoback}
               secondImgUrl={VideoCamera}
@@ -72,8 +91,8 @@ export default function Categories() {
               desc="Virtual Worlds"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
-    </>
+    </div>
   );
 }

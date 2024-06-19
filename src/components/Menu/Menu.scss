@@ -4,10 +4,10 @@
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 12;
   display: flex;
   justify-content: flex-start;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   opacity: 0;
   animation: fadeIn 0.3s forwards;
@@ -17,6 +17,10 @@
   to {
     opacity: 1;
   }
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 .menu_content {
@@ -38,17 +42,6 @@
   }
 }
 
-// .close-btn {
-//   position: absolute;
-//   top: 20px;
-//   right: 20px;
-//   font-size: 24px;
-//   color: #b90000;
-//   background: none;
-//   border: none;
-//   cursor: pointer;
-// }
-
 .menu_content ul {
   list-style: none;
   padding: 0;
@@ -58,20 +51,37 @@
 
 .menu_content li {
   margin: 20px 0;
-  width: 10 0%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.menu_content a {
+.menu_content a,
+.menu_content button {
   text-decoration: none;
   color: #ffffff;
   font-size: 18px;
   width: 100%;
   text-align: center;
   padding: 10px 0;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color 0.3s ease;
 }
 
-.menu_content a:hover {
+.menu_content a:hover,
+.menu_content button:hover {
   background-color: #b324e3;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.market-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }

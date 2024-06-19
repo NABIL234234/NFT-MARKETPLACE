@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaUserAlt, FaBars } from "react-icons/fa"; // Импортируем FaBars
+import { FaUserAlt, FaBars, FaTimes } from "react-icons/fa"; // Импортируем FaBars и FaTimes
 import Menu from "../../components/Menu/Menu";
 import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
+import { FaEthereum } from "react-icons/fa";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function Header() {
         }
       }
     };
-    
+
     window.addEventListener("storage", handleStorageChange);
     return () => {
       window.removeEventListener("storage", handleStorageChange);
@@ -62,7 +63,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center p-6">
             <div className="flex items-center gap-4">
-              <img src={market} alt="market" />
+            <FaEthereum  className="text-purple-500 text-3xl"/>
               <NavLink to="/" className="nav_link text-xl smm:text-2xl">
                 NFT Marketplace
               </NavLink>
@@ -81,7 +82,7 @@ export default function Header() {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/connectWallet" exact="true" className="nav_link">
+                  <NavLink to="/wallet" exact="true" className="nav_link">
                     Connect a wallet
                   </NavLink>
                 </li>
@@ -109,14 +110,16 @@ export default function Header() {
                   )}
                 </li>
               </ul>
-              <button className="lgg:hidden burger-btn" onClick={toggleMenu}>
-                <FaBars className="text-white text-2xl" /> {/* Заменяем FaUserAlt на FaBars */}
+              <button className={`lgg:hidden burger-btn ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+                <span className={`line ${menuOpen ? 'line1' : ''}`}></span>
+                <span className={`line ${menuOpen ? 'line2' : ''}`}></span>
+                <span className={`line ${menuOpen ? 'line3' : ''}`}></span>
               </button>
             </div>
           </div>
         </div>
       </header>
-      {menuOpen && <Menu menuOpen={menuOpen} closeMenu={closeMenu} />}
+      {menuOpen && <Menu closeMenu={closeMenu} />}
     </>
   );
 }

@@ -12,13 +12,13 @@ export default function ArtistsCard({
 }) {
   return (
     <>
-      <div className="ArtistCard w-full  bg-zinc-700  gap-[20px] rounded-xl py-[12px] px-[15px]">
+      <div className="ArtistCard w-full  bg-zinc-700  gap-[20px] rounded-xl py-[12px] px-[15px] mb-[15px]">
         <div className="flex ">
           <div className="hidden absolute left-[15%] bg-zinc-800 pt-0.5 pb-0.5 px-2.5 rounded-full">
             <h6 className="text-stone-400">{number}</h6>
           </div>
           <div className="flex items-center gap-[10px] text-white text-lg mb:text-xl font-medium">
-            <img className="w-[30%] sm:w-[15%]" src={imgUrl} alt="imgUrl" />
+            <img className="w-[40px] sm:w-[50px]" src={imgUrl} alt="imgUrl" />
             <h3>{nickName}</h3>
           </div>
         </div>

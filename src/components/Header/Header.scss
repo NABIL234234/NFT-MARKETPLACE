@@ -1,3 +1,4 @@
+// Header.scss
 .nav_link {
   text-decoration: none;
   color: #ffffff;
@@ -13,7 +14,7 @@
 }
 
 .burger-btn {
-  width: 30px;
+  width: 35px;
   height: 30px;
   position: relative;
   cursor: pointer;
@@ -22,24 +23,26 @@
   justify-content: space-around;
   align-items: center;
   z-index: 20;
+  transition: all 0.3s ease;
 }
-  
-.burger-btn span {
+
+.line {
   display: block;
-  width: 30px;
-  height: 2.5px;
+  width: 35px;
+  height: 2.4px;
   background-color: rgb(255, 255, 255);
   transition: all 0.3s ease;
 }
 
-.burger-btn.open span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 9px);
+.burger-btn.open .line1 {
+  transform: rotate(45deg) translate(8px, 5px);
 }
 
-.burger-btn.open span:nth-child(2) {
+.burger-btn.open .line2 {
   opacity: 0;
+
 }
 
-.burger-btn.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+.burger-btn.open .line3 {
+  transform: rotate(-45deg) translate(8px, -6px);
 }
