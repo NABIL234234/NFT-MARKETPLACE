@@ -5,6 +5,10 @@ const initialState = {
   walletLoading: false,
   wallet: null,
   walletError: null,
+
+  bankCardLoading: false,
+  bankCard: null,
+  bankCardError: null,
 };
 
 const BearerToken = `Bearer ${localStorage.getItem("accessToken")}`;
@@ -68,6 +72,18 @@ const WalletSlice = createSlice({
     .addCase(MetaMaskWallet.rejected, (state,action) => {
       state.walletLoading = false;
       state.walletError = action.payload || action.error.message;;
+    })
+    .addCase(addBankCard.pending, (state) => {
+      state.bankCardLoading = true;
+      state.bankCardError = null;
+    })
+    .addCase(addBankCard.fulfilled, (state,action) => {
+      state.bankCardLoading = false;
+      state.bankCard =  action.payload.data;
+    })
+    .addCase(addBankCard.rejected, (state,action) => {
+      state.bankCardLoading = false;
+      state.bankCardError = action.payload || action.error.message;;
     })
   },
 });
