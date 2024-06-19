@@ -1,6 +1,7 @@
 import React from "react";
 import GetStart from "../../../components/buttons/GetStart";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 // images
 import spaceWalking from "../../../../src/assets/IMAGE/SECTION/SPACE WALKING.png";
@@ -18,11 +19,22 @@ export default function Discover() {
     }
   };
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
     <>
       <div className="max-w-6xl mx-auto px-5 font-mono">
-        <div className="mdd:flex pt-2 lgg:pt-16 justify-between items-center gap-[34px]">
-          <div className="text-white">
+        <motion.div 
+          className="mdd:flex pt-2 lgg:pt-16 justify-between items-center gap-[34px]"
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div className="text-white" variants={fadeInUp}>
             <div className="mdd:max-w-md font-semibold text-4xl lg:text-6xl">
               <h2>Discover Digital Art & Collect NFTs</h2>
             </div>
@@ -33,7 +45,7 @@ export default function Discover() {
               </p>
             </div>
 
-            <div className="block mdd:hidden bg-zinc-700 rounded-3xl mt-[20px] w-[100%] lgg:w-[45%]">
+            <motion.div className="block mdd:hidden bg-zinc-700 rounded-3xl mt-[20px] w-[100%] lgg:w-[45%]" variants={fadeInUp}>
               <div className="w-full">
                 <img
                   className="w-full object-cover"
@@ -48,7 +60,7 @@ export default function Discover() {
                   <h4>Anumakid</h4>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             <div className="flex justify-center smm:justify-start">
               <GetStart onClick={handleGetStarted} />
@@ -68,8 +80,8 @@ export default function Discover() {
                 <h2 className="text-sm smm:text-xl">Artist</h2>
               </div>
             </div>
-          </div>
-          <div className="hidden mdd:block bg-zinc-700 rounded-3xl mt-[20px] lgg:w-[45%]">
+          </motion.div>
+          <motion.div className="hidden mdd:block bg-zinc-700 rounded-3xl mt-[20px] lgg:w-[45%]" variants={fadeInUp}>
             <div className="w-full">
               <img
                 className="w-full object-cover"
@@ -84,8 +96,8 @@ export default function Discover() {
                 <h4>Anumakid</h4>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </>
   );

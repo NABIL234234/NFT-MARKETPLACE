@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SpaceMan from "../../../../src/assets/IMAGE/SECTION/SpaceMan.png";
 import { IoMdMailUnread } from "react-icons/io";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const Popup = ({ onClose }) => {
   return (
@@ -22,6 +24,19 @@ export default function Digest() {
   const [showPopup, setShowPopup] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: true });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 }
+  };
 
   const handleSend = (event) => {
     event.preventDefault(); // Prevent the default form submission action
@@ -51,7 +66,14 @@ export default function Digest() {
   return (
     <form className="pt-[40px]" onSubmit={handleSend}>
       <div className="max-w-6xl mx-auto font-mono">
-        <div className="flex flex-col mdd:flex-row gap-[30px] mdd:gap-[80px] bg-zinc-700 rounded-3xl p-[60px]  mb-[80px]">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={controls}
+          variants={fadeInUp}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col mdd:flex-row gap-[30px] mdd:gap-[80px] bg-zinc-700 rounded-3xl p-[60px]  mb-[80px]"
+        >
           <div>
             <img src={SpaceMan} alt="spaceman" />
           </div>
@@ -77,7 +99,7 @@ export default function Digest() {
                 {error && <p className="text-red-500 absolute top-16">{error}</p>}
                 <button
                   type="submit"
-                  className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white hover:text-black border-2 bg-purple-500 hover:bg-white border-purple-500 hover:border-black  transition ease-in-out delay-15 p-3 pl-[42px] pr-[42px] right-0 top-0 bottom-0"
+                  className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white hover:text-black border-2 bg-purple-500 hover:bg-white border-purple-500 hover:border-black transition ease-in-out delay-15 p-3 pl-[42px] pr-[42px] right-0 top-0 bottom-0"
                 >
                   <IoMdMailUnread />
                   Send
@@ -85,7 +107,7 @@ export default function Digest() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
       {showPopup && <Popup onClose={handleClose} />}
     </form>

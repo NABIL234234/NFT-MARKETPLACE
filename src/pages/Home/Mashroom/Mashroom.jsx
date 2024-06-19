@@ -2,12 +2,27 @@ import React, { useState, useEffect } from "react";
 import Look from "../../../components/buttons/Look";
 import shroomieMini from "../../../../src/assets/IMAGE/PLAY.SVG/nav/shroomie-mini.png";
 import { useNavigate } from "react-router";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 export default function Mashroom() {
   const navigate = useNavigate();
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(59);
   const [seconds, setSeconds] = useState(59);
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: true });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -16,16 +31,16 @@ export default function Mashroom() {
           if (hours === 0) {
             clearInterval(timer);
           } else {
-            setHours(prevHours => prevHours - 1);
+            setHours((prevHours) => prevHours - 1);
             setMinutes(59);
             setSeconds(59);
           }
         } else {
-          setMinutes(prevMinutes => prevMinutes - 1);
+          setMinutes((prevMinutes) => prevMinutes - 1);
           setSeconds(59);
         }
       } else {
-        setSeconds(prevSeconds => prevSeconds - 1);
+        setSeconds((prevSeconds) => prevSeconds - 1);
       }
     }, 1000);
 
@@ -42,7 +57,14 @@ export default function Mashroom() {
   };
 
   return (
-    <div className="mt-20 pb-[40px] sm:pb-[60px] bg-[url('./src/assets/IMAGE/SECTION/mushroom-root.png')] bg-no-repeat bg-center bg-cover relative z-[1]">
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={fadeInUp}
+      transition={{ duration: 0.5 }}
+      className="mt-20 pb-[40px] sm:pb-[60px] bg-[url('./src/assets/IMAGE/SECTION/mushroom-root.png')] bg-no-repeat bg-center bg-cover relative z-[1]"
+    >
       <div className="max-w-6xl mx-auto px-5 font-mono ">
         <div className="h-full">
           <div className="absolute bg-gradient-to-t from-purple-500 inset-x-0 bottom-0 h-5/6 z-[-1]" />
@@ -90,6 +112,6 @@ export default function Mashroom() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
