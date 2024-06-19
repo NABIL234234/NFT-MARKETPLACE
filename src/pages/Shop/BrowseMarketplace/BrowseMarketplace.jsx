@@ -81,18 +81,18 @@ export default function BrowseMarketplace() {
     dispatch(fetchNftsForSale());
   }, [dispatch]);
 
-  const filterNft = (searchText, listOfNft) => {
+  const filterNft = (searchText) => {
     if (!searchText) {
-      return listOfNft;
+      return data;
     }
-    return listOfNft.filter(({ name }) =>
+    return data.filter(({ name }) =>
       name.toLowerCase().includes(searchText.toLowerCase())
     );
   };
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      const filteredNft = filterNft(searchTerm, data);
+      const filteredNft = filterNft(searchTerm);
       setNftList(filteredNft);
     }, 300);
 
@@ -145,6 +145,7 @@ export default function BrowseMarketplace() {
             <input
               className="w-full p-[13px] rounded-2xl bg-zinc-700 text-white outline-none pr-[60px] mt-[30px]"
               type="text"
+              onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search your favourite NFTs"
             />
           </div>
@@ -184,6 +185,7 @@ export default function BrowseMarketplace() {
                   onDelete={() => handleDelete(nft.id)}
                   onCancel={() => handleCancel(nft.id)}
                   onWalletClick={() => handleSellClick(nft)}
+                  BuyIcon
                 />
               ))
             ) : (
