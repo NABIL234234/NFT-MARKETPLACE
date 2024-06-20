@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
 import See from "../../../components/buttons/See";
 import { useNavigate } from "react-router";
-import mockNfts from "../../../../server/MockData"; // Импортируем mock данные
+import mockNfts from "../../../../server/MockData"; 
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -47,17 +47,7 @@ export default function MoreNft() {
               <p className="text-xl pt-3">Explore new trending NFTs</p>
             </div>
             <div className="flex mb:hidden justify-start flex-wrap">
-              {mockNfts.map((nft) => (
-                <CardMoreNft
-                  key={nft.id}
-                  id={nft.id}
-                  imgUrl={nft.nftImage}
-                  title={nft.name}
-                  avatar={nft.avatar}
-                  user={nft.creatorUsername}
-                  price={nft.price}
-                />
-              ))}
+              
             </div>
             <See onClick={handleGetStarted} />
           </div>
@@ -71,7 +61,8 @@ export default function MoreNft() {
                 title={nft.name}
                 avatar={nft.avatar}
                 user={nft.creatorUsername}
-                price={nft.price}
+                dollarPrice={nft.dollarPrice}
+                ethereumPrice={nft.ethereumPrice}
               />
             ))}
           </div>

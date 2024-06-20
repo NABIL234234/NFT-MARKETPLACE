@@ -12,6 +12,7 @@ const initialState = {
 };
 
 const BearerToken = `Bearer ${localStorage.getItem("accessToken")}`;
+
 export const MetaMaskWallet = createAsyncThunk(
   "wallet/MetaMaskWallet",
   async ({ walletAddress, walletPassword }, { rejectWithValue }) => {
@@ -25,6 +26,11 @@ export const MetaMaskWallet = createAsyncThunk(
           },
         }
       );
+
+
+        if (response.data.statusCode === 404) {
+          return rejectWithValue(response.data.message);
+        }
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -34,6 +40,8 @@ export const MetaMaskWallet = createAsyncThunk(
     }
   }
 );
+
+
 export const addBankCard = createAsyncThunk(
   "wallet/addBankCard",
   async ({ cardNumber, cardExpiryDate, cvv }, { rejectWithValue }) => {
@@ -47,6 +55,10 @@ export const addBankCard = createAsyncThunk(
           },
         }
       );
+      
+      if (response.data.statusCode === 404) {
+        return rejectWithValue(response.data.message);
+      }
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

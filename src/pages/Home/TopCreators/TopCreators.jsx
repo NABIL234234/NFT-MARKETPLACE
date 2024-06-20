@@ -1,28 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import CardCreators from "../../../components/CardCreators/CardCreators";
-import { useNavigate } from "react-router";
-
-// images
-import KeepTrial from "../../../../src/assets/IMAGE/SECTION/Keepitreal.png";
-import DigiLab from "../../../../src/assets/IMAGE/SECTION/DIGIlab.png";
-import GravityOne from "../../../../src/assets/IMAGE/SECTION/gravityOne.png";
-import Juanie from "../../../../src/assets/IMAGE/SECTION/Juanie.png";
-import BlueWhale from "../../../../src/assets/IMAGE/SECTION/BlueWhale.png";
-import MrFox from "../../../../src/assets/IMAGE/SECTION/Mr Fox.png";
-import ShroomieAang from "../../../../src/assets/IMAGE/SECTION/Shroomie Aang.png";
-import Robotica from "../../../../src/assets/IMAGE/SECTION/Robotica.png";
-import RustyRobot from "../../../../src/assets/IMAGE/SECTION/RustyRobot.png";
-import Anumakid from "../../../../src/assets/IMAGE/SECTION/Anumakid.png";
-import Dotgu from "../../../../src/assets/IMAGE/SECTION/Dotgu.png";
-import Chiblier from "../../../../src/assets/IMAGE/SECTION/Chiblier.png";
+import { useNavigate } from "react-router-dom";
+import UserData from "../../../../server/UserData";
 import ViewRankings from "../../../components/buttons/ViewRankings";
 
 export default function TopCreators() {
   const navigate = useNavigate();
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: true });
+  const [creators, setCreators] = useState([]);
 
   const handleGetStarted = () => {
     const token = localStorage.getItem("accessToken");
@@ -33,15 +21,23 @@ export default function TopCreators() {
     }
   };
 
+  const handleProfileClick = (id) => {
+    navigate(`/CreatorsProfile/${id}`);
+  };
+
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
 
+  useEffect(() => {
+    setCreators(Object.values(UserData));
+  }, []);
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 }
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
@@ -61,161 +57,19 @@ export default function TopCreators() {
                 Checkout Top Rated Creators on the NFT Marketplace
               </p>
             </div>
-            <div className="flex mb:hidden justify-center flex-wrap">
-              <div className="flex flex-wrap justify-center">
-                <CardCreators
-                  number="1"
-                  imgUrl={KeepTrial}
-                  nickName="Keepitreal"
-                  ETH="34.53 $"
-                />
-                <CardCreators
-                  number="2"
-                  imgUrl={DigiLab}
-                  nickName="DigiLab"
-                  ETH="32.52 $"
-                />
-                <CardCreators
-                  number="3"
-                  imgUrl={GravityOne}
-                  nickName="GravityOne"
-                  ETH="30.04 $"
-                />
-                <CardCreators
-                  number="4"
-                  imgUrl={Juanie}
-                  nickName="Juanie"
-                  ETH="30.01 $"
-                />
-                <CardCreators
-                  number="5"
-                  imgUrl={BlueWhale}
-                  nickName="BlueWhale"
-                  ETH="29.02 $"
-                />
-                <CardCreators
-                  number="6"
-                  imgUrl={MrFox}
-                  nickName="Mr Fox"
-                  ETH="29.00 $"
-                />
-                <div className="hidden mb:flex flex-wrap justify-center">
-                  <CardCreators
-                    number="7"
-                    imgUrl={ShroomieAang}
-                    nickName="Shroomie Aang"
-                    ETH="28.22 $"
-                  />
-                  <CardCreators
-                    number="8"
-                    imgUrl={Robotica}
-                    nickName="Robotica"
-                    ETH="27.33 $"
-                  />
-                  <CardCreators
-                    number="9"
-                    imgUrl={RustyRobot}
-                    nickName="RustyRobot"
-                    ETH="25.34 $"
-                  />
-                  <CardCreators
-                    number="10"
-                    imgUrl={Anumakid}
-                    nickName="Anumakid"
-                    ETH="25.24 $"
-                  />
-                  <CardCreators
-                    number="11"
-                    imgUrl={Dotgu}
-                    nickName="Dotgu"
-                    ETH="20.22 $"
-                  />
-                  <CardCreators
-                    number="12"
-                    imgUrl={Chiblier}
-                    nickName="Chiblier"
-                    ETH="19.11 $"
-                  />
-                </div>
-              </div>
-            </div>
             <ViewRankings onClick={handleGetStarted} />
           </div>
-          <div>
-            <div className="hidden mb:flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center">
+            {creators.map((creator) => (
               <CardCreators
-                number="1"
-                imgUrl={KeepTrial}
-                nickName="Keepitreal"
-                ETH="34.53 $"
+                key={creator.id}
+                number={creator.id}
+                imgUrl={creator.imgUrl}
+                nickName={creator.nickName}
+                ETH={creator.ETH}
+                onClick={() => handleProfileClick(creator.id)}
               />
-              <CardCreators
-                number="2"
-                imgUrl={DigiLab}
-                nickName="DigiLab"
-                ETH="32.52 $"
-              />
-              <CardCreators
-                number="3"
-                imgUrl={GravityOne}
-                nickName="GravityOne"
-                ETH="30.04 $"
-              />
-              <CardCreators
-                number="4"
-                imgUrl={Juanie}
-                nickName="Juanie"
-                ETH="30.01 $"
-              />
-              <CardCreators
-                number="5"
-                imgUrl={BlueWhale}
-                nickName="BlueWhale"
-                ETH="29.02 $"
-              />
-              <CardCreators
-                number="6"
-                imgUrl={MrFox}
-                nickName="Mr Fox"
-                ETH="29.00 $"
-              />
-              <CardCreators
-                number="7"
-                imgUrl={ShroomieAang}
-                nickName="Shroomie Aang"
-                ETH="28.22 $"
-              />
-              <CardCreators
-                number="8"
-                imgUrl={Robotica}
-                nickName="Robotica"
-                ETH="27.33 $"
-              />
-              <CardCreators
-                number="9"
-                imgUrl={RustyRobot}
-                nickName="RustyRobot"
-                ETH="25.34 $"
-              />
-              <CardCreators
-                number="10"
-                imgUrl={Anumakid}
-                nickName="Anumakid"
-                ETH="25.24 $"
-              />
-              <CardCreators
-                number="11"
-                imgUrl={Dotgu}
-                nickName="Dotgu"
-                ETH="20.22 $"
-              />
-              <CardCreators
-                number="12"
-                imgUrl={Chiblier}
-                nickName="Chiblier"
-                ETH="19.11 $"
-              />
-            </div>
+            ))}
           </div>
         </motion.div>
       </div>

@@ -20,6 +20,8 @@ import CreateNft from "../pages/CreateNft/CreateNft";
 
 import PrivateRoute from "../components/Private/PrivateRoute";
 
+import CreatorsProfile from "../pages/Profile/CreatorsProfile";
+
 export default function RouterView() {
   const location = useLocation();
   const [showLoading, setShowLoading] = useState(false);
@@ -43,7 +45,9 @@ export default function RouterView() {
     { path: "/wallet", element: <PrivateRoute><Wallet /></PrivateRoute> },
     { path: "/info/:id", element: <PrivateRoute><Info /></PrivateRoute> },
     { path: "/profile/:id", element: <PrivateRoute><Profile /></PrivateRoute> },
-
+  
+    { path: "/CreatorsProfile/:id", element: <PrivateRoute><CreatorsProfile /></PrivateRoute> },
+  
     { path: "/createNft", element: <PrivateRoute><CreateNft /></PrivateRoute> },
 
     { path: "/register", element: <Register /> },
