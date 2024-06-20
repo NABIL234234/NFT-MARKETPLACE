@@ -33,7 +33,7 @@ export default function Categories() {
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 }
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
@@ -46,10 +46,10 @@ export default function Categories() {
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-white pb-[20px] mdd:pb-[60px]">
+          <div className="hidden mb:flex text-white pb-[20px] mdd:pb-[60px]">
             <h2 className="font-semibold text-4xl">Browse Categories</h2>
           </div>
-          <div className="flex justify-start flex-wrap">
+          <div className="hidden mb:flex justify-start flex-wrap">
             <CardCotegories
               imgUrl={Artback}
               secondImgUrl={PaintBrush}

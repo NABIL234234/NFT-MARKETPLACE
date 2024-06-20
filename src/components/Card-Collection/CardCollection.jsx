@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./CardCollection.css";
+import "./CardCollection.scss";
 import { motion } from "framer-motion";
 
 export default function CardCollection({

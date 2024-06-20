@@ -149,18 +149,9 @@ export default function BrowseMarketplace() {
               placeholder="Search your favourite NFTs"
             />
           </div>
-          <div className="flex mt-[80px] ">
-            <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px]">
-              <h3 className="text-white font-semibold">NFTs</h3>
-              <div className="bg-zinc-400 w-[47px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-                <h5 className="text-white">300</h5>
-              </div>
-            </div>
-            <div className="flex justify-center items-center  gap-[16px] w-[525px] pb-[14.5px]">
-              <h3 className="text-stone-400 font-semibold">Collection</h3>
-              <div className="bg-zinc-400 w-[37px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-                <h5 className="text-white">70</h5>
-              </div>
+          <div className="flex justify-center mt-[80px] pb-[10px] ">
+            <div className="flex justify-center items-center ">
+              <h3 className="text-xl text-white font-semibold">NFTs</h3>
             </div>
           </div>
         </div>

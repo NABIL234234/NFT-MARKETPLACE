@@ -1,23 +1,20 @@
 import React, { useState } from "react";
-import "./CardCategories.css";
+import "./CardCategories.scss";
 import { motion } from "framer-motion";
 
 export default function CardCategories({ imgUrl, secondImgUrl, desc }) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
+  const handleClick = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 2000);
   };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       className="CardCategories self-stretch"
     >
       <div className="w-full">
@@ -29,10 +26,8 @@ export default function CardCategories({ imgUrl, secondImgUrl, desc }) {
           <h3 className="text-white text-xl font-medium">{desc}</h3>
         </div>
       </div>
-      {isHovered && (
-        <div className="development-icon animate">
-          Категории в процессе разработки
-        </div>
+      {isClicked && (
+        <div className="development-icon animate">В процессе разработки</div>
       )}
     </motion.div>
   );

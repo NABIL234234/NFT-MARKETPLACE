@@ -17,6 +17,7 @@ import SuccessChange from "../pages/Register/SuccessChange";
 import CreateNft from "../pages/CreateNft/CreateNft";
 import PrivateRoute from "../components/Private/PrivateRoute";
 import CreatorsProfile from "../pages/Profile/CreatorsProfile";
+
 import "./Spinner.scss"; // Assuming this is your spinner CSS
 
 export default function RouterView() {
@@ -44,6 +45,7 @@ export default function RouterView() {
     { path: "/info/:id", element: <PrivateRoute><Info /></PrivateRoute> },
     { path: "/profile/:id", element: <PrivateRoute><Profile /></PrivateRoute> },
     { path: "/CreatorsProfile/:id", element: <PrivateRoute><CreatorsProfile /></PrivateRoute> },
+
     { path: "/createNft", element: <PrivateRoute><CreateNft /></PrivateRoute> },
     { path: "/register", element: <Register /> },
     { path: "/login", element: <Login /> },
@@ -51,6 +53,7 @@ export default function RouterView() {
     { path: "/identification", element: <Identification /> },
     { path: "/newPassword", element: <NewPassword /> },
     { path: "/successChange", element: <SuccessChange /> },
+
   ]);
 
   return (
