@@ -305,7 +305,11 @@ const nftSlice = createSlice({
       .addCase(transactions.rejected, (state, action) => {
         state.transactionsLoading = false;
         state.transactionsError = action.payload || action.error.message;
-      });
+      })
+
+      .addCase(changeProfilePhoto.fulfilled, (state, action) => {
+        state.profile.data = {...state.profile.data, profileImage: action.payload.avatarUrl}
+      })
   },
 });
 
