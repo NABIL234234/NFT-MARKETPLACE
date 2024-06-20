@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchNftInfo } from "../../../store/slices/nft"; // Assuming your slice is correctly imported
+import mockNfts from "../../../../server/MockData"; // Импорт моковых данных из файла mockData
 
-export default function NftDetails() {
-  const { id } = useParams(); // Assuming you only need the id from params
+export default function Orbit() {
+  const { id } = useParams(); // Получаем параметр id из URL
   const dispatch = useDispatch();
   const nft = useSelector((state) => state.nft.nft);
   const loading = useSelector((state) => state.nft.loading);
@@ -17,11 +17,8 @@ export default function NftDetails() {
     }
   }, [dispatch, id]);
 
-  useEffect(() => {
-    if (nft) {
-      console.log("NFT data:", nft);
-    }
-  }, [nft]);
+  // Если Redux данные не загружены, используем моковые данные
+  const fallbackNft = mockNfts.find((item) => item.id === parseInt(id));
 
   if (loading) {
     return <p>Loading...</p>;
@@ -31,39 +28,40 @@ export default function NftDetails() {
     return <p>Error: {error}</p>;
   }
 
-  if (!nft) {
+  if (!nft && !fallbackNft) {
     return <p>NFT not found</p>;
   }
+
+  const displayNft = nft || fallbackNft;
 
   return (
     <>
       <div
         className="relative w-full h-[650px] rounded-[12px] overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${nft.nftImage})`,
+          backgroundImage: `url(${displayNft.nftImage})`,
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <img src={nft.nftImage} alt="" className="object-cover" />
+          <img src={displayNft.nftImage} alt="" className="object-cover" />
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-5 font-mono">
         <div className="max-w-[400px]">
-          <h2 className="text-white font-semibold text-5xl mt-6">{nft.name}</h2>
-          <p className="text-stone-400 text-lg">{nft.description}</p>
-          {/* Link to owner's profile using ownerId */}
-          <Link to={`/profile/${nft.ownerId}`}>
+          <h2 className="text-white font-semibold text-5xl mt-6">{displayNft.name}</h2>
+          <p className="text-stone-400 text-lg">{displayNft.description}</p>
+          <Link to={`/profile/${displayNft.ownerId}`}>
             <div className="mt-9">
               <h4 className="text-stone-400 text-lg">Created By</h4>
               <div className="flex items-center gap-4">
-                <h4 className="text-white font-semibold">{nft.creatorUsername}</h4>
+                <h4 className="text-white font-semibold">{displayNft.creatorUsername}</h4>
               </div>
             </div>
           </Link>
           <div className="mt-4">
             <h4 className="text-stone-400 text-lg">Description</h4>
-            <p className="text-white">{nft.description}</p>
+            <p className="text-white">{displayNft.description}</p>
           </div>
           <div className="mt-4">
             <h4 className="text-stone-400 text-lg font-semibold">Details</h4>
@@ -76,7 +74,7 @@ export default function NftDetails() {
           </div>
           <div className="mt-4">
             <h4 className="text-stone-400 text-lg font-semibold">Price</h4>
-            <p className="text-white">{nft.price} $</p>
+            <p className="text-white">{displayNft.price} $</p>
           </div>
         </div>
       </div>
