@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
 import See from "../../../components/buttons/See";
 import { useNavigate } from "react-router";
-import mockNfts from "../../../../server/MockData"; 
+import mockNfts from "../../../../server/MockData";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -28,7 +28,7 @@ export default function MoreNft() {
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 }
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
@@ -47,7 +47,18 @@ export default function MoreNft() {
               <p className="text-xl pt-3">Explore new trending NFTs</p>
             </div>
             <div className="flex mb:hidden justify-start flex-wrap">
-              
+              {mockNfts.map((nft) => (
+                <CardMoreNft
+                  key={nft.id}
+                  id={nft.id}
+                  imgUrl={nft.nftImage}
+                  title={nft.name}
+                  avatar={nft.avatar}
+                  user={nft.creatorUsername}
+                  dollarPrice={nft.dollarPrice}
+                  ethereumPrice={nft.ethereumPrice}
+                />
+              ))}
             </div>
             <See onClick={handleGetStarted} />
           </div>
