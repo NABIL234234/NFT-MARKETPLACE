@@ -4,6 +4,7 @@ import shroomieMini from "../../../../src/assets/IMAGE/PLAY.SVG/nav/shroomie-min
 import { useNavigate } from "react-router";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Mushroom from "../../../assets/IMAGE/SECTION/mushroom.png"
 
 export default function Mashroom() {
   const navigate = useNavigate();
@@ -63,7 +64,8 @@ export default function Mashroom() {
       animate={controls}
       variants={fadeInUp}
       transition={{ duration: 0.5 }}
-      className="mt-20 pb-[40px] sm:pb-[60px] bg-[url('./src/assets/IMAGE/SECTION/mushroom.png')] bg-no-repeat bg-center bg-cover relative z-[1]"
+      className="mt-20 pb-[40px] sm:pb-[60px] relative z-[1]"
+      style={{ backgroundImage: `url(${Mushroom})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: "cover" }}
     >
       <div className="max-w-6xl mx-auto px-5 font-mono ">
         <div className="h-full">
