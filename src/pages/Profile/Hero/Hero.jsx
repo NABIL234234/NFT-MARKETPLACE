@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProfileInfo,
-  changeProfilePhoto,
-} from "../../../store/slices/nft";
+import { fetchProfileInfo, changeProfilePhoto } from "../../../store/slices/nft";
 import "./Hero.css";
 import { motion } from "framer-motion";
 import { CiInstagram } from "react-icons/ci";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SlUserFollow } from "react-icons/sl";
-import { useParams } from "react-router-dom"; // Исправлен импорт для useParams
+import { useParams } from "react-router-dom";
 
 const TABS = [
   { label: "Created", value: "createdNfts" },
@@ -19,18 +16,22 @@ const TABS = [
 export default function Hero() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { profile, loading } = useSelector((state) => state.nft); // Удален неиспользуемый error
+  const { profile, loading } = useSelector((state) => state.nft);
   const data = profile?.data || {};
   const [selectedTab, setSelectedTab] = useState("createdNfts");
-  const [followersCount, setFollowersCount] = useState(
-    data?.followersCount || 0
-  );
+  const [followersCount, setFollowersCount] = useState(data?.followersCount || 0);
   const [isFollowed, setIsFollowed] = useState(false);
-  const [imagePreview, setImagePreview] = useState();
+  const [imagePreview, setImagePreview] = useState(() => {
+    return localStorage.getItem("avatarUrl") || data?.avatar;
+  });
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchProfileInfo(id));
+      dispatch(fetchProfileInfo(id)).then((response) => {
+        console.log("Profile info response:", response);
+      }).catch((error) => {
+        console.error("Error fetching profile info:", error);
+      });
     } else {
       console.error("ID должен быть числом");
     }
@@ -38,7 +39,8 @@ export default function Hero() {
 
   useEffect(() => {
     if (data) {
-      setImagePreview(data.avatar);
+      const avatar = localStorage.getItem("avatarUrl") || data.avatar;
+      setImagePreview(avatar);
       setIsFollowed(data.isFollowed || false);
     }
   }, [data]);
@@ -71,9 +73,11 @@ export default function Hero() {
 
       dispatch(changeProfilePhoto(formData))
         .then((response) => {
-          if (response.payload && response.payload.avatarUrl) {
-            const newAvatarUrl = response.payload.avatarUrl;
+          console.log("Change profile photo response:", response);
+          if (response.payload && response.payload.data) {
+            const newAvatarUrl = response.payload.data;
             setImagePreview(newAvatarUrl);
+            localStorage.setItem("avatarUrl", newAvatarUrl);
           }
         })
         .catch((error) => {

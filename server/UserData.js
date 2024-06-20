@@ -120,7 +120,7 @@ const UserData = {
       "FutureVision looks ahead with futuristic and visionary art pieces.",
   },
   11: {
-    id: 10,
+    id: 11,
     imgUrl: Dotgu,
     nickName: "Dotgu",
     ETH: "20.32 $",
@@ -131,7 +131,7 @@ const UserData = {
       "FutureVision looks ahead with futuristic and visionary art pieces.",
   },
   12: {
-    id: 10,
+    id: 12,
     imgUrl: Chiblier,
     nickName: "Chiblier",
     ETH: "19.02 $",
