@@ -46,7 +46,7 @@ const UserData = {
   4: {
     id: 4,
     imgUrl: Juanie,
-    nickName: "Juice",
+    nickName: "Juanie",
     ETH: "28.12 $",
     volume: 310,
     soldNft: 123,
@@ -57,7 +57,7 @@ const UserData = {
   5: {
     id: 5,
     imgUrl: BlueWhale,
-    nickName: "BigBoyClub",
+    nickName: "BlueWhale",
     ETH: "26.45 $",
     volume: 300,
     soldNft: 110,
@@ -68,7 +68,7 @@ const UserData = {
   6: {
     id: 6,
     imgUrl: MrFox,
-    nickName: "EyesDesign",
+    nickName: "MrFox",
     ETH: "24.98 $",
     volume: 286,
     soldNft: 102,
@@ -79,7 +79,7 @@ const UserData = {
   7: {
     id: 7,
     imgUrl: ShroomieAang,
-    nickName: "BaduFuu",
+    nickName: "ShroomieAang",
     ETH: "23.76 $",
     volume: 274,
     soldNft: 98,
@@ -90,7 +90,7 @@ const UserData = {
   8: {
     id: 8,
     imgUrl: Robotica,
-    nickName: "Orbital",
+    nickName: "Robotica",
     ETH: "22.54 $",
     volume: 256,
     soldNft: 94,
@@ -101,7 +101,7 @@ const UserData = {
   9: {
     id: 9,
     imgUrl: RustyRobot,
-    nickName: "ArtWizard",
+    nickName: "RustyRobot",
     ETH: "21.43 $",
     volume: 232,
     soldNft: 89,
@@ -111,7 +111,7 @@ const UserData = {
   10: {
     id: 10,
     imgUrl: Anumakid,
-    nickName: "FutureVision",
+    nickName: "Anumakid",
     ETH: "21.42 $",
     volume: 220,
     soldNft: 82,
