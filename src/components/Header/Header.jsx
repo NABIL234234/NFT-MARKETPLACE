@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaUserAlt, FaBars, FaTimes } from "react-icons/fa"; // Импортируем FaBars и FaTimes
+import { FaUserAlt} from "react-icons/fa"; // Импортируем FaBars и FaTimes
 import Menu from "../../components/Menu/Menu";
-import market from "../../../src/assets/IMAGE/PLAY.SVG/nav/Storefront.svg";
 import { FaEthereum } from "react-icons/fa";
 
 export default function Header() {
