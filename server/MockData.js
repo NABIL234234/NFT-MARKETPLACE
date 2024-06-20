@@ -11,7 +11,8 @@ export const mockNfts = [
     createdAt: "2024-06-02T00:00:00Z",
     creatorUsername: "MoonDancer",
     description: "Description for Distant Galaxy",
-    price: 6,
+    dollarPrice: 14,
+    ethereumPrice: 0.0039,
   },
   {
     id: 2,
@@ -20,7 +21,8 @@ export const mockNfts = [
     createdAt: "2024-06-02T00:00:00Z",
     creatorUsername: "NebulaKid",
     description: "Description for Life On Edena",
-    price: 4,
+    dollarPrice: 18,
+    ethereumPrice: 0.0052,
   },
   {
     id: 3,
@@ -29,7 +31,8 @@ export const mockNfts = [
     createdAt: "2024-06-02T00:00:00Z",
     creatorUsername: "Spaceone",
     description: "Description for AstroFiction",
-    price: 1,
+    dollarPrice: 14,
+    ethereumPrice: 0.0039,
   },
 ];
 

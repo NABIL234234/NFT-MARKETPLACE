@@ -49,32 +49,35 @@ export default function Orbit() {
       </div>
       <div className="max-w-6xl mx-auto px-5 font-mono">
         <div className="max-w-[400px]">
-          <h2 className="text-white font-semibold text-5xl mt-6">{displayNft.name}</h2>
-          <p className="text-stone-400 text-lg">{displayNft.description}</p>
+          <h2 className="text-white font-semibold text-5xl mt-6">
+            {displayNft.name}
+          </h2>
           <Link to={`/profile/${displayNft.ownerId}`}>
             <div className="mt-9">
               <h4 className="text-stone-400 text-lg">Created By</h4>
               <div className="flex items-center gap-4">
-                <h4 className="text-white font-semibold">{displayNft.creatorUsername}</h4>
+                <h4 className="text-2xl font-semibold text-purple-600">
+                  {displayNft.creatorUsername}
+                </h4>
               </div>
             </div>
           </Link>
-          <div className="mt-4">
-            <h4 className="text-stone-400 text-lg">Description</h4>
-            <p className="text-white">{displayNft.description}</p>
-          </div>
+
           <div className="mt-4">
             <h4 className="text-stone-400 text-lg font-semibold">Details</h4>
             <div className="flex items-center gap-4 mt-2">
-              <h4 className="text-white font-semibold">View on Etherscan</h4>
+              <h4 className="text-white font-semibold">
+                {displayNft.createdAt}
+              </h4>
             </div>
             <div className="flex items-center gap-4 mt-2">
-              <h4 className="text-white font-semibold">View Original</h4>
+              <h4 className="text-white font-semibold">Original</h4>
             </div>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 mb-5">
             <h4 className="text-stone-400 text-lg font-semibold">Price</h4>
-            <p className="text-white">{displayNft.price} $</p>
+            <p className="text-white">{displayNft.dollarPrice} $</p>
+            <p className="text-white">{displayNft.ethereumPrice} ETH</p>
           </div>
         </div>
       </div>
