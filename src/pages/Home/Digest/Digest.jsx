@@ -72,7 +72,7 @@ export default function Digest() {
           animate={controls}
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
-          className="flex flex-col mdd:flex-row gap-[30px] mdd:gap-[80px] bg-zinc-700 rounded-3xl p-[60px]  mb-[80px]"
+          className="flex flex-col mdd:flex-row gap-[30px] mdd:gap-[80px] bg-zinc-700 rounded-3xl pb-[75px] mdd:pb-[60px] p-[60px]  mb-[80px]"
         >
           <div>
             <img src={SpaceMan} alt="spaceman" />
@@ -96,7 +96,7 @@ export default function Digest() {
                   value={inputValue}
                   onChange={handleChange}
                 />
-                {error && <p className="text-red-500 absolute top-16">{error}</p>}
+                {error && <p className="text-red-500 absolute top-[120px] mdd:top-16">{error}</p>}
                 <button
                   type="submit"
                   className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white hover:text-black border-2 bg-purple-500 hover:bg-white border-purple-500 hover:border-black transition ease-in-out delay-15 p-3 pl-[42px] pr-[42px] right-0 top-0 bottom-0"

@@ -135,7 +135,11 @@ export default function Footer() {
                     value={inputValue}
                     onChange={handleChange}
                   />
-                   {error && <p className="text-red-500 absolute top-16">{error}</p>}
+                  {error && (
+                    <p className="text-red-500 absolute top-28 mdd:top-16">
+                      {error}
+                    </p>
+                  )}
                   <button
                     type="submit"
                     className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white hover:text-black border-2 bg-purple-500 hover:bg-white border-purple-500 hover:border-black  transition ease-in-out delay-15 p-3 pl-[42px] pr-[42px] right-0 top-0 bottom-0"
