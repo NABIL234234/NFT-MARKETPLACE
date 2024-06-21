@@ -27,20 +27,19 @@ export const postUsers = createAsyncThunk(
           },
         }
       );
+
       // Если регистрация прошла успешно, переходим к шагу подтверждения
-      if (response.status === 201) {
+      if (response.status === 201 || response.status === 200) {
         return { data: response.data, navigate };
       } else {
         throw new Error("Ошибка при регистрации пользователя");
       }
-      
     } catch (error) {
       console.error("Ошибка при выполнении запроса регистрации:", error);
       return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
-
 
 export const confirmRegistration = createAsyncThunk(
   "user/confirmRegistration",
@@ -60,21 +59,14 @@ export const confirmRegistration = createAsyncThunk(
         }
       );
 
-      if (response.data) {
-        localStorage.setItem("accessToken", response.data.tokens.access_token);
-        navigate("/profile");
-        return response.data;
-      } else {
-        throw new Error("Ошибка при подтверждении регистрации");
-      }
+      navigate("/login");
+      return response.data;
     } catch (error) {
       console.error("Error during confirmation request:", error);
       return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
-
-
 
 // export const postUserLogin = createAsyncThunk(
 //   "user/login",
@@ -148,7 +140,7 @@ export const getGoogleToken = createAsyncThunk(
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_GOOGLE_URL}/api/auth/getGoogleToken`,
-        { params: { token } } 
+        { params: { token } }
       );
       return response.data;
     } catch (error) {
@@ -158,14 +150,13 @@ export const getGoogleToken = createAsyncThunk(
   }
 );
 
-
 export const RedirectGoogle = createAsyncThunk(
   "auth/RedirectGoogle",
   async ({ token, navigate }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_GOOGLE_URL}/api/auth/google`,
-        { params: { token } } 
+        { params: { token } }
       );
       return response.data;
     } catch (error) {

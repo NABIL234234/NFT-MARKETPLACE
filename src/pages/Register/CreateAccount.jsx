@@ -164,7 +164,7 @@ export default function Register() {
               type="submit"
               className="bg-purple-600 hover:bg-white w-[200px] p-3 rounded-lg text-white hover:text-black "
             >
-              {isConfirming ? "gjlndthlbnm" : "Зарегестрироваться"}
+              {isConfirming ? "Подтвердить" : "Зарегистрироваться"}
             </button>
           </div>
         </div>
