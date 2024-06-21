@@ -25,8 +25,8 @@ export default function ArtistsCard({
 
         <div className="grid justify-center mb:justify-between text-white pr-[20px]">
           <h5 className="text-green-500 hidden mb:flex">{change}</h5>
-          <h5 className="hidden lgg:flex">{sold}</h5>
-          <h5 >{volume}</h5>
+          <h5 className="hidden smm:flex">{sold}</h5>
+          <h5 pl-0>{volume}</h5>
         </div>
       </div>
     </>

@@ -5,7 +5,9 @@ import { fetchUsersRank, fetchUserRank } from "../../../store/slices/rankings";
 
 export default function Rankings() {
   const dispatch = useDispatch();
-  const { rank, rankLoading, rankError } = useSelector((state) => state.rankings);
+  const { rank, rankLoading, rankError } = useSelector(
+    (state) => state.rankings
+  );
 
   useEffect(() => {
     const days = 7;
@@ -14,8 +16,8 @@ export default function Rankings() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log('rank:', rank);
-    console.log('rankError:', rankError);
+    console.log("rank:", rank);
+    console.log("rankError:", rankError);
   }, [rank, rankError]);
 
   if (rankLoading) {
@@ -43,9 +45,8 @@ export default function Rankings() {
               key={user.id}
               imgUrl={user.profileImage}
               nickName={user.username}
-              change={user.statistic}
               sold={user.countOfSoldNft}
-              volume={user.volume}
+              volume={user.transactionVolume}
             />
           ))}
         </div>
