@@ -34,25 +34,24 @@ export default function Guide() {
           transition={{ duration: 0.5 }}
         >
           <div className="text-white">
-            <h2 className="font-semibold text-5xl"> How it works</h2>
-            <p className="text-xl pt-3">Find out how to get started</p>
+            <h2 className="font-semibold text-5xl">Как это работает</h2>
+            <p className="text-xl pt-3">Узнайте, как начать</p>
           </div>
           <div className="flex justify-start flex-wrap mt-[48px] mb-[80px]">
             <CardGuide
               imgUrl={Wallet}
-              title="Setup Your wallet"
-              desc=" Set up your wallet of choice. Connect it to the Animarket by
-            clicking the wallet icon in the top right corner."
+              title="Настройте свой кошелек"
+              desc="Подключите его к Метамаску или банковской карте."
             />
             <CardGuide
               imgUrl={CollectionCreate}
-              title="Create Collection"
-              desc="Upload your work and setup your collection. Add a description, social links and floor price."
+              title="Создайте NFT "
+              desc="Загрузите свою работу и настройте свой Nft. Добавьте название, изображение и минимальную цену.."
             />
             <CardGuide
               imgUrl={Earning}
-              title="Start Earning"
-              desc="Choose between auctions and fixed-price listings. Start earning by selling your NFTs or trading others."
+              title="Начни зарабатывать!"
+              desc="Начните зарабатывать, продавая свои NFT или торгуя другими"
             />
           </div>
         </motion.div>

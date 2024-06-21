@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./CardCategories.css";
+import "./CardCategories.scss";
 import { motion } from "framer-motion";
 
 export default function CardCategories({ imgUrl, secondImgUrl, desc }) {

@@ -24,7 +24,8 @@ export default function CreateNft() {
   const [previewImage, setPreviewImage] = useState(nftImagePreview);
   const [nftName, setNftName] = useState("");
   const [nftPrice, setNftPrice] = useState("");
-  const [nftDescription, setNftDescription] = useState("");
+
+  const ethereumConversionRate = 2000; // Example conversion rate
 
   const onSubmit = async (data) => {
     try {
@@ -40,7 +41,7 @@ export default function CreateNft() {
       const resultAction = await dispatch(createNft(formData));
       console.log("Созданный NFT:", resultAction.payload);
       if (resultAction.payload) {
-        const userId = localStorage.getItem("userId"); // Получаем userId из localStorage
+        const userId = localStorage.getItem("userId");
         navigate(`/profile/${userId}`);
       }
     } catch (error) {
@@ -108,7 +109,7 @@ export default function CreateNft() {
                 className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer"
               />
               <div className="flex items-center gap-3 bg-gray-700 rounded-xl p-3">
-                <FaFileImage  className="text-purple-500"/>
+                <FaFileImage className="text-purple-500" />
                 <span className="text-white">Выбрать изображение</span>
               </div>
             </div>
@@ -127,13 +128,14 @@ export default function CreateNft() {
             )}
           </form>
         </div>
-        <div className="w-full md:w-1/2 flex  p-4">
+        <div className="w-full md:w-1/2 flex p-4">
           <LiveNftCard
             imgUrl={previewImage}
             title={nftName || "Название NFT"}
             avatar={previewImage}
-            user={"Moon"}
-           
+            user={"Ваше имя"}
+            dollarPrice={nftPrice || "0"}
+            ethereumPrice={(nftPrice / ethereumConversionRate).toFixed(4)}
           />
         </div>
       </div>

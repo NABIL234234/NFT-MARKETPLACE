@@ -1,61 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProfileInfo, changeProfilePhoto } from "../../../store/slices/nft";
 import { motion } from "framer-motion";
 import { CiInstagram } from "react-icons/ci";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SlUserFollow } from "react-icons/sl";
 import { useParams } from "react-router-dom";
-import "./Hero.css";
+import UserData from "../../../server/UserData";
 
 const TABS = [
-  { label: "Создано", value: "createdNfts" },
-  { label: "Принадлежит", value: "ownedByNfts" },
+  { label: "Created", value: "createdNfts" },
+  { label: "Owned", value: "ownedByNfts" },
 ];
 
-export default function Hero() {
+export default function CreatorsProfile() {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const { profile, loading } = useSelector((state) => state.nft);
-  const data = profile?.data || {};
   const [selectedTab, setSelectedTab] = useState("createdNfts");
-  const [followersCount, setFollowersCount] = useState(data?.followersCount || 0);
-  const [transactionVolume, setTransactionVolume] = useState(data?.transactionVolume || 0);
-  const [countOfSoldNft, setCountOfSoldNft] = useState(data?.countOfSoldNft || 0);
+  const [followersCount, setFollowersCount] = useState(0);
   const [isFollowed, setIsFollowed] = useState(false);
-  const [imagePreview, setImagePreview] = useState(() => {
-    return localStorage.getItem("avatarUrl") || data?.avatar;
-  });
+  const [imagePreview, setImagePreview] = useState(null);
+  const [soldNft, setSoldNft] = useState(0); // Initialize with 0, as it's a number
+
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchProfileInfo(id))
-        .then((response) => {
-          console.log("Profile info response:", response); // Выводим ответ сервера в консоль
-        })
-        .catch((error) => {
-          console.error("Error fetching profile info:", error);
-        });
+      const profile = UserData[id];
+      if (profile) {
+        setProfileData(profile);
+        setImagePreview(profile.imgUrl);
+        setFollowersCount(profile.followersCount || 0);
+        setSoldNft(profile.soldNft || 0); // Set soldNft directly as a number
+      } else {
+        console.error("Profile not found");
+      }
     } else {
       console.error("ID должен быть числом");
     }
-  }, [dispatch, id]);
+  }, [id]);
 
-  useEffect(() => {
-    if (data) {
-      const avatar = localStorage.getItem("avatarUrl") || data.avatar;
-      setImagePreview(avatar);
-      setIsFollowed(data.isFollowed || false);
-      setTransactionVolume(data.transactionVolume || 0);
-      setCountOfSoldNft(data.countOfSoldNft || 0);
-    }
-  }, [data]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!profile) {
+  if (!profileData) {
     return <div>Profile not found</div>;
   }
 
@@ -74,21 +56,11 @@ export default function Hero() {
   const changeAvatar = (event) => {
     const photoData = event.target.files[0];
     if (photoData) {
-      const formData = new FormData();
-      formData.append("multipartFile", photoData);
-
-      dispatch(changeProfilePhoto(formData))
-        .then((response) => {
-          console.log("Change profile photo response:", response);
-          if (response.payload && response.payload.data) {
-            const newAvatarUrl = response.payload.data;
-            setImagePreview(newAvatarUrl);
-            localStorage.setItem("avatarUrl", newAvatarUrl);
-          }
-        })
-        .catch((error) => {
-          console.error("Error changing profile photo:", error);
-        });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(photoData);
     }
   };
 
@@ -110,7 +82,7 @@ export default function Hero() {
         <div>
           <div className="block md:flex items-center">
             <h2 className="text-white text-4xl font-semibold">
-              {data?.username || "Unknown user"}
+              {profileData.nickName || "Unknown user"}
             </h2>
             <div className="flex gap-20 ml-auto">
               <button
@@ -118,26 +90,26 @@ export default function Hero() {
                 onClick={handleFollow}
               >
                 <SlUserFollow />
-                Подписаться
+                Follow
               </button>
             </div>
           </div>
           <div className="flex gap-8 sm:gap-40 smm:gap-15 mt-[20px] text-xl smm:text-2xl text-white">
             <div>
-              <h2 className="font-semibold">{transactionVolume}+</h2>
-              <h2 className="text-sm smm:text-xl">Объем транзакции</h2>
+              <h2 className="font-semibold">{profileData.volume}+</h2>
+              <h2 className="text-sm smm:text-xl">Volume</h2>
             </div>
             <div>
-              <h2 className="font-semibold">{countOfSoldNft}+</h2>
-              <h2 className="text-sm smm:text-xl">NFT продано</h2>
+              <h2 className="font-semibold">{soldNft}+</h2>
+              <h2 className="text-sm smm:text-xl">Sold NFT</h2>
             </div>
             <div>
               <h2 className="font-semibold">{followersCount}+</h2>
-              <h2 className="text-sm smm:text-xl">Подписчиков</h2>
+              <h2 className="text-sm smm:text-xl">Subscribers</h2>
             </div>
           </div>
           <div className="pt-[20px]">
-            <h4 className="text-stone-400 text-lg">Ссылки</h4>
+            <h4 className="text-stone-400 text-lg">Links</h4>
             <div className="w-72 flex gap-[20px] pt-5 text-purple-500">
               <a
                 href="https://www.instagram.com/magic_nftmarcketplace?igsh=ZmplY3c0ZTI4eWI5"
@@ -156,6 +128,7 @@ export default function Hero() {
             {TABS.map((tab) => (
               <div key={tab.value} className="relative">
                 <h3
+                  key={tab.value} // Add unique key
                   className={`text-white cursor-pointer text-xl ${
                     selectedTab === tab.value ? "text-purple-600" : ""
                   }`}

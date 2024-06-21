@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { MetaMaskWallet, addBankCard } from "../../store/slices/Wallet";
 import WalletModal from "../Wallet/Modal_wallet";
 import BankCardModal from "../Wallet/Modal_BankCard";
-
-// images
 import SingUpImg from "../../assets/IMAGE/SECTION/SingUpImg.png";
 import MetamaskFox from "../../assets/IMAGE/SECTION/MetaMask_Fox.svg.png";
 import BankCardImg from "../../assets/IMAGE/SECTION/Credit Card.png";
@@ -56,15 +54,14 @@ export default function Wallet() {
       <div>
         <img src={SingUpImg} alt="Sign Up" className="rounded-lg shadow-lg" />
       </div>
-      <div className="flex justify-center items-center p-[20px] rounded-lg shadow-lg">
+      <div className="flex justify-center items-center p-[20px] rounded-lg shadow-lg ">
         <div className="flex flex-col">
           <div className="text-white pt-[30px]">
             <h3 className="text-4xl lg:text-5xl font-semibold">
-              Connect wallet
+             Подключить кошелек
             </h3>
             <p className="max-w-md pt-4 text-xl">
-              Choose a wallet you want to connect. There are several wallet
-              providers.
+            Выберите способ оплаты!
             </p>
           </div>
           <div className="flex flex-col gap-4 mt-8 text-white">
@@ -92,10 +89,10 @@ export default function Wallet() {
           )}
           {walletError && (
             <div className="pt-4 text-red-500">
-              {walletError.statusCode === 404 ? (
-                <p>MetaMask с адрессом - {walletError.message} не найден</p>
+              {walletError === "Incorrect wallet details provided" ? (
+                <p>MetaMask с адресом не найден</p>
               ) : (
-                <p>Error: {walletError.message}</p>
+                <p>{walletError}</p>
               )}
             </div>
           )}
@@ -107,8 +104,8 @@ export default function Wallet() {
             </div>
           )}
           {bankCardError && (
-            <div className="pt-4 text-red-500">
-              <p>Error: {bankCardError}</p>
+            <div className=" text-red-500">
+              <p>{bankCardError}</p>
             </div>
           )}
         </div>

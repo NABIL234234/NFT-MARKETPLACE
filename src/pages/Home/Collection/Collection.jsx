@@ -44,10 +44,10 @@ export default function Collection() {
         >
           <div className="text-white">
             <h2 className="font-semibold text-3xl mdd:text-5xl">
-              Trending Collection
+            Коллекции
             </h2>
             <p className="text-lg sm:text-xl pt-3">
-              Checkout our weekly updated trending collection.
+              Не пропустите, скоро выйдут колекции Nft!  
             </p>
           </div>
           <motion.div

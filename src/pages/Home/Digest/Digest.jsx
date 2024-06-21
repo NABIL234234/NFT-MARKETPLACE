@@ -3,6 +3,7 @@ import SpaceMan from "../../../../src/assets/IMAGE/SECTION/SpaceMan.png";
 import { IoMdMailUnread } from "react-icons/io";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { FaArrowDown } from "react-icons/fa";
 
 const Popup = ({ onClose }) => {
   return (
@@ -42,7 +43,7 @@ export default function Digest() {
     event.preventDefault(); // Prevent the default form submission action
 
     if (inputValue.trim() === "") {
-      setError("Please enter text before submitting.");
+      setError("Пожалуйста, введите текст перед отправкой.");
     } else {
       // Logic for sending data (e.g., to a server)
       // Show the popup after submission
@@ -72,7 +73,7 @@ export default function Digest() {
           animate={controls}
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
-          className="flex flex-col mdd:flex-row gap-[30px] mdd:gap-[80px] bg-zinc-700 rounded-3xl p-[60px]  mb-[80px]"
+          className="flex flex-col mdd:flex-row gap-[30px] mdd:gap-[80px] bg-zinc-700 rounded-3xl pb-[75px] mdd:pb-[60px] p-[60px]  mb-[80px]"
         >
           <div>
             <img src={SpaceMan} alt="spaceman" />
@@ -80,29 +81,29 @@ export default function Digest() {
           <div>
             <div className="text-white pt-[14px]">
               <h2 className="max-w-[400px] text-4xl font-bold">
-                Submit a complaint or review
+              Отправить жалобу или отзыв
               </h2>
-              <p className="max-w-[370px] pt-[10px]">
-                Systemic problems? Write about them
+              <p className="flex gap-[10px] items-center max-w-[370px] pt-[10px]">
+              Системные проблемы? Напишите об этом  <FaArrowDown />
               </p>
             </div>
 
             <div className="relative mt-8 mb-[40px]">
               <div className="flex flex-col gap-2 mdd:relative w-full h-[56px]">
                 <input
-                  className="bg-white p-4 rounded-3xl w-full h-full z-0 focus:outline-none mdd:pr-[140px]"
-                  placeholder="Write here"
+                  className="bg-white p-4 rounded-3xl w-full h-full z-0 focus:outline-none mdd:pr-[160px]"
+                  placeholder="Напиши"
                   type="text"
                   value={inputValue}
                   onChange={handleChange}
                 />
-                {error && <p className="text-red-500 absolute top-16">{error}</p>}
+                {error && <p className="text-red-500 absolute top-[120px] mdd:top-16">{error}</p>}
                 <button
                   type="submit"
                   className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white hover:text-black border-2 bg-purple-500 hover:bg-white border-purple-500 hover:border-black transition ease-in-out delay-15 p-3 pl-[42px] pr-[42px] right-0 top-0 bottom-0"
                 >
                   <IoMdMailUnread />
-                  Send
+                  сюда
                 </button>
               </div>
             </div>

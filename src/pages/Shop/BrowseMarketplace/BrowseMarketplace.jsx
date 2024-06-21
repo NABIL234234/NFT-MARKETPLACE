@@ -133,8 +133,8 @@ export default function BrowseMarketplace() {
       <div className="max-w-6xl mx-auto px-5 font-mono">
         <div>
           <Title
-            mainText="Browse Marketplace"
-            miniText=" Browse through more than 50k NFTs on the NFT Marketplace."
+            mainText="Торговая площадка"
+            miniText="Подберите NFT в торговой площадке на любой вкус!"
           />
           <div className="relative">
             <img
@@ -146,21 +146,12 @@ export default function BrowseMarketplace() {
               className="w-full p-[13px] rounded-2xl bg-zinc-700 text-white outline-none pr-[60px] mt-[30px]"
               type="text"
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search your favourite NFTs"
+              placeholder="Найдите свои любимые NFT"
             />
           </div>
-          <div className="flex mt-[80px] ">
-            <div className="flex justify-center items-center gap-[16px] w-[525px] pb-[14.5px]">
-              <h3 className="text-white font-semibold">NFTs</h3>
-              <div className="bg-zinc-400 w-[47px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-                <h5 className="text-white">300</h5>
-              </div>
-            </div>
-            <div className="flex justify-center items-center  gap-[16px] w-[525px] pb-[14.5px]">
-              <h3 className="text-stone-400 font-semibold">Collection</h3>
-              <div className="bg-zinc-400 w-[37px] pt-0.5 pb-0.5 px-2.5 rounded-full">
-                <h5 className="text-white">70</h5>
-              </div>
+          <div className="flex justify-center mt-[80px] pb-[10px] ">
+            <div className="flex justify-center items-center ">
+              <h3 className="text-xl text-white font-semibold">NFTs</h3>
             </div>
           </div>
         </div>

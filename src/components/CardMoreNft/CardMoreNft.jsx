@@ -47,10 +47,10 @@ export default function CardMoreNft({
           </div>
           <div className="flex justify-between mb-2 mt-5">
             <div>
-              <h5 className="text-stone-400">Price $</h5>
+              <h5 className="text-stone-400">Цена $</h5>
               <h6 className="">{dollarPrice}</h6>
             </div>
-            <div>
+            <div className="ml-[10px]">
               <h5>ETH</h5>
               <h6>{ethereumPrice}</h6>
             </div>
