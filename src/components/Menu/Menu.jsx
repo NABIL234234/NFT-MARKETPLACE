@@ -108,7 +108,7 @@ export default function Menu({ closeMenu }) {
                 onClick={handleLinkClick}
               >
                 <FaShoppingCart />
-                Marketplace
+                Маркетплейс
               </NavLink>
             </motion.div>
           </li>
@@ -124,7 +124,7 @@ export default function Menu({ closeMenu }) {
                 onClick={handleLinkClick}
               >
                 <PiRanking />
-                Rankings
+                Рейтинги
               </NavLink>
             </motion.div>
           </li>
@@ -140,7 +140,7 @@ export default function Menu({ closeMenu }) {
                 onClick={handleLinkClick}
               >
                 <IoWalletSharp />
-                Connect a wallet
+                Кошелек
               </NavLink>
             </motion.div>
           </li>
@@ -156,7 +156,7 @@ export default function Menu({ closeMenu }) {
                   className="nav_link flex items-center gap-2 text-white"
                 >
                   <CiLogout />
-                  Logout
+                  Выйти
                 </button>
               ) : (
                 <NavLink
@@ -166,7 +166,7 @@ export default function Menu({ closeMenu }) {
                   onClick={handleLinkClick}
                 >
                   <FaUserAlt />
-                  Login
+                  Войти
                 </NavLink>
               )}
             </motion.div>
@@ -184,7 +184,7 @@ export default function Menu({ closeMenu }) {
                   onClick={handleLinkClick}
                 >
                   <FaUserAlt />
-                  Profile
+                  Профиль
                 </NavLink>
               )}
             </motion.div>
