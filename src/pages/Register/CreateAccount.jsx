@@ -59,10 +59,10 @@ export default function Register() {
         <div className="flex flex-col">
           <div className="text-white pt-[20px]">
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
-              {isConfirming ? "Confirm your account" : "Create account"}
+              {isConfirming ? "Confirm your account" : "Зарегистрироваться"}
             </h3>
             <p className="max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
-              {isConfirming ? "Enter the confirmation code sent to your email" : "Welcome! Enter your details and start creating, collecting, and selling NFTs."}
+              {isConfirming ? "Введите код подтверждения, отправленный на вашу электронную почту" : "Добро пожаловать! Введите свои данные и начните создавать, собирать и продавать NFT.."}
             </p>
           </div>
           <div className="flex flex-col gap-[10px] md:gap-[30px] pt-[15px] mdd:pt-[20px]">
@@ -72,7 +72,7 @@ export default function Register() {
                   <FaUser className="absolute top-[29%] left-[4%] z-10 text-xl" />
                   <Inputs
                     type="text"
-                    placeholder="Username"
+                    placeholder="Имя пользователя"
                     name="username"
                     {...register("username", { required: "Введи имя пользователя" })}
                   />
@@ -87,7 +87,7 @@ export default function Register() {
                   <MdEmail className="absolute top-[29%] left-[4%] z-10 text-xl" />
                   <Inputs
                     type="email"
-                    placeholder="Email address"
+                    placeholder="Почта"
                     name="email"
                     {...register("email", { required: "Введи свой @email" })}
                   />
@@ -102,14 +102,14 @@ export default function Register() {
                   <FaUnlockAlt className="absolute top-[29%] left-[4%] z-10 text-xl" />
                   <Inputs
                     type={showPassword ? "text" : "password"}
-                    placeholder="Password"
+                    placeholder="Пароль"
                     name="password"
                     {...register("password", {
                       required: "Придумай новый пароль",
                       minLength: { value: 6, message: "Пароль должен содержать как минимум 6 символов!" },
                     })}
                   />
-                  <div className="absolute top-[-6%] left-[84%] mb:left-[75%]">
+                  <div className="absolute top-[-6%] left-[300px]">
                     <IconButton
                       onClick={() => setShowPassword(!showPassword)}
                       sx={{ color: "black", position: "absolute", right: 10, top: 10 }}
@@ -129,7 +129,7 @@ export default function Register() {
                   <FaUnlockAlt className="absolute top-[29%] left-[4%] z-10 text-xl" />
                   <Inputs
                     type={showPassword ? "text" : "password"}
-                    placeholder="Confirm Password"
+                    placeholder="Подтвердить пароль"
                     name="confirmPassword"
                     {...register("confirmPassword", {
                       required: "Подтверди пароль",
@@ -148,7 +148,7 @@ export default function Register() {
                 <FaUnlockAlt className="absolute top-[29%] left-[4%] z-10 text-xl" />
                 <Inputs
                   type="text"
-                  placeholder="Confirmation Code"
+                  placeholder="Подтвердить код"
                   name="code"
                   {...register("code", { required: "Введите код подтверждения" })}
                 />
@@ -162,9 +162,9 @@ export default function Register() {
 
             <button
               type="submit"
-              className="bg-gradient-to-r from-[#5C0BCB] to-[#2D8BFC] w-full text-xl md:text-2xl text-white py-2 rounded-lg mt-[20px]"
+              className="bg-purple-600 hover:bg-white w-[200px] p-3 rounded-lg text-white hover:text-black "
             >
-              {isConfirming ? "Confirm" : "Sign Up"}
+              {isConfirming ? "gjlndthlbnm" : "Зарегестрироваться"}
             </button>
           </div>
         </div>

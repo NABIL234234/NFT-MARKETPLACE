@@ -9,8 +9,8 @@ import { useParams } from "react-router-dom";
 import "./Hero.css";
 
 const TABS = [
-  { label: "Created", value: "createdNfts" },
-  { label: "Owned", value: "ownedByNfts" },
+  { label: "Создано", value: "createdNfts" },
+  { label: "Принадлежит", value: "ownedByNfts" },
 ];
 
 export default function Hero() {
@@ -118,26 +118,26 @@ export default function Hero() {
                 onClick={handleFollow}
               >
                 <SlUserFollow />
-                Follow
+                Подписаться
               </button>
             </div>
           </div>
           <div className="flex gap-8 sm:gap-40 smm:gap-15 mt-[20px] text-xl smm:text-2xl text-white">
             <div>
               <h2 className="font-semibold">{transactionVolume}+</h2>
-              <h2 className="text-sm smm:text-xl">Transaction Volume</h2>
+              <h2 className="text-sm smm:text-xl">Объем транзакции</h2>
             </div>
             <div>
               <h2 className="font-semibold">{countOfSoldNft}+</h2>
-              <h2 className="text-sm smm:text-xl">Sold NFT</h2>
+              <h2 className="text-sm smm:text-xl">NFT продано</h2>
             </div>
             <div>
               <h2 className="font-semibold">{followersCount}+</h2>
-              <h2 className="text-sm smm:text-xl">Subscribers</h2>
+              <h2 className="text-sm smm:text-xl">Подписчиков</h2>
             </div>
           </div>
           <div className="pt-[20px]">
-            <h4 className="text-stone-400 text-lg">Links</h4>
+            <h4 className="text-stone-400 text-lg">Ссылки</h4>
             <div className="w-72 flex gap-[20px] pt-5 text-purple-500">
               <a
                 href="https://www.instagram.com/magic_nftmarcketplace?igsh=ZmplY3c0ZTI4eWI5"

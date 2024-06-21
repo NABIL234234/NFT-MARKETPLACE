@@ -82,7 +82,7 @@ export default function Header() {
                 </li>
                 <li>
                   <NavLink to="/wallet" exact="true" className="nav_link">
-                    Подключить кошелек
+                    Кошелек
                   </NavLink>
                 </li>
                 <li>

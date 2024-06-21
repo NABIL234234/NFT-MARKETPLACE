@@ -64,14 +64,14 @@ export default function NewPassword() {
           </div>
           <div className="flex flex-col justify-center items-center gap-[15px] max-w-[400px] text-white">
             <h2 className="text-2xl mb:text-3xl font-bold">
-              Create a new password
+             Создай новый пароль
             </h2>
-            <p className="max-w-[300px]">Choose a secure password!</p>
+            <p className="max-w-[300px]">Выбери надежный пароль!</p>
           </div>
           <div className="mt-[10px] relative">
             <input
               type={showPassword ? "text" : "password"}
-              placeholder="New Password"
+              placeholder="новый пароль"
               {...register("password", {
                 required: "Введите новый пароль",
                 minLength: {
@@ -99,7 +99,7 @@ export default function NewPassword() {
           <div className="mt-[10px]">
             <input
               type={showPassword ? "text" : "password"}
-              placeholder="Confirm Password"
+              placeholder="Подтвердите пароль"
               {...register("confirmPassword", {
                 required: "Подтвердите новый пароль",
                 validate: (value) =>
@@ -119,13 +119,13 @@ export default function NewPassword() {
               type="submit"
               className="flex justify-center items-center w-[280px] rdd:w-[300px] mb:w-[350px] h-[40px] text-white bg-purple-500 rounded-sm transition ease-in-out hover:bg-violet-600 active:bg-violet-700"
             >
-              Next
+              Далее
             </button>
             <NavLink
               to="/login"
               className="flex justify-center items-center text-purple-500 rounded-sm hover:text-violet-600"
             >
-              Back
+              Далее
             </NavLink>
           </div>
         </form>

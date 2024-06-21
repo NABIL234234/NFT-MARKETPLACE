@@ -133,8 +133,8 @@ export default function BrowseMarketplace() {
       <div className="max-w-6xl mx-auto px-5 font-mono">
         <div>
           <Title
-            mainText="Browse Marketplace"
-            miniText=" Browse through more than 50k NFTs on the NFT Marketplace."
+            mainText="Торговая площадка"
+            miniText="Подберите NFT в торговой площадке на любой вкус!"
           />
           <div className="relative">
             <img
@@ -146,7 +146,7 @@ export default function BrowseMarketplace() {
               className="w-full p-[13px] rounded-2xl bg-zinc-700 text-white outline-none pr-[60px] mt-[30px]"
               type="text"
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search your favourite NFTs"
+              placeholder="Найдите свои любимые NFT"
             />
           </div>
           <div className="flex justify-center mt-[80px] pb-[10px] ">

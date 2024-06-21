@@ -86,10 +86,10 @@ export default function Login() {
         <div className="flex flex-col">
           <div className="text-white pt-[20px]">
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
-              Login to your account
+            Войдите в свой аккаунт
             </h3>
             <p className="max-w-[410px] mdd:max-w-[400px] pt-[10px] lgg:pt-[20px]">
-              Welcome! Enter your details and start creating, collecting, and selling NFTs.
+            Добро пожаловать! Введите свои данные и начните создавать, собирать и продавать NFT.
             </p>
           </div>
           <div className="flex flex-col gap-[25px] md:gap-[25px] pt-[15px] mdd:pt-[20px]">
@@ -98,7 +98,7 @@ export default function Login() {
               <Inputs
                 type="text"
                 icons={User}
-                placeholder="Username"
+                placeholder="Имя пользователя"
                 {...register("username", { required: "Введите имя пользователя" })}
               />
               {errors.username && (
@@ -112,7 +112,7 @@ export default function Login() {
               <Inputs
                 type={showPassword ? "text" : "password"}
                 icons={Password}
-                placeholder="Password"
+                placeholder="Пароль"
                 {...register("password", {
                   required: "Введите пароль",
                   minLength: { value: 6, message: "Пароль должен содержать как минимум 6 символов!" }
@@ -135,17 +135,17 @@ export default function Login() {
             </div>
             <button type="submit" className="flex justify-center items-center gap-[10px] w-[150px] h-[40px] rounded-xl bg-purple-500 text-white transition ease-in-out delay-150 hover:bg-white hover:text-black active:bg-purple-400">
               <IoLogIn />
-              Login
+              Логин
             </button>
             <div>
               <NavLink to="/register" className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-purple-500 text-white transition ease-in-out delay-150 hover:bg-white hover:text-black active:bg-purple-400">
-                Are you registered?
+                Регистрация
               </NavLink>
             </div>
             <div className="flex justify-center items-center gap-[20px] w-[300px] p-[3px] rounded-md bg-white text-black transition ease-in-out delay-150 hover:bg-purple-500 hover:text-white active:bg-purple-400">
               <FaKey />
               <NavLink to="/confirmAccount">
-                Don't remember your password?
+                Не помните свой пароль?
               </NavLink>
             </div>
             <a

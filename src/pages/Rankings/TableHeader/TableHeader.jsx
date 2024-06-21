@@ -15,12 +15,12 @@ export default function TableHeader() {
             <div className="Indicators w-full text-stone-500 border-2 border-zinc-600 py-[12px] px-[20px] rounded-3xl">
               <div className="flex gap-[12px] ">
                 <img src={lattice} alt="lattice" />
-                <h5>Artist</h5>
+                <h5>Авторы</h5>
               </div>
               <div className="grid justify-center sm:justify-between gap-[100px] pl-[12px]">
                 <h5 className="hidden smm:flex"></h5>
-                <h5 className="hidden smm:flex">NFTs Sold</h5>
-                <h5>Volume</h5>
+                <h5 className="hidden smm:flex">NFT продано</h5>
+                <h5>Обьем</h5>
               </div>
             </div>
           </div>

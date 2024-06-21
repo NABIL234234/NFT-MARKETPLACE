@@ -130,8 +130,8 @@ export default function ConfirmAccount() {
             </NavLink>
           </div>
           <div className="flex flex-col justify-center items-center gap-[15px] max-w-[400px] text-white">
-            <h2 className="text-3xl mb:text-4xl font-bold">Security Check</h2>
-            <p>Enter the verification code sent to your account:</p>
+            <h2 className="text-2xl mb:text-3xl font-bold">Проверка безопастности</h2>
+            <p>Введите код подтверждения, отправленный на ваш аккаунт:</p>
             <span className="text-xl text-green-500">{email}</span>
           </div>
           <div className="flex justify-center gap-2 mt-[10px]">
@@ -142,13 +142,13 @@ export default function ConfirmAccount() {
               type="submit"
               className="flex justify-center items-center w-[280px] rdd:w-[300px] mb:w-[400px] h-[40px] text-white bg-purple-500 rounded-sm transition ease-in-out hover:bg-violet-600 active:bg-violet-700"
             >
-              Next
+              Далее
             </button>
             <NavLink
               to="/confirmAccount"
               className="flex justify-center items-center text-purple-500 rounded-sm hover:text-violet-600"
             >
-              back
+              назад
             </NavLink>
           </div>
         </form>

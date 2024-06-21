@@ -58,11 +58,10 @@ export default function Wallet() {
         <div className="flex flex-col">
           <div className="text-white pt-[30px]">
             <h3 className="text-4xl lg:text-5xl font-semibold">
-              Connect wallet
+             Подключить кошелек
             </h3>
             <p className="max-w-md pt-4 text-xl">
-              Choose a wallet you want to connect. There are several wallet
-              providers.
+            Выберите способ оплаты!
             </p>
           </div>
           <div className="flex flex-col gap-4 mt-8 text-white">

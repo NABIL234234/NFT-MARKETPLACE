@@ -39,15 +39,15 @@ export default function ConfirmAccount() {
             </NavLink>
           </div>
           <div className="flex flex-col justify-center items-center gap-[15px] max-w-[400px] text-white">
-            <h2 className="text-3xl mb:text-4xl font-bold">Account Verification</h2>
-            <p className="max-w-[300px]">
-              Which <span className="text-purple-500">Nft Marketplace</span> account are you having trouble logging into?
+            <h2 className="text-3xl mb:text-4xl font-bold">Востановление пароля</h2>
+            <p className="max-w-[360px]">
+              Отправьте свою почту и  <span className="text-purple-500">Nft Marketplace</span> отправит вам код подтверждения!
             </p>
           </div>
           <div className="mt-[10px]">
             <input
               type="email"
-              placeholder="Email address"
+              placeholder="Почта(email)"
               name="email"
               {...register("email", { required: "Введи свой @email" })}
               className="flex items-center w-[280px] rdd:w-[300px] mb:w-[400px] p-[5px] rounded-sm text-white bg-zinc-800 outline-none border-[1px]"
@@ -61,13 +61,13 @@ export default function ConfirmAccount() {
               type="submit"
               className="flex justify-center items-center w-[280px] rdd:w/[300px] mb:w/[400px] h-[40px] text-white bg-purple-500 rounded-sm transition ease-in-out hover:bg-violet-600 active:bg-violet-700"
             >
-              Next
+              Далее
             </button>
             <NavLink
               to="/login"
               className="flex justify-center items-center text-purple-500 rounded-sm hover:text-violet-600"
             >
-              back
+              назад
             </NavLink>
           </div>
         </form>
