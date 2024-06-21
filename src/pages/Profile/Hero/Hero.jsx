@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfileInfo, changeProfilePhoto } from "../../../store/slices/nft";
-import "./Hero.css";
 import { motion } from "framer-motion";
 import { CiInstagram } from "react-icons/ci";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SlUserFollow } from "react-icons/sl";
 import { useParams } from "react-router-dom";
+import "./Hero.css";
 
 const TABS = [
   { label: "Created", value: "createdNfts" },
@@ -20,6 +20,8 @@ export default function Hero() {
   const data = profile?.data || {};
   const [selectedTab, setSelectedTab] = useState("createdNfts");
   const [followersCount, setFollowersCount] = useState(data?.followersCount || 0);
+  const [transactionVolume, setTransactionVolume] = useState(data?.transactionVolume || 0);
+  const [countOfSoldNft, setCountOfSoldNft] = useState(data?.countOfSoldNft || 0);
   const [isFollowed, setIsFollowed] = useState(false);
   const [imagePreview, setImagePreview] = useState(() => {
     return localStorage.getItem("avatarUrl") || data?.avatar;
@@ -27,11 +29,13 @@ export default function Hero() {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchProfileInfo(id)).then((response) => {
-        console.log("Profile info response:", response);
-      }).catch((error) => {
-        console.error("Error fetching profile info:", error);
-      });
+      dispatch(fetchProfileInfo(id))
+        .then((response) => {
+          console.log("Profile info response:", response); // Выводим ответ сервера в консоль
+        })
+        .catch((error) => {
+          console.error("Error fetching profile info:", error);
+        });
     } else {
       console.error("ID должен быть числом");
     }
@@ -42,6 +46,8 @@ export default function Hero() {
       const avatar = localStorage.getItem("avatarUrl") || data.avatar;
       setImagePreview(avatar);
       setIsFollowed(data.isFollowed || false);
+      setTransactionVolume(data.transactionVolume || 0);
+      setCountOfSoldNft(data.countOfSoldNft || 0);
     }
   }, [data]);
 
@@ -118,11 +124,11 @@ export default function Hero() {
           </div>
           <div className="flex gap-8 sm:gap-40 smm:gap-15 mt-[20px] text-xl smm:text-2xl text-white">
             <div>
-              <h2 className="font-semibold">{data?.volume}+</h2>
-              <h2 className="text-sm smm:text-xl">Volume</h2>
+              <h2 className="font-semibold">{transactionVolume}+</h2>
+              <h2 className="text-sm smm:text-xl">Transaction Volume</h2>
             </div>
             <div>
-              <h2 className="font-semibold">+</h2>
+              <h2 className="font-semibold">{countOfSoldNft}+</h2>
               <h2 className="text-sm smm:text-xl">Sold NFT</h2>
             </div>
             <div>
