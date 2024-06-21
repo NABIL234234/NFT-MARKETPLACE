@@ -43,8 +43,8 @@ export default function MoreNft() {
         >
           <div className="mb:flex items-center mdd:pb-16">
             <div className="font-semibold text-white">
-              <h2 className="text-4xl">Discover More NFTs</h2>
-              <p className="text-xl pt-3">Explore new trending NFTs</p>
+              <h2 className="text-4xl">Откройте для себя больше NFT</h2>
+              <p className="text-xl pt-3">Изучите новые трендовые NFT</p>
             </div>
             <div className="flex mb:hidden justify-start flex-wrap">
               {mockNfts.map((nft) => (

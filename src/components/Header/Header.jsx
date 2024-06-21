@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaUserAlt} from "react-icons/fa"; // Импортируем FaBars и FaTimes
+import { FaUserAlt } from "react-icons/fa"; // Импортируем FaBars и FaTimes
 import Menu from "../../components/Menu/Menu";
 import { FaEthereum } from "react-icons/fa";
 
@@ -62,7 +62,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center p-6">
             <div className="flex items-center gap-4">
-            <FaEthereum  className="text-purple-500 text-3xl"/>
+              <FaEthereum className="text-purple-500 text-3xl" />
               <NavLink to="/" className="nav_link text-xl smm:text-2xl">
                 NFT Marketplace
               </NavLink>
@@ -72,17 +72,17 @@ export default function Header() {
               <ul className="hidden lgg:flex justify-between gap-x-12 text-white font-semibold text-xl">
                 <li>
                   <NavLink to="/shop" exact="true" className="nav_link">
-                    Marketplace
+                    Маркетплейс
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/rankings" exact="true" className="nav_link">
-                    Rankings
+                    Рейтинги
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/wallet" exact="true" className="nav_link">
-                    Connect a wallet
+                    Подключить кошелек
                   </NavLink>
                 </li>
                 <li>
@@ -91,12 +91,12 @@ export default function Header() {
                       onClick={handleLogout}
                       className="nav_link flex items-center gap-2"
                     >
-                      Logout
+                      Выйти
                     </button>
                   ) : (
                     <NavLink to="/login" exact="true" className="nav_link flex items-center gap-2">
                       <FaUserAlt />
-                      Login
+                      Войти
                     </NavLink>
                   )}
                 </li>
@@ -104,7 +104,7 @@ export default function Header() {
                   {isAuthenticated && userId && (
                     <NavLink to={`/profile/${userId}`} exact="true" className="nav_link flex items-center gap-2">
                       <FaUserAlt />
-                      Profile
+                      Профиль
                     </NavLink>
                   )}
                 </li>

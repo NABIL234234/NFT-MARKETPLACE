@@ -52,9 +52,9 @@ export default function TopCreators() {
         >
           <div className="md:flex items-center pb-[20px] mdd:pb-[60px]">
             <div className="font-semibold text-white">
-              <h2 className="text-3xl mdd:text-5xl">Top creators</h2>
+              <h2 className="text-3xl mdd:text-5xl">Топ авторов</h2>
               <p className="text-lg sm:text-xl pt-3">
-                Checkout Top Rated Creators on the NFT Marketplace
+              Оформить заказ на авторов с самым высоким рейтингом на торговой площадке NFT
               </p>
             </div>
             <ViewRankings onClick={handleGetStarted} />

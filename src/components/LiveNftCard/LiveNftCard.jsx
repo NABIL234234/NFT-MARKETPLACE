@@ -3,7 +3,14 @@ import "./LiveNftCard.scss";
 import { motion } from "framer-motion";
 import { FcOk } from "react-icons/fc";
 
-export default function LiveNftCard({ imgUrl, title, avatar, user, price }) {
+export default function LiveNftCard({
+  imgUrl,
+  title,
+  avatar,
+  user,
+  dollarPrice,
+  ethereumPrice,
+}) {
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
@@ -20,12 +27,15 @@ export default function LiveNftCard({ imgUrl, title, avatar, user, price }) {
           <h4 className="card-title">{title}</h4>
           <div className="card-user">
             <img src={avatar} alt="User Avatar" className="avatar-image" />
-            <span>{user}</span>
+            <span className="pt-2 pb-2">{user}</span>
           </div>
           <div className="flex justify-between">
             <div className="card-price">
-              <span>Price ($)</span>
-              <span>{price}</span>
+              <div className="flex flex-col">
+                <span>Цена ($)</span>
+                <span>{dollarPrice}</span>
+              </div>
+              <span>ETH {ethereumPrice}</span>
             </div>
             <div className="card-bid">
               <FcOk />

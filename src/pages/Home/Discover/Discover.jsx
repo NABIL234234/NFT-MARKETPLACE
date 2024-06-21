@@ -36,12 +36,12 @@ export default function Discover() {
         >
           <motion.div className="text-white" variants={fadeInUp}>
             <div className="mdd:max-w-md font-semibold text-4xl lg:text-6xl">
-              <h2>Discover Digital Art & Collect NFTs</h2>
+              <h2>Откройте для себя цифровое искусство и коллекционируйте NFT</h2>
             </div>
             <div className="max-w-lg font-normal text-lg pt-7 mb-[20px]">
               <p>
-                NFT Marketplace UI created with Anima for Figma. Collect, buy
-                and sell art from more than 20k NFT artists.
+              Пользовательский интерфейс NFT Marketplace, созданный с помошью совместной работы Фронтенд и Бэкэнд, покупай
+              и продавайте произведения более чем тысячи художником NFT.
               </p>
             </div>
 
@@ -68,16 +68,16 @@ export default function Discover() {
 
             <div className="flex justify-between gap-[8px] sm:gap-[12px] smm:gap-[15px] mt-[6%] mdd:mt-[12%] text-xl smm:text-2xl">
               <div>
-                <h2 className="font-semibold">240k+</h2>
-                <h2 className="text-sm smm:text-xl">Total Scale</h2>
+                <h2 className="font-semibold">20k+</h2>
+                <h2 className="text-sm smm:text-xl">Охват</h2>
               </div>
               <div>
-                <h2 className="font-semibold">100k+</h2>
-                <h2 className="text-sm smm:text-xl">Auctions</h2>
+                <h2 className="font-semibold">1k+</h2>
+                <h2 className="text-sm smm:text-xl">Транзакции</h2>
               </div>
               <div>
-                <h2 className="font-semibold">240k+</h2>
-                <h2 className="text-sm smm:text-xl">Artist</h2>
+                <h2 className="font-semibold">40k+</h2>
+                <h2 className="text-sm smm:text-xl">Авторов</h2>
               </div>
             </div>
           </motion.div>

@@ -19,7 +19,7 @@ export default function CardCreators({ number, imgUrl, nickName, ETH, onClick })
             {nickName}
           </h3>
           <div className="flex gap-2">
-            <h4 className="text-stone-400">Total Sales:</h4>
+            <h4 className="text-stone-400">Общие продажи:</h4>
             <h4 className="text-white">{ETH}</h4>
           </div>
         </div>

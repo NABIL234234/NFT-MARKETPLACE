@@ -8,6 +8,7 @@ import { CiInstagram } from "react-icons/ci";
 import { FaTelegramPlane } from "react-icons/fa";
 import Border from "../../../src/assets/IMAGE/SECTION/Border.svg";
 import { IoMdMailUnread } from "react-icons/io";
+import { FaArrowDown } from "react-icons/fa";
 
 const Popup = ({ onClose }) => {
   return (
@@ -34,7 +35,7 @@ export default function Footer() {
     event.preventDefault(); // Prevent the default form submission action
 
     if (inputValue.trim() === "") {
-      setError("Please enter text before submitting.");
+      setError("Пожалуйста, введите текст перед отправкой.");
     } else {
       // Logic for sending data (e.g., to a server)
       // Show the popup after submission
@@ -70,9 +71,11 @@ export default function Footer() {
 
               <div className="text-stone-400 pt-[30px] text-xl">
                 <h4 className="max-w-[380px]">
-                  NFT marketplace UI created with Anima for Figma.
+                  NFT marketplace у нас есть соц.сети
                 </h4>
-                <h4 className="pt-[20px]">Join our community</h4>
+                <h4 className="pt-[20px]">
+                  Присоединяйтесь к нашему сообществу
+                </h4>
               </div>
               <div className="flex gap-[12px] pt-[15px] text-3xl text-purple-500">
                 <a
@@ -91,7 +94,9 @@ export default function Footer() {
             </div>
             <div className="mt-[30px] text-xl  flex flex-col gap-[12px]  text-white">
               <div>
-                <h3 className="font-bold">Explore</h3>
+                <h3 className=" flex gap-[10px] items-center font-bold text-stone-400 ">
+                  Навигация <FaArrowDown />
+                </h3>
                 <ul className="mt-[22px]">
                   <li>
                     <NavLink to="/shop" exact="true" className="nav_link">
@@ -121,16 +126,19 @@ export default function Footer() {
             </div>
             <form onSubmit={handleSend}>
               <div className="text-white pt-[30px]">
-                <h2 className=" text-4xl font-bold">Join our weekly Digest</h2>
-                <p className="max-w-[370px] pt-[15px] text-stone-400">
-                  Get Exclusive Promotions & Updates Straight To Your Inbox.
+                <h2 className=" text-4xl font-bold">
+                  {" "}
+                  Отправить жалобу или отзыв
+                </h2>
+                <p className="flex items-center gap-[10px] max-w-[370px] pt-[15px] text-stone-400">
+                  Системные проблемы? Напишите об этом <FaArrowDown />
                 </p>
               </div>
               <div className="relative mt-8 mb-[40px]">
                 <div className=" flex flex-col gap-2 mdd:relative w-full h-[56px]">
                   <input
                     className="bg-white p-4 rounded-3xl w-full h-full z-0 focus:outline-none mdd:pr-[140px]"
-                    placeholder="White here"
+                    placeholder="Напиши"
                     type="text"
                     value={inputValue}
                     onChange={handleChange}
@@ -145,7 +153,7 @@ export default function Footer() {
                     className="mdd:absolute flex items-center justify-center gap-[12px] rounded-2xl text-white hover:text-black border-2 bg-purple-500 hover:bg-white border-purple-500 hover:border-black  transition ease-in-out delay-15 p-3 pl-[42px] pr-[42px] right-0 top-0 bottom-0"
                   >
                     <IoMdMailUnread />
-                    Send
+                    Cюда
                   </button>
                 </div>
               </div>
@@ -156,7 +164,7 @@ export default function Footer() {
             <img src={Border} alt="border" />
 
             <h3 className="text-stone-400 pt-[20px] pb-[40px]">
-              Ⓒ NFT Market. Use this template freely.
+              Ⓒ NFT Market. Здесь были Набиль и Даниил.
             </h3>
           </div>
         </div>

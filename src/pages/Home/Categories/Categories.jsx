@@ -46,49 +46,51 @@ export default function Categories() {
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
         >
-          <div className="hidden smm:flex text-white pb-[20px] mdd:pb-[60px]">
-            <h2 className="font-semibold text-4xl">Browse Categories</h2>
+          <div className="hidden smm:flex flex-col gap-[12px] text-white pb-[20px] mdd:pb-[60px]">
+            <h2 className="font-semibold text-4xl">Просмотр категорий</h2>
+            <h3 className=" text-3xl">Совсем Скоро!</h3>
+         
           </div>
           <div className="hidden smm:flex justify-start flex-wrap">
             <CardCotegories
               imgUrl={Artback}
               secondImgUrl={PaintBrush}
-              desc="Art"
+              desc="Арты"
             />
             <CardCotegories
               imgUrl={Collectiblse}
               secondImgUrl={Swatches}
-              desc="Collectibles"
+              desc="Коллекционирование"
             />
             <CardCotegories
               imgUrl={Musicback}
               secondImgUrl={MusicNotes}
-              desc="Music"
+              desc="Музыка"
             />
             <CardCotegories
               imgUrl={Photography}
               secondImgUrl={Camera}
-              desc="Photography"
+              desc="Фотографии"
             />
             <CardCotegories
               imgUrl={Videoback}
               secondImgUrl={VideoCamera}
-              desc="Video"
+              desc="Видео"
             />
             <CardCotegories
               imgUrl={UtilityBack}
               secondImgUrl={MagicWand}
-              desc="Utility"
+              desc="Полезные"
             />
             <CardCotegories
               imgUrl={SportBack}
               secondImgUrl={Basketball}
-              desc="Sport"
+              desc="Спорт"
             />
             <CardCotegories
               imgUrl={VirtualWorlds}
               secondImgUrl={Planet}
-              desc="Virtual Worlds"
+              desc="Виртуальные Миры"
             />
           </div>
         </motion.div>

@@ -88,25 +88,25 @@ export default function Mashroom() {
 
             <div className="backdrop-blur-md bg-black/30 w-[295px] h-[144px] flex justify-center items-center rounded-xl  md:ml-auto mt-[30px] md:mt-auto">
               <div className="text-white">
-                <h5 className="text-xs pb-[10px]">Auction ends in:</h5>
+                <h5 className="text-xs pb-[10px]">Скидки заканчиваются:</h5>
                 <div className="flex gap-[10px]">
                   <div>
                     <h3 className="text-4xl font-bold">{hours}</h3>
-                    <div className="pt-[10px]">Hours</div>
+                    <div className="pt-[10px]">Час</div>
                   </div>
                   <div>
                     <h3 className="text-4xl font-bold">:</h3>
                   </div>
                   <div>
                     <h3 className="text-4xl font-bold">{minutes}</h3>
-                    <div className="pt-[10px]">Minutes</div>
+                    <div className="pt-[10px]">Минут</div>
                   </div>
                   <div>
                     <h3 className="text-4xl font-bold">:</h3>
                   </div>
                   <div>
                     <h3 className="text-4xl font-bold">{seconds}</h3>
-                    <div className="pt-[10px]">Seconds</div>
+                    <div className="pt-[10px]">Секунд</div>
                   </div>
                 </div>
               </div>
