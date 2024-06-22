@@ -72,7 +72,7 @@ export default function Header() {
               <ul className="hidden lgg:flex justify-between gap-x-12 text-white font-semibold text-xl">
                 <li>
                   <NavLink to="/shop" exact="true" className="nav_link">
-                    Маркетплейс
+                    Магазин
                   </NavLink>
                 </li>
                 <li>

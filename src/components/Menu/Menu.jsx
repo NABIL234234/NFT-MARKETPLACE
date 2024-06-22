@@ -108,7 +108,7 @@ export default function Menu({ closeMenu }) {
                 onClick={handleLinkClick}
               >
                 <FaShoppingCart />
-                Маркетплейс
+                Магазин
               </NavLink>
             </motion.div>
           </li>
