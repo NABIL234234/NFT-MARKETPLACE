@@ -32,16 +32,17 @@ const Modal = ({
       <div className="bg-white p-6 rounded-lg text-center">
         <h2 className="text-lg font-bold mb-4">Confirm Sale</h2>
         <p>
-          Are you sure you want to sell {nftName} for {nftPrice}?
+          Вы действительно хотите купить {nftName} за {nftPrice}?
         </p>
         <div className="mt-4">
-          <label className="block mb-2">Select Payment Method:</label>
+          <label className="block mb-2">Способ оплаты:</label>
           <select
             className="p-2 border border-gray-300 rounded"
             value={paymentMethod}
             onChange={handleChange}
           >
-            <option value="META_MASK_WALLET">MetaMask Wallet</option>
+            <option value="META_MASK_WALLET">Кошелек MetaMask</option>
+            <option value="BANK_CARD">Банковская карта</option>
           </select>
         </div>
         <div className="mt-6 flex justify-center gap-4">
@@ -49,13 +50,13 @@ const Modal = ({
             className="bg-purple-700 text-white px-4 py-2 rounded"
             onClick={handleSell}
           >
-            Sell
+            Купить
           </button>
           <button
             className="bg-gray-300 text-black px-4 py-2 rounded"
             onClick={onClose}
           >
-            Cancel
+            Отмена
           </button>
         </div>
       </div>
@@ -180,7 +181,7 @@ export default function BrowseMarketplace() {
                 />
               ))
             ) : (
-              <div>No NFT found</div>
+              <div>NFT не найдено</div>
             )}
           </div>
         </div>
