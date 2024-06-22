@@ -65,7 +65,7 @@ export default function Register() {
               {isConfirming ? "Введите код подтверждения, отправленный на вашу электронную почту" : "Добро пожаловать! Введите свои данные и начните создавать, собирать и продавать NFT.."}
             </p>
           </div>
-          <div className="flex flex-col gap-[10px] md:gap-[30px] pt-[15px] mdd:pt-[20px]">
+          <div className="flex flex-col gap-[25px] md:gap-[30px] pt-[15px] mdd:pt-[20px]">
             {!isConfirming ? (
               <>
                 <div className="relative">
@@ -164,7 +164,7 @@ export default function Register() {
               type="submit"
               className="bg-purple-600 hover:bg-white w-[200px] p-3 rounded-lg text-white hover:text-black "
             >
-              {isConfirming ? "gjlndthlbnm" : "Зарегестрироваться"}
+              {isConfirming ? "Подтвердить" : "Зарегистрироваться"}
             </button>
           </div>
         </div>

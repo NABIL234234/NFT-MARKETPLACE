@@ -65,7 +65,7 @@ export default function CardMoreNft({
                     className="w-[22px] cursor-pointer"
                     onClick={onDelete}
                   />
-                  <FcCancel onClick={onCancel} />
+                  <FcCancel className="cursor-pointer" onClick={onCancel} />
                 </>
               )}
               {BuyIcon && (
