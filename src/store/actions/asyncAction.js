@@ -134,34 +134,3 @@ export const getUserLogin = createAsyncThunk(
   }
 );
 
-export const getGoogleToken = createAsyncThunk(
-  "auth/getGoogleToken",
-  async ({ token, navigate }, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_GOOGLE_URL}/api/auth/getGoogleToken`,
-        { params: { token } }
-      );
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      return rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
-
-export const RedirectGoogle = createAsyncThunk(
-  "auth/RedirectGoogle",
-  async ({ token, navigate }, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_GOOGLE_URL}/api/auth/google`,
-        { params: { token } }
-      );
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      return rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
