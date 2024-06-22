@@ -1,13 +1,10 @@
-import React from 'react'
-
-import Hero from "./Hero/Hero"
-import NftsProfile from './NftsProfile/NftsProfile'
+import React from "react";
+import Hero from "./Hero/Hero";
 
 export default function index() {
   return (
     <>
-    <Hero />
-    <NftsProfile />
+      <Hero />
     </>
-  )
+  );
 }

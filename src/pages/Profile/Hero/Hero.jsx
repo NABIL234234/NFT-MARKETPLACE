@@ -1,37 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProfileInfo, changeProfilePhoto } from "../../../store/slices/nft";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CiInstagram } from "react-icons/ci";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SlUserFollow } from "react-icons/sl";
-import { useParams } from "react-router-dom";
+import {
+  fetchProfileInfo,
+  changeProfilePhoto,
+  pushNftToMarket,
+  deleteNft,
+  cancelSelling,
+} from "../../../store/slices/nft";
+import CardMoreNft from "../../../components/CardMoreNft/CardMoreNft";
 import "./Hero.css";
 
 const TABS = [
   { label: "Создано", value: "createdNfts" },
-  { label: "Принадлежит", value: "ownedByNfts" },
+  { label: "Принадлежит", value: "ownedNfts" },
 ];
 
 export default function Hero() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { profile, loading } = useSelector((state) => state.nft);
+  const { profile, loading, error } = useSelector((state) => state.nft);
   const data = profile?.data || {};
   const [selectedTab, setSelectedTab] = useState("createdNfts");
-  const [followersCount, setFollowersCount] = useState(data?.followersCount || 0);
-  const [transactionVolume, setTransactionVolume] = useState(data?.transactionVolume || 0);
-  const [countOfSoldNft, setCountOfSoldNft] = useState(data?.countOfSoldNft || 0);
+  const [followersCount, setFollowersCount] = useState(
+    data?.followersCount || 0
+  );
+  const [transactionVolume, setTransactionVolume] = useState(
+    data?.transactionVolume || 0
+  );
+  const [countOfSoldNft, setCountOfSoldNft] = useState(
+    data?.countOfSoldNft || 0
+  );
   const [isFollowed, setIsFollowed] = useState(false);
   const [imagePreview, setImagePreview] = useState(() => {
     return localStorage.getItem("avatarUrl") || data?.avatar;
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNft, setSelectedNft] = useState(null);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+
   useEffect(() => {
     if (id) {
       dispatch(fetchProfileInfo(id))
         .then((response) => {
-          console.log("Profile info response:", response); // Выводим ответ сервера в консоль
+          console.log("Profile info response:", response);
         })
         .catch((error) => {
           console.error("Error fetching profile info:", error);
@@ -90,6 +107,57 @@ export default function Hero() {
           console.error("Error changing profile photo:", error);
         });
     }
+  };
+
+  const handleSellNft = (nftId) => {
+    dispatch(pushNftToMarket(nftId))
+      .unwrap()
+      .then(() => {
+        dispatch(fetchProfileInfo(id));
+        setIsModalOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleCancelSelling = (nftId) => {
+    dispatch(cancelSelling(nftId))
+      .unwrap()
+      .then(() => {
+        dispatch(fetchProfileInfo(id));
+        setIsCancelModalOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeleteNft = (nftId) => {
+    dispatch(deleteNft(nftId))
+      .unwrap()
+      .then(() => {
+        dispatch(fetchProfileInfo(id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const openSellModal = (nft) => {
+    setSelectedNft(nft);
+    setIsModalOpen(true);
+  };
+
+  const openCancelModal = (nft) => {
+    setSelectedNft(nft);
+    setIsCancelModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedNft(null);
+    setIsModalOpen(false);
+    setIsCancelModalOpen(false);
   };
 
   return (
@@ -174,7 +242,100 @@ export default function Hero() {
             ))}
           </div>
         </div>
+        <div className="pt-[60px] bg-zinc-750">
+          <div className="max-w-6xl mx-auto px-5 font-mono">
+            <div className="flex justify-start items-center flex-wrap mb-6">
+              {selectedTab === "createdNfts" && 
+                profile.data.createdNfts.map((nft) => (
+                  <CardMoreNft
+                    key={nft.id}
+                    id={nft.id}
+                    imgUrl={nft.nftImage}
+                    title={nft.name}
+                    avatar={nft.userAvatar}
+                    creatorUsername={nft.ownerUsername}
+                    dollarPrice={`${nft.dollarPrice}`}
+                    ethereumPrice={`${nft.ethereumPrice}`}
+                    ownerId={nft.ownerId}
+                    isForSale={nft.isForSale}
+                    onIconClick={() => openSellModal(nft)}
+                    onDelete={() => handleDeleteNft(nft.id)}
+                    onCancel={() => openCancelModal(nft)}
+                    iconsAvailable
+                  />
+                ))}
+              {selectedTab === "ownedNfts" &&
+                profile.data.ownedNfts.map((nft) => (
+                  <CardMoreNft
+                    key={nft.id}
+                    id={nft.id}
+                    imgUrl={nft.nftImage}
+                    title={nft.name}
+                    avatar={nft.userAvatar}
+                    creatorUsername={nft.ownerUsername}
+                    dollarPrice={`${nft.dollarPrice}`}
+                    ethereumPrice={`${nft.ethereumPrice}`}
+                    ownerId={nft.ownerId}
+                    isForSale={nft.isForSale}
+                    onIconClick={() => openSellModal(nft)}
+                    onDelete={() => handleDeleteNft(nft.id)}
+                    onCancel={() => openCancelModal(nft)}
+                    iconsAvailable
+                  />
+                ))}
+            </div>
+          </div>
+        </div>
       </div>
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded shadow-lg">
+            <h2 className="text-xl mb-4">Confirm Sale</h2>
+            <p>
+              Вы уверены что хотите продать {selectedNft.name}{" "}
+              {selectedNft.price}?
+            </p>
+            <div className="flex justify-end mt-4">
+              <button
+                className="bg-purple-600 text-white px-4 py-2 rounded mr-2"
+                onClick={() => handleSellNft(selectedNft.id)}
+              >
+                Продать
+              </button>
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded"
+                onClick={closeModal}
+              >
+                Отмена
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {isCancelModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg p-6 max-w-md mx-auto">
+            <h2 className="text-xl font-semibold mb-4">Отменить продажу NFT</h2>
+            <p className="mb-6">
+              Вы уверены, что хотите отменить продажу {selectedNft.name}?
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                onClick={() => handleCancelSelling(selectedNft.id)}
+              >
+                Отменить
+              </button>
+              <button
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400"
+                onClick={closeModal}
+              >
+                Отмена
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
